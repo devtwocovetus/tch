@@ -1,0 +1,37 @@
+.nav-tabs>li>a{
+	margin-right: -7px;
+}
+.btn{
+	     margin-top: 6px!important;
+
+}
+label{
+	font-weight: bold;
+}
+
+
+.fa-pencil-square-o{
+	cursor: pointer;
+}
+.fa-trash{
+	cursor: pointer;
+}
+
+
+
+.add-button{
+  cursor: pointer;
+}
+.view-button{
+  cursor: pointer;
+}
+
+.fa-eye{
+  cursor: pointer;
+}
+
+table.dataTable tbody tr.alertDanger td {
+    color: #a94442 !important;
+    background-color: #f2dede !important;
+    border-color: #ebccd1 !important;
+}

@@ -1,0 +1,88 @@
+<div class="section-container section-container-new">
+	<div class="section">
+		<div class="main-heading">
+			<h1>{{'Add Notification' | translate }}</h1>
+			<div class="mh-right">
+				<a class="view-button" routerLink="/notifications">
+                  <i class="fa fa-angle-left"></i> {{'Back' | translate }}
+               </a>
+				
+			</div>
+		</div>
+
+		<div class="form-element">	
+			<div class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-6">
+						<label for="recipient-name" class="col-form-label">{{'Notification Category' | translate }}:</label>	
+						<div class="input-group">
+							<div class="input-group-addon">
+								<img src="assets/Images/box-icon.png">
+							</div>
+							<select class="form-control" [(ngModel)] = "reqData.NC_Category" id="categname" value="reqData.NC_Category" [ngModelOptions]="{standalone: true}" (change)="changeCat($event)">
+								<option value="" disabled="">{{'Please Select Category' | translate }}</option>
+								<option *ngFor = "let NC_Category of GetNotiCategoryListArray" value="{{NC_Category.NC_Unique_ID}}">{{NC_Category.NC_Category_Name}}</option>
+						</select>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<label for="recipient-name" class="col-form-label">{{'Notification Type' | translate }}:</label>
+						<div class="input-group">
+							<div class="input-group-addon">
+								<img src="assets/Images/box-icon.png">
+							</div>
+							<select class="form-control" [(ngModel)] = "reqData.NC_Type" id="catgnametype" value="reqData.NC_Type" [ngModelOptions]="{standalone: true}">
+								<option value="" disabled="">{{'Please Select Type' | translate }}</option>
+								<option *ngFor = "let noti_type of noti_typesList" value="{{noti_type.NT_Unique_ID}}">{{noti_type.NT_Category_Type_Name}}</option>
+							</select>
+						</div>
+					</div>	
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6">
+						<label for="recipient-name" class="col-form-label">{{'Name' | translate }}</label>
+						<div class="input-group">
+							<div class="input-group-addon">
+								<img src="assets/Images/box-icon.png">
+							</div>
+							<input type="text" name="name" class="form-control" placeholder="{{'Enter Name' | translate }}" [(ngModel)] = "reqData.name" value="reqData.name"> 
+						</div>
+					</div>	
+
+				</div>	
+				<div class="form-group">
+					<div class="col-sm-12">
+						<label for="message-text" class="col-form-label">{{'Description' | translate }}:</label>
+						<textarea class="form-control" rows="5" [(ngModel)] = "reqData.messages" value="reqData.messages"></textarea>
+					</div>
+				</div>			
+				
+			</div>
+
+			<br/>
+	<input class="btn btngp btnsubmit" type="button" value="{{'Submit' | translate }}" (click)="finalAction()"/>
+	<input type="button" value="{{'Cancel' | translate }}" id="cancel" data-toggle="modal" data-target="#cancelbtn" class="btn btngp btncancel"/>
+		</div>
+
+	</div>
+	
+    </div>
+
+<!-- Modal -->
+<div id="cancelbtn" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content--> 
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to Cancel ?' | translate }}</h3>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="goBack()" >{{'Yes' | translate }}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+			</div>
+		</div>
+	</div>
+</div>

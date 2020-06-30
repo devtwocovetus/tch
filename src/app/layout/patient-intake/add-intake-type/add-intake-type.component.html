@@ -1,0 +1,75 @@
+<div class="section-container section-container-new">
+	<div class="section">
+		<div class="main-heading main-heading1">
+			<div class="mh-left">
+				<h1 class="view-button">{{'Add Patient Intake Type' | translate }}</h1>
+			</div>
+			<div class="mh-right">
+				<a class="view-button" routerLink="/intake">
+					<i class="fa fa-angle-left"></i> {{'Back' | translate }}
+				</a>
+				
+			</div>
+		</div>
+		<div class="form-element">	
+			<div class="form-horizontal">
+				<form>
+					<div class="form-group">
+
+						<div class="col-sm-6">
+							<label for="message-text" class="col-form-label">{{'Patient Intake Type' | translate }}:</label>
+							<div class="input-group">
+								<div class="input-group-addon">
+									<img src="assets/Images/box-icon.png">
+								</div>
+								<input type="text"  id="catgnametype"class="form-control"  [(ngModel)] = "reqData.PIT_Type" [ngModelOptions]="{standalone: true}">
+							</div>							
+						</div>
+						<div class="col-sm-6">
+							<label for="recipient-name" class="col-form-label">{{'Patient Intake Category Optional' | translate }}:</label>
+							<div class="input-group">
+								<div class="input-group-addon">
+									<img src="assets/Images/box-icon.png">
+								</div>
+								<select class="form-control selectbox" 
+								id="categname"
+								[(ngModel)] = "reqData.PIT_Category" [ngModelOptions]="{standalone: true}">
+								<option value="" disabled="">{{'Please Select Category' | translate }}</option>
+								<option *ngFor = "let NC_Category of GetNotiCategoryListArray" value="{{NC_Category.PIT_Unique_ID}}">{{NC_Category.PIT_Category_Name}}</option>
+							</select>
+						</div>	
+
+					</div>
+					<div class="col-sm-6"> 
+						<br/>
+						<input class="btn btngp btnsubmit my-12" type="button" (click) = "finalAction()" value="Save"/>	
+
+						<input type="button" value="{{'Cancel' | translate }}" id="cancelbt" data-toggle="modal" data-target="#cancelbtn" class="btn btngp btncancel"/>
+					</div> 
+				</div>					
+			</form>					
+		</div>
+	</div>
+</div>
+
+</div>
+
+
+<!-- Modal -->
+<div id="cancelbtn" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content--> 
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to Cancel ?' | translate }}</h3>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="goBack()" >{{'Yes' | translate }}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+			</div>
+		</div>
+	</div>
+</div>

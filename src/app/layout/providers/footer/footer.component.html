@@ -1,0 +1,11 @@
+<footer>
+	<div class="footer">
+		<p class="copyright" *ngIf = "setAccToSurgery?.SurgC_Footer" class="copyright">© {{setAccToSurgery.SurgC_DBA_Name}} {{setAccToSurgery.SurgC_Footer.Footer_Text}}
+		</p>
+		<p class="copyright" *ngIf = "setAccToSurgery?.PhyO_Footer" class="copyright">© {{setAccToSurgery.PhyO_DBA_Name}} {{setAccToSurgery.PhyO_Footer.Footer_Text}}
+		</p>
+		<p class="copyright" *ngIf = "!setAccToSurgery?.SurgC_Footer && !setAccToSurgery?.PhyO_Footer ">© 2020, The Cloud Health. All Rights Reserved.</p>
+
+		<p class="version">Version {{version}}</p>
+	</div>
+</footer>

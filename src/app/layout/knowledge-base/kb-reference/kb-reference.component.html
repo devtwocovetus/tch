@@ -1,0 +1,161 @@
+<!-- <div class="loader-contaier" *ngIf = "showLoader">
+	<div class="loader-img">
+		<img src="assets/Images/logo2.gif" alt="">
+	</div>
+</div>	 -->
+<div class="section-container section-container-new" >
+	<div class="main-heading main-heading1">
+		<div class="mh-left">
+			<h1 class="add-button">{{'References' | translate }}</h1>
+			<h1 class="view-button"> {{'Add Reference' | translate }}</h1>
+			<h1 class="view-delete-button">{{'Deleted Records' | translate }}</h1>
+			<h1 class="edit-data">{{'Edit Reference' | translate }}</h1>
+		</div>
+
+		<div class="mh-right">
+			<a class="add-button"><i class="fa fa-plus" aria-hidden="true" style="font-size: 15px;"></i> {{'Add Reference' | translate }}</a>&nbsp;
+			<a class="add-button" (click)  ="getLastLocation()"><i class="fa fa-angle-left"></i> {{'Back' | translate }}</a>
+			<a class="view-button"  id="again-Back"><i class="fa fa-angle-left"></i> {{'Back' | translate }}</a>
+		</div>
+	</div>
+	<div class="form-element hide-from">
+		<div class="">
+			<div class=" form-horizontal">
+				<div class="form-group">
+					<div>
+						<table>
+							<tbody>
+								<tr *ngFor="let tr of totalTr; let i = index;">
+									<td>
+										<div >
+											<div class="input-group">
+												<div class="input-group-addon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+												<input type="text" class="form-control" placeholder="{{'Name' | translate }}" id="ptfn" [(ngModel)] = "reqData.name[i]" [ngModelOptions]="{standalone: true}">
+											</div>
+										</div>
+									</td>
+									<td>
+										<div >
+											<div class="input-group">
+												<div class="input-group-addon"><i class="fa fa-link" aria-hidden="true"></i></div>
+												<input type="text" class="form-control" placeholder="{{'Link' | translate }}" id="ptfn" [(ngModel)] = "reqData.file[i]" [ngModelOptions]="{standalone: true}">
+											</div>
+										</div>
+									</td>
+									<td width="180px" class="text-center">
+										<div class="btn-group">
+											<!-- <input type="button" value=" - Remove"  class="min btn btn-sm btn-danger" (click) = "removeRow(i)"/> -->
+
+											<span class="min btn btn-sm btn-danger" (click)="removeRow(i)">
+												<i class="fa fa-minus" style="cursor: pointer;"></i>
+											</span>
+											<!-- <input *ngIf="i==totalTr.length-1" type="button" value=" + Add More"  class="add btn btn-sm btn-primary" (click) = "addRow()"/> -->
+											<span class="add btn btn-sm btn-primary" (click)="addRow()" *ngIf="i==totalTr.length-1">
+												<i class="fa fa-plus" style="cursor: pointer;"></i>
+											</span>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<input type="button" value="{{'Submit' | translate }}"  class="btn btngp btnsubmit" (click) = "uploadData()"/>
+				<input type="button" value="{{'Cancel' | translate }}" id="cancel" data-toggle="modal" data-target="#cancelbtn"   class="btn btngp btncancel" />
+
+			</div>
+		</div>
+		<!-- <div>
+			<input type="button" value="{{'Submit' | translate }}" id="submitdata" data-toggle="modal" data-target="#submitbtn"   class="btn btngp btnsubmit" [disabled] = "!form.valid" />
+
+			<input type="button" value="{{'Cancel' | translate }}" id="cancel" data-toggle="modal" data-target="#cancelbtn"     class="btn btngp btncancel" />
+		</div> -->
+	</div>
+	<div class = "add-table">
+		<!-- <a class="add-button" style="float: right; color: grey"><i class="fa fa-plus" aria-hidden="true" style="font-size: 15px;"></i> Add Reference</a> -->
+		<table class = "table"  id = 'kbknwldge'>
+			<thead>
+				<tr>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">#</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Reference Name' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax :null)">{{'Type' | translate }}</th>
+					<!-- <th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Created By' | translate }}</th> -->
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Last Modify' | translate }}</th>
+					<!-- <th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Status' | translate }}</th> -->
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Action' | translate }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor = "let list of getListArray; let i = index">
+					<td class="hash-center">{{i+1}}</td>
+					<td>{{list.KBR_Description}}</td>
+					<td>{{list.KBR_Link}}</td>
+					<!-- <td>{{list.KBR_User_Name}}</td> -->
+					<td>{{list.KBR_Modify_Date | date: 'MM-dd-yyyy, hh:mm a'}}</td>
+					<td><i class="fa fa-trash" aria-hidden="true" title = "{{'Delete' | translate}}" (click) = dataDeleted(list)></i></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!-- Modal -->
+<div id="submitbtn" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to Submit ?' | translate }}</h3>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary"  >{{'Yes' | translate }}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- Modal -->
+<div id="cancelbtn" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to Cancel ?' | translate }}</h3>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary" (click)  = "goBack()" >{{'Yes' | translate }}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!-- Modal -->
+<div id="trash" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to delete ?' | translate }}</h3>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary" (click)  = "isDeletedYes()" >{{'Yes' | translate }}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+			</div>
+		</div>
+
+	</div>
+</div>

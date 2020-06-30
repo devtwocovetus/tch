@@ -1,0 +1,175 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+	<div class="loader-img">
+		<img src="assets/Images/logo2.gif" alt="">
+	</div>
+</div>	
+<div class="section-container section-container-new" >
+	<div class="main-heading main-heading1">
+		<div class="mh-left">
+			<h1 class="add-button">{{getpatientName}} {{getpatietnLastName}} - {{getPatientBookingId}}</h1>
+			<h1 class="view-button"> {{'Add Attachment' | translate }}</h1>
+			<h1 class="view-delete-button">{{'Deleted Records' | translate }}</h1>
+			<h1 class="edit-data">{{'Edit Attachment' | translate }}</h1>
+		</div>
+
+		<div class="mh-right">
+			<a class="add-button"><i class="fa fa-plus"></i> {{'Add Attachment' | translate }} </a>&nbsp;
+			<a class="add-button" (click)  ="getLastLocation()"><i class="fa fa-angle-left"></i> {{'Back' | translate }}</a>
+			<a class="view-button"  id="again-Back"><i class="fa fa-angle-left"></i> {{'Back' | translate }}</a>
+		</div>
+	</div>
+	<div class="form-element hide-from">
+		<div class="">
+			<div class=" form-horizontal">
+				<div class="form-group">
+					<div class="col-md-12">
+						<table>
+							<tbody>
+								<tr *ngFor="let tr of totalTr; let i = index;">
+									<td>
+										<div class="input-group">
+											<div class="input-group-addon"><img src="assets/Images/user-icon.png" /></div>
+											<select class = "form-control selectbox " [(ngModel)] = "reqData.name[i]" [ngModelOptions]="{standalone: true}">
+												<!-- <option value="">Upload Attachments</option> -->
+												<option selected="" value="Authorization Letter">Authorization Letter</option>
+												<option value="Chest X-Ray">Chest X-Ray</option>
+												<option value="Consent">Consent</option>
+												<option value="Ekg">Ekg</option>
+												<option value="H and P">H and P</option>
+												<option value="ID0">ID</option>
+												<option value="Insurance">Insurance</option>
+												<option value="Lab">Lab</option>
+												<option value="Other">Other</option>
+												<option value="Report">Report</option>
+												<option value="Signed Lien">Signed Lien</option>
+											</select>
+										</div>
+									</td>
+									<td>
+										<div class="col-sm-3">
+											<input type="file" name="UploadAttachments" id="uploadAtchm{{i}}" [(ngModel)] = "reqData.file[i]" (change) = "chekcupload(i)" #uploadAtchm  [ngModelOptions]="{standalone: true}"/>
+										</div>
+									</td>
+									<td width="180px" class="text-center">
+										<div class="btn-group">
+											<input type="button" value=" - Remove"  class="min btn btn-sm btn-danger" (click) = "removeRow(i)"/>
+
+											<input *ngIf="i==totalTr.length-1" type="button" value=" + Add More"  class="add btn btn-sm btn-primary" (click) = "addRow()"/>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<input type="button" value="{{'Submit' | translate }}"  class="btn btngp btnsubmit" (click) = "uploadImages()"/>
+				<input type="button" value="{{'Cancel' | translate }}" id="cancel" data-toggle="modal" data-target="#cancelbtn"   class="btn btngp btncancel" />
+
+			</div>
+		</div>
+
+
+	</div>
+	<div class="form-element edit-attach" >
+			<div class=" form-horizontal">
+				<div class="form-group">
+					<div class="col-md-6">
+						<div class="input-group">
+							<div class="input-group-addon"><img src="assets/Images/user-icon.png" /></div>
+							<select class = "form-control selectbox " [(ngModel)] = "reqData.editName" [ngModelOptions]="{standalone: true}">
+								<!-- <option value="">Upload Attachments</option> -->
+								<option value="Authorization Letter">Authorization Letter</option>
+								<option value="Chest X-Ray">Chest X-Ray</option>
+								<option value="Consent">Consent</option>
+								<option value="Ekg">Ekg</option>
+								<option value="H and P">H and P</option>
+								<option value="ID0">ID</option>
+								<option value="Insurance">Insurance</option>
+								<option value="Lab">Lab</option>
+								<option value="Other">Other</option>
+								<option value="Report">Report</option>
+								<option value="Signed Lien">Signed Lien</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<input type="file" [(ngModel)] = "reqData.editFile" (change) = "editData($event)"   [ngModelOptions]="{standalone: true}"/>
+					</div>
+				</div>
+				<div>
+					<img src="{{imageLink}}{{removeTildSign(reqData.imgLink)}}" height="100px" width="100px">
+				</div>
+			</div>
+			<br>
+			<input type="button" value="{{'Submit' | translate }}"  class="btn btngp btnsubmit" (click) = "uploadImages()"/>
+				<input type="button" value="{{'Cancel' | translate }}" id="cancel" data-toggle="modal" data-target="#cancelbtn"   class="btn btngp btncancel" />
+		</div>
+	<div class = "add-table">
+		<!-- <a class="add-button" style="float: right; color: grey"><i class="fa fa-plus" aria-hidden="true" style="font-size: 15px;"></i> Add Attachment</a> -->
+		<table class = "table"  id = 'atchtbleggg'>
+			<thead>
+				<tr>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">#</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)"> {{'Attachment Name' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Preview' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Created By' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Last Modify' | translate }}</th>
+					<!-- <th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Status' | translate }}</th> -->
+					<th  [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Action' | translate }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor = "let list of getDocArray; let i = index">
+					<td class="hash-center">{{i+1}}</td>
+					<td>{{list.DU_Doc_Name}}</td>
+					<td><a href="{{imageLink}}{{removeTildSign(list.DU_Doc_Path)}}" target="_blank"><img src="{{imageLink}}{{removeTildSign(list.DU_Doc_Path)}}" height="40px" width="40px"  (click) = "getLinkOfDOc(list.DU_Doc_Path)"></a> </td>
+					<td>{{list.DU_User_Name}}</td>
+					<td>{{list.DU_Modify_Date | date: 'MM-dd-yyyy, hh:mm a'}}</td>
+					<td><a href="{{imageLink}}{{removeTildSign(list.DU_Doc_Path)}}" target="_blank"><i class="fa fa-eye" aria-hidden="true" title = "{{'View' | translate}}"></i></a> &nbsp;&nbsp;
+						<span id="editbtn"><i   class="fa fa-edit" aria-hidden="true" title = "{{'Edit' | translate}}" (click) = "editAttach(list)"></i></span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!-- Modal -->
+<div id="submitbtn" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to Submit ?' | translate }}</h3>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary"  >{{'Yes' | translate }}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- Modal -->
+<div id="cancelbtn" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to Cancel ?' | translate }}</h3>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary" (click)  = "goBack()" >{{'Yes' | translate }}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+			</div>
+		</div>
+
+	</div>
+</div>

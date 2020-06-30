@@ -1,0 +1,1561 @@
+<div class="section-container section-container-new position-relative" >
+   <div class="section" id="contentToConvert">
+      <div class="form-element">
+         <div class="form-horizontal">
+            <style type="text/css">
+               .wrapper {
+                  width: 90%;
+                  margin: auto;
+                  font-family: sans-serif;
+               }
+               .table_one_bdy_inner {
+                  overflow: hidden;
+                  border: 1px solid #ddd;
+                  padding: 10px 10px;
+               }
+               .table_one_bdy_left {
+                  float: left;
+                  width: 48%;
+                  margin-right: 2%;
+               }
+               .table_one_bdy_right {
+                  float: left;
+                  width: 48%;
+                  margin-left: 1%;
+               }
+               .table_fifth_bdy_inner {
+                  overflow: hidden;
+                  border: 1px solid #ddd;
+                  padding: 10px 10px;
+               }
+               .table_fifth_bdy_left {
+                  float: left;
+                  width: 48%;
+                  margin-right: 2%;
+               }
+               .table_fifth_bdy_right {
+                  float: left;
+                  width: 48%;
+                  margin-left: 1%;
+               }
+               .table_four_bdy_inner {
+                  overflow: hidden;
+                  border: 1px solid #ddd;
+                  padding: 10px 10px;
+               }
+               .table_four_bdy_left {
+                  float: left;
+                  width: 48%;
+                  margin-right: 2%;
+               }
+               .table_four_bdy_right {
+                  float: left;
+                  width: 48%;
+                  margin-left: 1%;
+               }
+               .heading_top {
+                  text-align: center;
+               }
+               h3.heading_tbl_txt {
+                  background-color: #dddddd!important;
+                  margin-bottom: 0px;
+                  padding-left: 10px;
+                  padding-top: 5px;
+                  font-size: 17px;
+                  padding-bottom: 2px;
+                  text-transform: uppercase;
+               }
+               table.tbl_intro {
+                  width: 100%;
+               }
+               table.tbl_intro tr td {
+                  padding: 0;
+                  vertical-align: text-top;
+               }
+               table.tbl_intro tr td p {
+                  margin-bottom: 0 !important;
+                  margin: 0;
+               }
+               .txt-bold {
+                  font-weight: bold;
+               }
+               .txt-light {
+                  font-weight: 400;
+               }
+               .font-normal{
+                  font-size: 13px;
+               }
+               .font-normal-two{
+                  font-size: 15px;
+               }
+               .empty_desc{
+                  color: #000;
+                  margin: 0;
+               }
+               .table_two_bdy_inner {
+                  border: none;
+                  padding: 10px 10px;
+               }
+               table.tbl_intro_full thead tr th {
+                  text-align: left;
+                  border: 1px solid #dddddd;
+                  padding-left: 10px;
+               }
+               table.tbl_intro_full tbody tr td {
+                  text-align: left;
+                  border: 1px solid #dddddd;
+                  padding-left: 10px;
+               }
+               table.tbl_intro_full {
+                  width: 100%;
+                  border: 1px solid #dddddd;
+                  border-collapse: collapse;
+               }
+               table.tbl_intro_full thead tr th p {
+                  margin: 0;
+                  margin-bottom: 0!important;
+               }
+               table.tbl_intro_full tbody tr td p{
+                  margin:0;
+                  margin-bottom: 0!important;
+               }
+               .col-header {
+                  float: left;
+                  width: 100%;
+                  margin-bottom: 20px;
+               }
+               .pull-pdf{
+                  float: left
+               }
+               .position-relative{
+                  position: relative;
+               }
+               .docicons{
+                  font-size: 18px !important;
+                  cursor: pointer;
+               }
+               .get-right{
+                  float: right
+               }
+               .form-element {
+                  padding: 14px 20px 1px 20px;
+               }
+               @media print {
+                  .col-header {
+                     display: none;
+                  }
+                  .form-element {
+                     padding: 0 !important;
+                  }
+               }
+            </style>
+            <div class="wrapper">
+               <div class="col-header">
+                  <div class="pull-pdf">
+                     <div class="mh-right">
+                        <span (click) = "getPdf()" > <i class="fa fa-file-pdf-o docicons" aria-hidden="true"  title="Download PDF" style="color: red;"></i> {{'Download' | translate }}</span > &nbsp;
+                        &nbsp;
+                        <span (click) = "getPdf()"> <i  class="icofont-print docicons" aria-hidden="true"  title="Print"> </i></span> {{'Print' | translate }}
+                     </div>
+                  </div>
+                  <div class="get-right">
+                     <a  (click) = "goLastLocation()"><i class="fa fa-angle-left"></i> {{'Back' | translate }}</a>
+                  </div>
+               </div>
+               <div class="heading_top">
+                  <h3 class="heading_top_txt" >{{patientslistarray.Patient_First_Name}}&nbsp;{{patientslistarray.Patient_Last_Name}} - 
+                     {{bookinglist.PB_Booking_No}}-
+                     {{SURGICAL_INFORMATION?.SPI_Date | date: 'MM-dd-yyyy'}}
+                  </h3>
+               </div>
+               <div class="table_one_bdy">
+                  <h3 class="heading_tbl_txt">{{'DEMOGRAPHICS' | translate }}</h3>
+                  <div class="table_one_bdy_inner">
+                     <div class="table_one_bdy_left">
+                        <table class="tbl_intro">
+                           <tbody >
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Name' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal">{{patientslistarray.Patient_First_Name}} {{patientslistarray.Patient_Last_Name}}</p>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Birth Date' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal">{{patientslistarray.Patient_DOB | date: 'MM-dd-yyyy'}}</p>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Marital Status' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal">{{patientslistarray.Patient_Marital_Status}}</p>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Race' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal">{{patientslistarray.Patient_Race}}</p>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Height' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal">{{patientslistarray.Patient_Height_In_Ft}}′  {{patientslistarray.Patient_Height_In_Inch}}″</p>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Weight' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal">{{patientslistarray.Patient_Weight}}</p>
+                                 </td>
+                              </tr>
+                              <tr >
+                                 <td rospan="2">
+                                    <p class="txt-bold font-normal-two">{{'Contact Information' | translate }}:</p>
+                                    {{'Primary Home' | translate }}<br> {{'Emergency Contact:' | translate }}
+                                 </td>
+                                 <td rospan="2">
+                                    <p class="txt-light font-normal">&nbsp;</p>
+                                    {{patientslistarray.Patient_Primary_No}}<br>{{patientslistarray.Patient_Emergency_No}}
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                     <div class="table_one_bdy_right">
+                        <table class="tbl_intro">
+                           <tbody>
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Patient Code' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal">{{patientslistarray.Patient_Code}}</p>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Gender' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal">{{patientslistarray.Patient_Sex}}</p>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'SSN' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal">	{{patientslistarray.Patient_SSN}}</p>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Religious' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal"> {{patientslistarray.Patient_Religion}} </p>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Ethnic' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal">	{{patientslistarray.Patient_Ethinicity}}</p>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td rospan="2">
+                                    <p class="txt-bold font-normal-two">{{'Address' | translate }}:</p>
+                                 </td>
+                                 
+                                 <td rospan="2">
+                                    <p class="txt-light font-normal"> {{patientslistarray.Patient_Address1}},</p>
+                                    <p class="txt-light font-normal">{{patientslistarray.Patient_City}},
+                                       {{patientslistarray.Patient_State}},
+                                       {{patientslistarray.Patient_Zipcode}},
+                                    </p>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Address 2' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                  <p class="txt-light font-normal">{{patientslistarray.Patient_Address2}}</p>
+                               </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Email' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{patientslistarray.Patient_Email}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Language' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{patientslistarray.Patient_Language}}</p>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="table_four_bdy" *ngIf = "patientslistarray.Patient_Primary_Insurance_Details">
+               <h3 class="heading_tbl_txt">{{'INSURANCE INFORMATION - PRIMARY INSURANCE' | translate }}</h3>
+               <div class="table_four_bdy_inner">
+                  <div class="table_four_bdy_left">
+                     <table class="tbl_intro">
+                        <tbody >
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Relationship To The Patient' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal" ></p>
+                                 {{Insurance_Details.PPID_Relation_To_Patient}} 
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Subscriber Name' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details.PPID_Subscriber_Name}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Subscriber SSN' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details.PPID_Subscriber_SSN_No}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Subscriber DOB' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details.PPID_DOB | date: 'MM-dd-yyyy'}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Policy Number' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details.PPID_Policy_No}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Primary Insurance' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details.PPID_Primary_Insurance}}</p>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="table_four_bdy_right">
+                     <table class="tbl_intro">
+                        <tbody>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Address' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details.PPID_Address}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Address 2' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details.PPID_Address2}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'State' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details.PPID_State}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'City' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details.PPID_City}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Zip Code' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details.PPID_Zip_Code}}</p>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="table_four_bdy" *ngIf = "patientslistarray.Patient_Secondary1_Insurance_Details">
+               <h3 class="heading_tbl_txt">{{'INSURANCE INFORMATION - SECONDARY INSURANCE' | translate }}</h3>
+               <div class="table_four_bdy_inner">
+                  <div class="table_four_bdy_left">
+                     <table class="tbl_intro">
+                        <tbody >
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Relationship To The Patient' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal"></p>
+                                 {{Insurance_Details1.PSID_Relation_To_Patient}} 
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Subscriber Name' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details1.PSID_Subscriber_Name}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Subscriber SSN' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details1.PSID_Subscriber_SSN_No}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Subscriber DOB' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details1.PSID_DOB | date: 'MM-dd-yyyy'}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Policy Number' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details1.PSID_Policy_No}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Primary Insurance' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details1.PSID_Primary_Insurance}}</p>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="table_four_bdy_right">
+                     <table class="tbl_intro">
+                        <tbody>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Address' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details1.PSID_Address}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Address 2' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details1.PSID_Address2}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'State' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details1.PSID_State}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'City' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details1.PSID_City}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Zip Code' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details1.PSID_Zip_Code}}</p>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="table_four_bdy" *ngIf = "patientslistarray.Patient_Secondary2_Insurance_Details">
+               <h3 class="heading_tbl_txt">{{'INSURANCE INFORMATION - THIRD INSURANCE' | translate }}</h3>
+               <div class="table_four_bdy_inner">
+                  <div class="table_four_bdy_left">
+                     <table class="tbl_intro">
+                        <tbody >
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Relationship To The Patient' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal"></p>
+                                 {{Insurance_Details2.PSID_Relation_To_Patient}} 
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Subscriber Name' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details2.PSID_Subscriber_Name}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Subscriber SSN' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details2.PSID_Subscriber_SSN_No}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Subscriber DOB' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details2.PSID_DOB | date: 'MM-dd-yyyy'}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Policy Number' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details2.PSID_Policy_No}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Primary Insurance' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details2.PSID_Primary_Insurance}}</p>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="table_four_bdy_right">
+                     <table class="tbl_intro">
+                        <tbody>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Address' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details2.PSID_Address}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Address 2' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details2.PSID_Address2}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'State' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details2.PSID_State}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'City' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details2.PSID_City}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Zip Code' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details2.PSID_Zip_Code}}</p>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="table_four_bdy" *ngIf = "patientslistarray.Patient_Secondary3_Insurance_Details">
+               <h3 class="heading_tbl_txt">{{'INSURANCE INFORMATION - FOURTH INSURANCE' | translate }}</h3>
+               <div class="table_four_bdy_inner">
+                  <div class="table_four_bdy_left">
+                     <table class="tbl_intro">
+                        <tbody >
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Relationship To The Patient' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal"></p>
+                                 {{Insurance_Details3.PSID_Relation_To_Patient}} 
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Subscriber Name' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details3.PSID_Subscriber_Name}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">Subscriber {{'SSN' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details3.PSID_Subscriber_SSN_No}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Subscriber DOB' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details3.PSID_DOB | date: 'MM-dd-yyyy'}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Policy Number' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details3.PSID_Policy_No}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Primary Insurance' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details3.PSID_Primary_Insurance}}</p>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="table_four_bdy_right">
+                     <table class="tbl_intro">
+                        <tbody>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Address' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details3.PSID_Address}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Address 2' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details3.PSID_Address2}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'State' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details3.PSID_State}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'City' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details3.PSID_City}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Zip Code' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Insurance_Details3.PSID_Zip_Code}}</p>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="table_fifth_bdy"  *ngIf = "bookinglist.PB_Incient_Detail">
+               <h3 class="heading_tbl_txt">{{'INCIDENT DETAILS' | translate }}</h3>
+               <div class="table_fifth_bdy_inner">
+                  <div class="table_fifth_bdy_left">
+                     <table class="tbl_intro">
+                        <tbody >
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'INCIDENT Type' | translate }}</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal"></p>
+                                 {{INCIDENT_DETAILS.Inci_Type}} 
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Claim Number' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal"></p>
+                                 {{INCIDENT_DETAILS.Inci_Claim_No}} 
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Date of Injury' | translate }}: </p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{INCIDENT_DETAILS.Inci_DOI | date: 'MM-dd-yyyy'}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two"> {{'Employer Name' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{INCIDENT_DETAILS.Inci_Employee_Name}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Employer Address' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{INCIDENT_DETAILS.Inci_Employee_Address}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Employer Phone' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{INCIDENT_DETAILS.Inci_Employee_Phone_No}}</p>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="table_fifth_bdy_right">
+                     <table class="tbl_intro">
+                        <tbody>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Is This a Lien' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{INCIDENT_DETAILS.Inci_Is_This_Lien}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two"> {{'Attorney Name' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{INCIDENT_DETAILS.Inci_Attorney_Name}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Attorney Phone' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{INCIDENT_DETAILS.Inci_Attorney_Phone_No}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Time of Injury' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{INCIDENT_DETAILS.Inci_TimeOfIncident}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Comments' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{INCIDENT_DETAILS.Inci_Comment}}</p>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="table_fifth_bdy" *ngIf = "bookinglist.PB_Surgical_Procedure_Information">
+               <h3 class="heading_tbl_txt">{{'SURGICAL PROCEDURE INFORMATION' | translate }}</h3>
+               <div class="table_fifth_bdy_inner">
+                  <div class="table_fifth_bdy_inner_in">
+                     <div class="table_fifth_bdy_left">
+                        <table class="tbl_intro">
+                           <tbody >
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two"> {{'Surgeon Name' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal"></p>
+                                    {{SURGICAL_INFORMATION.SPI_Surgeon_Name}} 
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Surgery Date' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal">{{SURGICAL_INFORMATION.SPI_Date | date: 'MM-dd-yyyy'}}</p>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Duration Needed' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal">{{SURGICAL_INFORMATION.SPI_Duration}} mins</p>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                     <div class="table_fifth_bdy_right">
+                        <table class="tbl_intro">
+                           <tbody>
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Assi Surgeon Name' | translate }}: </p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal">{{SURGICAL_INFORMATION.SPI_Assi_Surgeon_Name}}</p>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Time' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal">{{tConvert(SURGICAL_INFORMATION.SPI_Time)}}</p>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Block Type' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal">{{SURGICAL_INFORMATION.SPI_Block_Type}}</p>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <p class="txt-bold font-normal-two">{{'Anesthesia Type' | translate }}:</p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal">{{SURGICAL_INFORMATION.SPI_Anesthesia_Type}}</p>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="multi_table_bdy">
+                     <div class="table_two_bdy width_30per" *ngIf = "SURGICAL_INFORMATION">
+                        <h3 class="heading_tbl_txt" >{{'PROCEDURE LIST' | translate }}</h3>
+                        <div class="table_two_bdy_inner">
+                           <table class="table_two_bdy_full">
+                              <tbody>
+                                 <tr *ngFor = "let list of Procedure_List; let i = index">
+                                    <td>
+                                       <p class="txt-light font-normal" title="{{list.Proc_Description}}<">{{list.Proc_Description | slice: 0:25}}</p>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                     <div class="table_two_bdy width_30per" *ngIf = "SURGICAL_INFORMATION">
+                        <h3 class="heading_tbl_txt">{{'CPT LIST' | translate }}</h3>
+                        <div class="table_two_bdy_inner">
+                           <table class="table_two_bdy_full">
+                              <tbody>
+                                 <tr *ngFor = "let list of CPT_List; let i = index">
+                                    <td>
+                                       <p class="txt-light font-normal" title="{{list.CPTS_Description}}">{{list.CPTS_Description | slice: 0:25}}</p>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                     <div class="table_two_bdy width_30per" *ngIf = "SURGICAL_INFORMATION">
+                        <h3 class="heading_tbl_txt">{{'ICD10 CODE LIST' | translate }}</h3>
+                        <div class="table_two_bdy_inner">
+                           <table class="table_two_bdy_full">
+                              <tbody>
+                                 <tr *ngFor = "let list of ICD10_Code_List; let i = index">
+                                    <td>
+                                       <p class="txt-light font-normal" title="{{list.ICD_Description}}">{{list.ICD_Description | slice: 0:30}}</p>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="table_fifth_bdy" *ngIf = "bookinglist.PB_Preoprative_Medical_Clearance">
+               <h3 class="heading_tbl_txt">{{'PRE - OPERATIVE MEDICAL CLEARANCE' | translate }}</h3>
+               <div class="table_fifth_bdy_inner">
+                  <div class="table_fifth_bdy_left">
+                     <table class="tbl_intro">
+                        <tbody >
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Require Medi Clearance' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal"></p>
+                                 {{Medical_Clearance.PMC_Is_Require_Pre_Op_Medi_Clearance}} 
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Is Require EKG' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal"></p>
+                                 {{Medical_Clearance.PMC_Is_Require_EKG}} 
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="table_fifth_bdy_right">
+                     <table class="tbl_intro">
+                        <tbody>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two"> {{'Name of clearing Physician' | translate }} :</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{Medical_Clearance.PMC_Clearing_Physician_Name}}</p>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="table_fifth_bdy" *ngIf = "bookinglist.PB_Special_Request">
+               <h3 class="heading_tbl_txt">{{'SPECIAL REQUESTS' | translate }}</h3>
+               <div class="table_fifth_bdy_inner">
+                  <div class="table_fifth_bdy_left">
+                     <table class="tbl_intro">
+                        <tbody >
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Special equipment required' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal"></p>
+                                 {{PB_Special_Request.SR_Is_Special_Equip_Req}} 
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Equipment' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal"></p>
+                                 {{PB_Special_Request.SR_Equip_Name}} 
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Supplies' | translate }}: </p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{PB_Special_Request.SR_Supplies_Name}}</p>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="table_fifth_bdy_right">
+                     <table class="tbl_intro">
+                        <tbody>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Instrumentation' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{PB_Special_Request.SR_Instrumentation_Name}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Others' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{PB_Special_Request.SR_Other}}</p>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="table_fifth_bdy" *ngIf = "bookinglist.PB_Insurance_Precertification_Authorization">
+               <h3 class="heading_tbl_txt">{{'INSURANCE PRE - CERTIFICATION AUTHORIZATION' | translate }}
+               </h3>
+               <div class="table_fifth_bdy_inner">
+                  <div class="table_fifth_bdy_left">
+                     <table class="tbl_intro">
+                        <tbody >
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Company Phone' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal"></p>
+                                 {{InsuranceAuthorization.IPA_Insurace_Company_Phone_No}} 
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two"> {{'Name' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal"></p>
+                                 {{InsuranceAuthorization.IPA_Insurace_Company_Representative}} 
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="table_fifth_bdy_right">
+                     <table class="tbl_intro">
+                        <tbody>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Authorization Name' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{InsuranceAuthorization.IPA_Authorization_Name}}</p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <p class="txt-bold font-normal-two">{{'Date of Authentication' | translate }}:</p>
+                              </td>
+                              <td>
+                                 <p class="txt-light font-normal">{{InsuranceAuthorization.IPA_DOA | date: 'MM-dd-yyyy'}}</p>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="table_two_bdy" *ngIf = "PB_ALERTS && PB_ALERTS.length > 0">
+               <h3 class="heading_tbl_txt">{{'ALERTS' | translate }}</h3>
+               <div class="table_two_bdy_inner">
+                  <table class="table_two_bdy_full">
+                     <tbody>
+                        <tr *ngFor = "let list of PB_ALERTS; let i = index">
+                           <li>{{list.Alrt_Name}}</li>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class="table_two_bdy" *ngIf = "bookinglist.PB_Doc_Uploaded_List">
+               <h3 class="heading_tbl_txt">{{'ATTACHMENTS' | translate }}</h3>
+               <div class="table_two_bdy_inner">
+                  <table class="table_two_bdy_full ">
+                     <tbody>
+                        <tr *ngFor = "let list of PB_Doc_Uploaded_List; let i = index">
+                           <td>
+                              <p class="txt-light font-normal">{{list.DU_Attachment_Type}}</p>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class="table_two_bdy" *ngIf = "bookinglist.PB_Forms">
+               <h3 class="heading_tbl_txt">{{'PATIENT FORMS' | translate }}</h3>
+               <div class="table_two_bdy_inner">
+                  <table class="table_two_bdy_full">
+                     <tbody>
+                        <tr *ngFor = "let list of PB_Forms; let i = index">
+                           <td>
+                              <p class="txt-light font-normal">
+                                 {{list.PF_Form_Name}} 
+                              </p>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class="table_two_bdy" *ngIf = "bookinglist.PB_Reject && bookinglist.PB_Reject.length > 0">
+               <h3 class="heading_tbl_txt">{{'REJECT REASON' | translate }}
+               </h3>
+               <div class="table_two_bdy_inner">
+                  <table class="table_two_bdy_full tble_reject ">
+                     <tbody>
+                        <tr *ngFor = "let list of bookinglist.PB_Reject; let i = index">
+                           <td>
+                              <p class="txt- category_bold font-normal text-align_left">
+                                 {{list.RR_User_Name}} 
+                              </p>
+                              <p class="light text-align_left"> {{list.RR_Message}} </p>
+                           </td>
+                           <td>
+                              <p class="txt-light font-normal text-align_right">
+                                 {{list.RR_Create_Date | date:'MM-dd-yyyy, hh:mm a'}} 
+                              </p>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class="table_two_bdy" *ngIf = "PB_Notes.length > 0">
+               <h3 class="heading_tbl_txt"> {{'NOTES' | translate }}
+               </h3>
+               <div class="table_two_bdy_inner">
+                  <table class="table_two_bdy_full tble_reject">
+                     <tbody>
+                        <tr *ngFor = "let list of PB_Notes; let i = index">
+                           <td>
+                              <p class="txt- category_bold font-normal text-align_left">
+                                 {{list.RR_User_Name}} 
+                              </p>
+                              <p class="light text-align_left breakline"> {{list.RR_Message}} </p>
+                                 <!-- <script type="text/javascript">
+                                    var aaa = $('.breakline').html();
+                                    abc(aaa);
+                                    </script>
+                                    
+                                    <p class="light text-align_left output_div"></p> -->
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal text-align_right">
+                                       {{list.RR_Create_Date | date:'MM-dd-yyyy, hh:mm a'}} 
+                                    </p>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="table_two_bdy" *ngIf = "bookinglist.PB_Approved && bookinglist.PB_Approved.length > 0">
+                     <h3 class="heading_tbl_txt">{{'Approved Reason' | translate }}
+                     </h3>
+                     <div class="table_two_bdy_inner">
+                        <table class="table_two_bdy_full tble_reject">
+                           <tbody>
+                              <tr *ngFor = "let list of bookinglist.PB_Approved; let i = index">
+                                 <td>
+                                    <p class="txt- category_bold font-normal text-align_left">
+                                       {{list.RR_User_Name}} 
+                                    </p>
+                                    <p class="light text-align_left"> {{list.RR_Message}} </p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal text-align_right">
+                                       {{list.RR_Create_Date | date:'MM-dd-yyyy, hh:mm a'}} 
+                                    </p>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="table_two_bdy" *ngIf="bookinglist.PB_Incomplete && bookinglist.PB_Incomplete.length>0">
+                     <h3 class="heading_tbl_txt">{{'Incomplete Reason' | translate }}</h3>
+                     <div class="table_two_bdy_inner">
+                        <table class="table_two_bdy_full tble_reject">
+                           <tbody>
+                              <tr *ngFor = "let list of bookinglist.PB_Incomplete; let i = index">
+                                 <td>
+                                    <p class="txt- category_bold font-normal text-align_left">
+                                       {{list.RR_User_Name}} 
+                                    </p>
+                                    <p class="light text-align_left"> {{list.RR_Message}} </p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal text-align_right">
+                                       {{list.RR_Create_Date | date:'MM-dd-yyyy, hh:mm a'}} 
+                                    </p>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="table_two_bdy" *ngIf = "bookinglist.PB_Complete && bookinglist.PB_Complete.length > 0">
+                     <h3 class="heading_tbl_txt">{{'Complete Reason' | translate }}
+                     </h3>
+                     <div class="table_two_bdy_inner">
+                        <table class="table_two_bdy_full tble_reject">
+                           <tbody>
+                              <tr *ngFor = "let list of bookinglist.PB_Complete; let i = index">
+                                 <td>
+                                    <p class="txt- category_bold font-normal text-align_left">
+                                       {{list.RR_User_Name}} 
+                                    </p>
+                                    <p class="light text-align_left"> {{list.RR_Message}} </p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal text-align_right">
+                                       {{list.RR_Create_Date | date:'MM-dd-yyyy, hh:mm a'}} 
+                                    </p>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="table_two_bdy" *ngIf = "bookinglist.PB_Noshow && bookinglist.PB_Noshow.length > 0">
+                     <h3 class="heading_tbl_txt">{{'Noshow Reason' | translate }}
+                     </h3>
+                     <div class="table_two_bdy_inner">
+                        <table class="table_two_bdy_full tble_reject">
+                           <tbody>
+                              <tr *ngFor = "let list of bookinglist.PB_Noshow; let i = index">
+                                 <td>
+                                    <p class="txt- category_bold font-normal text-align_left">
+                                       {{list.RR_User_Name}} 
+                                    </p>
+                                    <p class="light text-align_left"> {{list.RR_Message}} </p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal text-align_right">
+                                       {{list.RR_Create_Date | date:'MM-dd-yyyy, hh:mm a'}} 
+                                    </p>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="table_two_bdy" *ngIf = "bookinglist.PB_Suspended && bookinglist.PB_Suspended.length > 0">
+                     <h3 class="heading_tbl_txt">{{'Suspended Reason' | translate }}
+                     </h3>
+                     <div class="table_two_bdy_inner">
+                        <table class="table_two_bdy_full tble_reject">
+                           <tbody>
+                              <tr *ngFor = "let list of bookinglist.PB_Suspended; let i = index">
+                                 <td>
+                                    <p class="txt- category_bold font-normal text-align_left">
+                                       {{list.RR_User_Name}} 
+                                    </p>
+                                    <p class="light text-align_left"> {{list.RR_Message}} </p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal text-align_right">
+                                       {{list.RR_Create_Date | date:'MM-dd-yyyy, hh:mm a'}} 
+                                    </p>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="table_two_bdy" *ngIf = "bookinglist.PB_Unapproved && bookinglist.PB_Unapproved.length > 0">
+                     <h3 class="heading_tbl_txt">{{'Unapproved Reason' | translate }}
+                     </h3>
+                     <div class="table_two_bdy_inner">
+                        <table class="table_two_bdy_full tble_reject">
+                           <tbody>
+                              <tr *ngFor = "let list of bookinglist.PB_Unapproved; let i = index">
+                                 <td>
+                                    <p class="txt- category_bold font-normal text-align_left">
+                                       {{list.RR_User_Name}} 
+                                    </p>
+                                    <p class="light text-align_left"> {{list.RR_Message}} </p>
+                                 </td>
+                                 <td>
+                                    <p class="txt-light font-normal text-align_right">
+                                       {{list.RR_Create_Date | date:'MM-dd-yyyy, hh:mm a'}} 
+                                    </p>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <br><br>
+                  <br><br>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div *ngIf = "admin.UM_Office_Type == 'S' && rejeectOrIncomp" class="btngroup bottombar_slide" id="btndiv">
+         <div *ngIf = "admin.UM_Office_Type == 'S'">
+            <div *ngIf = "statusReqAndDateNotPased || datePassedExpire">
+               <input type="button" value="{{'Incomplete' | translate }}"  class="btn btngp btnsubmit my-12" id="submitdata" data-toggle="modal" data-target="#incomplete"/>
+               <input  type="button" value="{{'Approve' | translate }}"  class="btn btngp btnsubmit my-12" id="submitdata" data-toggle="modal" data-target="#approve"/>
+               <input  type="button" value="{{'Reject' | translate }}" class="btn btngp btnsubmit my-12" id="submitdata" data-toggle="modal" data-target="#forreject"/>
+               <input  type="button" value="{{'Cancel Booking' | translate }}"  class="btn btngp btnsubmit my-12" id="submitdata" data-toggle="modal" data-target="#cancelBoking"/>
+               <input type="button" value="{{'Cancel' | translate }}" class="btn btngp btncancel my-12" (click) = "goLastLocation()" />
+            </div>
+         </div>
+         <div *ngIf = "checkPastDate && admin.UM_Office_Type == 'S'">
+            <input type="button" value="{{'No Show' | translate }}"  class="btn btngp btnsubmit my-12" data-toggle="modal" data-target="#noshow"  />
+            <input type="button" value="{{'Suspended' | translate }}" id="submitdata"  class="btn btngp btnsubmit my-12"   data-toggle="modal" data-target="#suspended" />
+            <input type="button" value="{{'Complete' | translate }}" class="btn btngp btnsubmit my-12"   data-toggle="modal" data-target="#complete" />
+            <input  type="button" value="{{'Cancel Booking' | translate }}"  class="btn btngp btnsubmit my-12" id="submitdata" data-toggle="modal" data-target="#approve"/>
+            <!-- <input  type="button" value="{{'Cancel Booking' | translate }}"  class="btn btngp btnsubmit my-12" id="submitdata" data-toggle="modal" data-target="#cancelBoking"/> -->
+            <input type="button" value="{{'Cancel' | translate }}" class="btn btngp btncancel my-12" (click) = "goLastLocation()" />
+         </div>
+         <div *ngIf = "dateNotPassApproved && admin.UM_Office_Type == 'S'">
+            <input type="button" value="{{'Unapproved' | translate }}"  class="btn btngp btnsubmit my-12"   data-toggle="modal" data-target="#unapproved"/>
+            <!-- <input  type="button" value="{{'Cancel Booking' | translate }}"  class="btn btngp btnsubmit my-12" id="submitdata" data-toggle="modal" data-target="#cancelBoking"/> -->
+            <input type="button" value="{{'Cancel' | translate }}" class="btn btngp btncancel my-12" (click) = "goLastLocation()" />
+         </div>
+      </div>
+   </div>
+   <!-- Modal -->
+   <div id="approve" class="modal fade modalmsg" role="dialog">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="close_btn">
+               <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+            </div>
+            <div class="modal-body text-center">
+               <h3>{{'Please enter the approve reason' | translate }}</h3>
+            </div>
+            <div class="col-md-12">
+               <textarea [(ngModel)] = "reasons.approve" class="form-control" style="height: 10em" placeholder="Approval Reason..."></textarea>
+            </div>
+            <div class="modal-footer border0">
+               <!-- <button type="button" class="btn btn-primary" (click) = "saveRejectReason('Rejected')">Submit</button> -->
+               <input type="button" value="{{'Submit' | translate }}"  (click) = "saveRejectReason('Approved')"  class="btn btngp btnsubmit my-12" />
+               <input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-dismiss="modal"  class="btn btngp btncancel my-12" />
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="forreject" class="modal fade modalmsg" role="dialog">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="close_btn">
+               <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+            </div>
+            <div class="modal-body text-center">
+               <h3>{{'Please enter the reject reason' | translate }}</h3>
+            </div>
+            <div class="col-md-12">
+               <textarea [(ngModel)] = "rejectValue" class="form-control" style="height: 10em" placeholder="Rejection Reason..."></textarea>
+            </div>
+            <div class="modal-footer border0">
+               <!-- <button type="button" class="btn btn-primary" (click) = "saveRejectReason('Rejected')">Submit</button> -->
+               <input type="button" value="{{'Submit' | translate }}"  (click) = "saveRejectReason('Rejected')"  class="btn btngp btnsubmit my-12" />
+               <input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-dismiss="modal"  class="btn btngp btncancel my-12" />
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Modal -->
+   <div id="incomplete" class="modal fade modalmsg" role="dialog">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="close_btn">
+               <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+            </div>
+            <div class="modal-body text-center">
+               <h3>{{'Please enter the incomplete reason' | translate }}</h3>
+            </div>
+            <div class="col-md-12">
+               <textarea [(ngModel)] = "incompleteValue" class="form-control" style="height: 10em" placeholder="Incomplete Reason..."></textarea>
+            </div>
+            <div class="modal-footer border0">
+               <!-- <button type="button" class="btn btn-primary" (click) = "saveRejectReason('Incomplete')"></button> -->
+               <input type="button" value="{{'Submit' | translate }}"  (click) = "saveRejectReason('Incomplete')"  class="btn btngp btnsubmit  my-12" />
+               <input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-dismiss="modal"  class="btn btngp btncancel  my-12" />
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="noshow" class="modal fade modalmsg" role="dialog">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="close_btn">
+               <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+            </div>
+            <div class="modal-body text-center">
+               <h3>{{'Please enter the no-show reason' | translate }}</h3>
+            </div>
+            <div class="col-md-12">
+               <textarea [(ngModel)] = "reasons.noshow" class="form-control" style="height: 10em" placeholder="Noshow Reason..."></textarea>
+            </div>
+            <div class="modal-footer border0">
+               <!-- <button type="button" class="btn btn-primary" (click) = "saveRejectReason('Incomplete')"></button> -->
+               <input type="button" value="{{'Submit' | translate }}"  (click) = "saveRejectReason('No Show')"  class="btn btngp btnsubmit  my-12" />
+               <input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-dismiss="modal"  class="btn btngp btncancel  my-12" />
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="suspended" class="modal fade modalmsg" role="dialog">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="close_btn">
+               <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+            </div>
+            <div class="modal-body text-center">
+               <h3>{{'Please enter the suspended reason' | translate }}</h3>
+            </div>
+            <div class="col-md-12">
+               <textarea [(ngModel)] = "reasons.suspended" class="form-control" style="height: 10em" placeholder="Suspended Reason..."></textarea>
+            </div>
+            <div class="modal-footer border0">
+               <!-- <button type="button" class="btn btn-primary" (click) = "saveRejectReason('Incomplete')"></button> -->
+               <input type="button" value="{{'Submit' | translate }}"  (click) = "saveRejectReason('Suspended')"  class="btn btngp btnsubmit  my-12" />
+               <input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-dismiss="modal"  class="btn btngp btncancel  my-12" />
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="unapproved" class="modal fade modalmsg" role="dialog">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="close_btn">
+               <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+            </div>
+            <div class="modal-body text-center">
+               <h3>{{'Please enter the unapproved reason' | translate }}</h3>
+            </div>
+            <div class="col-md-12">
+               <textarea [(ngModel)] = "reasons.unapproved" class="form-control" style="height: 10em" placeholder="Unapproved Reason..."></textarea>
+            </div>
+            <div class="modal-footer border0">
+               <!-- <button type="button" class="btn btn-primary" (click) = "saveRejectReason('Incomplete')"></button> -->
+               <input type="button" value="{{'Submit' | translate }}"  (click) = "saveRejectReason('Action Required')"  class="btn btngp btnsubmit  my-12" />
+               <input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-dismiss="modal"  class="btn btngp btncancel  my-12" />
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="complete" class="modal fade modalmsg" role="dialog">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="close_btn">
+               <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+            </div>
+            <div class="modal-body text-center">
+               <h3>{{'Please enter the complete reason' | translate }}</h3>
+            </div>
+            <div class="col-md-12">
+               <textarea [(ngModel)] = "reasons.complete" class="form-control" style="height: 10em" placeholder="Complete Reason..."></textarea>
+            </div>
+            <div class="modal-footer border0">
+               <!-- <button type="button" class="btn btn-primary" (click) = "saveRejectReason('Incomplete')"></button> -->
+               <input type="button" value="{{'Submit' | translate }}"  (click) = "saveRejectReason('Complete')"  class="btn btngp btnsubmit  my-12" />
+               <input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-dismiss="modal"  class="btn btngp btncancel  my-12" />
+            </div>
+         </div>
+      </div>
+   </div>
+   
+   <div id="cancelBoking" class="modal fade modalmsg" role="dialog">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="close_btn">
+               <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+            </div>
+            <div class="modal-body text-center">
+               <h3>{{'Please enter the Cancel reason' | translate }}</h3>
+            </div>
+            <div class="col-md-12">
+               <textarea [(ngModel)] = "reasons.complete" class="form-control" style="height: 10em" placeholder="Complete Reason..."></textarea>
+            </div>
+            <div class="modal-footer border0">
+               <!-- <button type="button" class="btn btn-primary" (click) = "saveRejectReason('Incomplete')"></button> -->
+               <input type="button" value="{{'Submit' | translate }}"  (click) = "saveRejectReason('Cancel')"  class="btn btngp btnsubmit  my-12" />
+               <input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-dismiss="modal"  class="btn btngp btncancel  my-12" />
+            </div>
+         </div>
+      </div>
+   </div>

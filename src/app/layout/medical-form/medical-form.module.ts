@@ -1,0 +1,23 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { MedicalFormRoutingModule } from './medical-form-routing.module';
+import { MedicalFormComponent } from './medical-form.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { TranslateModule } from '@ngx-translate/core';
+import { DataTablesModule } from 'angular-datatables';
+
+@NgModule({
+  declarations: [MedicalFormComponent],
+  imports: [
+    CommonModule,
+    MedicalFormRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSlideToggleModule,
+    TranslateModule,
+    DataTablesModule
+  ]
+})
+export class MedicalFormModule { }

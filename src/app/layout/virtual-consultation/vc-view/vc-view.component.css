@@ -1,0 +1,266 @@
+
+.wrapper {
+	width: 90%;
+	margin: auto;
+	font-family: sans-serif;
+}
+.table_one_bdy_inner {
+	overflow: hidden;
+	
+	padding: 10px 10px;
+}
+.table_one_bdy_left {
+	float: left;
+	width: 48%;
+	margin-right: 2%;
+}
+.table_one_bdy_right {
+	float: left;
+	width: 48%;
+	margin-left: 1%;
+}
+
+.table_fifth_bdy_inner {
+	overflow: hidden;
+	border: 1px solid #ddd;
+	padding: 10px 10px;
+}
+.table_fifth_bdy_left {
+	float: left;
+	width: 48%;
+	margin-right: 2%;
+}
+.table_fifth_bdy_right {
+	float: left;
+	width: 48%;
+	margin-left: 1%;
+}
+
+.table_four_bdy_inner {
+	overflow: hidden;
+	border: 1px solid #ddd;
+	padding: 10px 10px;
+}
+.table_four_bdy_left {
+	float: left;
+	width: 48%;
+	margin-right: 2%;
+}
+.table_four_bdy_right {
+	float: left;
+	width: 48%;
+	margin-left: 1%;
+}
+.heading_top {
+	text-align: center;
+}
+h3.heading_tbl_txt {
+	background-color: #dddddd!important;
+	margin-bottom: 0px;
+	padding-left: 10px;
+	padding-top: 5px;
+	font-size: 17px;
+	padding-bottom: 2px;
+}
+table.tbl_intro {
+	width: 100%;
+}
+table.tbl_intro tr td {
+	padding: 0;
+	vertical-align: text-top;
+	width: 50%;
+}
+table.tbl_intro tr td .radio, table.tbl_intro tr td .checkbox {
+
+	margin-top: 0;
+	margin-bottom: 0;
+
+}
+table.tbl_intro tr td p {
+	margin-bottom: 0 !important;
+	margin: 0;
+}
+.txt-bold {
+	font-weight: bold;
+}
+.txt-light {
+	font-weight: 400;
+}
+.font-normal{
+	font-size: 13px;
+}
+.font-normal-two{
+	font-size: 15px;
+}
+.empty_desc{
+	color: #000;
+	margin: 0;
+}
+.table_two_bdy_inner {
+	border: none;
+	padding: 10px 10px;
+}
+table.tbl_intro_full thead tr th {
+	text-align: left;
+	border: 1px solid #dddddd;
+	padding-left: 10px;
+}
+table.tbl_intro_full tbody tr td {
+	text-align: left;
+	border: 1px solid #dddddd;
+	padding-left: 10px;
+}
+table.tbl_intro_full {
+	width: 100%;
+	border: 1px solid #dddddd;
+	border-collapse: collapse;
+}
+table.tbl_intro_full thead tr th p {
+	margin: 0;
+	margin-bottom: 0!important;
+}
+table.tbl_intro_full tbody tr td p{
+	margin:0;
+	margin-bottom: 0!important;
+}
+.pull-pdf{
+	position: absolute;
+	top: 43px;
+	left: 106px;
+
+}
+.position-relative{
+	position: relative;
+}
+.docicons{
+	font-size: 18px !important;
+	cursor: pointer;
+}
+.get-right{
+	position: absolute;
+	top: 43px;
+	right: 106px;
+}
+.form-element select.selectbox {
+	padding-right: 53px;
+}
+.booking_heading_inner {
+	margin-top: 20px;
+	/*text-transform: uppercase;*/
+}
+h1.booking_heading_txt {
+	margin-bottom: 20px;
+	text-transform: uppercase;
+}
+.checkbox_body_time input {
+	position: absolute;
+	left: -9999px;
+}
+
+.checkbox_body_time label {
+	display: block;
+	position: relative;
+	margin-bottom: 20px;
+	padding: 8px 16px 15px 55px;
+	border: 1px solid #050202;
+	border-radius: 100px;
+	color: #000;
+	background-color: #f6fdff;
+	white-space: nowrap;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	transition: background-color .2s, box-shadow .2s;
+	margin:0px;
+}
+
+.checkbox_body_time	label::before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 10px;
+	bottom: 10px;
+	left: 10px;
+	width: 23px;
+	border: 3px solid #003d86;
+	border-radius: 100px;
+	transition: background-color .2s;
+}
+
+
+.checkbox_body_time label:hover, input:focus + label {
+	box-shadow: 0 0 20px rgba(0, 0, 0, .6);
+}
+
+.checkbox_body_time input:checked + label {
+	
+	background-color: rgb(0, 61, 134);
+	color: #fff;
+	font-weight: 500;
+	font-size: 15px;
+	line-height: 20px;
+}
+
+.checkbox_body_time input:checked + label::before {
+	background-color: #fff;
+}
+.calender_bdy {
+	padding: 0px 0px;
+	margin-bottom: 30px;
+}
+.top_heading {
+	text-align: center;
+	margin-bottom: 14px;
+	font-size: 15px;
+	font-weight: 600;
+}
+.checkbox_list_item {
+	margin-bottom: 14px;
+}
+.jqx-calendar-cell-today {
+	color: #898989;
+	background-color: #953131 !important;
+	border: 1px solid #050202 !important;
+	margin: 0 0 0 0;
+	cursor: pointer;
+	color: #fff !important;
+}
+p.aval_txt {
+	font-size: 14px;
+	text-transform: capitalize;
+	font-weight: normal;
+}
+span.aval_txt_date {
+	font-weight: 600;
+}
+p.select_time_bdy_in_txt {
+	font-size: 16px;
+	font-weight: normal;
+	text-transform: capitalize;
+}
+span.select_time_bdy_in_boldtxt {
+	font-weight: 600;
+}
+.nest_heading_notes {
+	margin-bottom: 20px;
+}
+.radio label, .checkbox label{
+	color: #333;
+}
+p.txt-light.font-normal.text-align_right {
+    text-align: right;
+}
+p.txt-light.font-normal.text-align_left {
+    text-align: left;
+}
+p.category_bold {
+    font-weight: 600;
+}
+/*.txt_lng_right{
+	text-align: right;
+}*/
+.tble_reject{
+	width: 100%;
+}

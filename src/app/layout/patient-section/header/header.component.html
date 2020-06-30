@@ -1,0 +1,117 @@
+
+<div class="left-bar ps" [ngStyle]="setAccToSurgery?.PhyO_Appearance?{'background-color': setAccToSurgery.PhyO_Appearance.App_NavigationColorLight_Hax} : {'background-color': 'green'}">
+	<div class="header" [ngStyle]="setAccToSurgery?.PhyO_Appearance?{'background-color': setAccToSurgery?.PhyO_Appearance.App_NavigationColorDark_Hax} : {'background-color': '#006400'}">
+		<div class="logo">
+			<a routerLink = "/patient-dashboard"><img src="assets/Images/logo.png"></a>
+			<!-- <a routerLink = "/dashboard" *ngIf = "setAccToSurgery && setAccToSurgery.PhyO_Logo"  class="nav-toggle"><img src="{{imageLink}}{{removeTildSign(setAccToSurgery.PhyO_Logo.Logo_Navigation_Image)}}"></a> -->
+		</div>
+		<div class="menu-icon">
+			<a  class="nav-toggle"><img src="assets/Images/menu-icon.png"></a>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="main-menu">
+		<ul class="nav menu">
+			<li>
+				<a routerLink = "/patients/dashboard" >
+					<img src="assets/Images/home-icon.png" class="inactiveimg" />
+					<img src="assets/Images/home-active-icon.png" class="activeimg" />
+					<span>Dashboard</span>
+					<img src="assets/Images/right-arrow.png" class="inactiveimg1" />
+					<img src="assets/Images/right-arrow-active.png" class="activeimg1" />
+				</a>
+			</li>
+			<li class="sidebar-dropdown" >
+				<a>
+					<img src="assets/Images/appointments.png" class="inactiveimg" />
+					<img src="assets/Images/appointments-active.png" class="activeimg" />
+					<span>Appointments</span>
+					<div class="plus">
+						<img src="assets/Images/plus.png" class="inactiveimg1" />
+						<img src="assets/Images/plus-active.png" class="activeimg1" />
+					</div>
+					<div class="minus">
+						<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+						<img src="assets/Images/minus-white.png" class="activeimg1" />
+					</div>
+				</a>
+				<ul class="side-nav-dropdown">
+					<li routerLink = "/patients/appointment-list"><a>Appointment List</a></li>
+					<li routerLink = "/patients/appointment-history"><a >Appointment History</a></li>
+					<!-- <li><a routerLink = "/quick-booking-list">Quick Booking List</a></li> -->
+					<!-- <li><a routerLink = "/walkin-list">Walk-in List</a></li> -->
+				</ul>
+			</li>
+			<li class="sidebar-dropdown" >
+				<a>
+					<img src="assets/Images/appointments.png" class="inactiveimg" />
+					<img src="assets/Images/appointments-active.png" class="activeimg" />
+					<span>Virtual Consultation</span>
+					<div class="plus">
+						<img src="assets/Images/plus.png" class="inactiveimg1" />
+						<img src="assets/Images/plus-active.png" class="activeimg1" />
+					</div>
+					<div class="minus">
+						<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+						<img src="assets/Images/minus-white.png" class="activeimg1" />
+					</div>
+				</a>
+				<ul class="side-nav-dropdown">
+					<li  routerLink = "/patients/vc-list"><a>Appointment List</a></li>
+					<li  routerLink = "/patients/vc-history"><a >Appointment History</a></li>
+					<li><a routerLink = "/patients/vc-cancel-list">Appointment Cancel List</a></li>
+					<!-- <li><a routerLink = "/walkin-list">Walk-in List</a></li> -->
+				</ul>
+			</li>
+			<li class="sidebar-dropdown">
+				<a>
+					<img src="assets/Images/settings-alt.png" class="inactiveimg" />
+					<img src="assets/Images/settings-alt-active.png" class="activeimg" />
+					<span>Settings</span>
+					<div class="plus">
+						<img src="assets/Images/plus.png" class="inactiveimg1" />
+						<img src="assets/Images/plus-active.png" class="activeimg1" />
+					</div>
+					<div class="minus">
+						<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+						<img src="assets/Images/minus-white.png" class="activeimg1" />
+					</div>
+				</a>
+				<ul class="side-nav-dropdown">
+					<li routerLink = "/patients/edit-user/{{admin.UM_Member_ID}}"><a >Profile</a></li>
+					<li><a routerLink = "/patients/reset-password">Change Password</a></li>
+				</ul>
+			</li>
+			<li>
+				<a (click) = "logOut()">
+					<img src="assets/Images/inc-man-icon.png" class="inactiveimg" />
+					<img src="assets/Images/inc-man-icon-active.png" class="activeimg" />
+					<span>Logout</span>
+					<img src="assets/Images/right-arrow.png" class="inactiveimg1" />
+					<img src="assets/Images/right-arrow-active.png" class="activeimg1" />
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="right-header">
+	<div class="row">
+		<div class="col-sm-8 col-md-9 col-lg-10">
+			<nav>
+				<!-- <ul class="nav nav-pills rbmenu">
+
+					<li><a routerLink="/booking" >Book Now</a></li>
+					<l ><a routerLink="/quik-book" >Quick Book </a></li>
+					<li><a routerLink="/walking" >Walk-in</a></li>
+				</ul> -->
+			</nav>
+		</div>
+		<div class="col-sm-4 col-md-3 col-lg-2">
+			<nav>
+				<ul class="nav nav-pills rbmenu text-right pull-right">
+					<li><a style="margin-right: 0;">Hi {{admin.UM_Username}}</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>

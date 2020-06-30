@@ -1,0 +1,27 @@
+.bottombar_slide {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+    background: #e6e6e6;
+    padding: 4px 15px;
+    right: 0;
+    text-align: left;
+    margin-left: 290px;
+    margin-right: 40px;
+    -webkit-transition: bottom 500ms ease 0s;
+    transition: bottom 500ms ease 0s;
+}
+ul.reson_list li{
+  overflow: hidden;
+  margin-top: 15px;
+}
+
+.inline_span1{
+  float: left;
+  width: 70%;
+}
+.inline_span2{
+  float: right;
+ /* padding: 20px;*/
+}

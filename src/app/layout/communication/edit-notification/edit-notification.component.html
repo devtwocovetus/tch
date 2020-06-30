@@ -1,0 +1,1153 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+   <div class="loader-img">
+      <img src="assets/Images/logo2.gif" alt="">
+   </div>
+</div>   
+<div id="itssms">
+   <div class="section-container section-container-new">
+      <div class="section">
+         <div class="main-heading">
+            <div class="mh-left">
+               <h1 class="edit-data">{{'SMS' | translate }}</h1>
+            </div>
+            <div class="mh-right">
+               <a class="view-button" (click) = "goBack()">
+                  <i class="fa fa-angle-left"></i> {{'Back' | translate }}
+               </a>
+            </div>
+         </div>
+         <div class="form-element">
+            <div class="form-horizontal_">
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'When' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" id="trigger" [(ngModel)] = "reqData.eventafterbeforesms" [ngModelOptions]="{standalone: true}">
+                           <option value="" disabled="">{{'Select Trigger' | translate }}</option>
+                           <option value="1">Before</option>
+                           <option value="2">After</option>
+                        </select>
+                     </div>
+                  </div>
+
+               </div>
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Select' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" [(ngModel)] = "reqData.dayandweeks" id="daysweek" [ngModelOptions]="{standalone: true}">
+                           <option value="0">Days</option>
+                           <option value="1">Weeks</option>
+                           
+                        </select>
+                     </div>
+                  </div>
+               </div>
+
+
+
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Select' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" [(ngModel)] = "reqData.eventdaysms" [ngModelOptions]="{standalone: true}">
+                           <option value="0">0</option>
+                           <option value="1">1</option>
+                           <option value="2">2</option>
+                           <option value="3">3</option>
+                           <option value="4">4</option>
+                           <option value="5">5</option>
+                           <option value="6">6</option>
+                           <option value="7">7</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+
+
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Language' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" [(ngModel)] = "reqData.language" [ngModelOptions]="{standalone: true}">
+                           <option selected="" value="English">English</option>
+                           <option value="Hindi">Hindi</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="col-sm-6">
+                     <label  class="col-form-label">{{'Notification Time' | translate }}:</label>
+
+
+                  <div class="input-group date" id='datetimepicker7'>
+                     <div class="input-group-addon"><i class="icofont-clock-time"></i></div>
+                     <input atp-time-picker value="{{reqData.appointmenttime}}" class="form-control" placeholder=" Notification Time - hh:mm" [(ngModel)] = "reqData.notificationtime"/>
+
+                   </div>
+                        
+                  </div>
+               <div class="col-md-12">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Message' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <textarea class="form-control" rows="5"  [(ngModel)] = "reqData.messagesms" [ngModelOptions]="{standalone: true}"></textarea>
+                     </div>
+                  </div>
+               </div>
+               <a class="btn btngp btnsubmit" (click)="smsAction()">{{'Submit' | translate }}</a>
+               <button class="btn btngp btnsubmit" title = "smsblock" (click) ="smsblock()">{{'Preview' | translate }}</button>
+            </div>
+         </div>
+      </div>
+      
+   </div>
+</div>
+<div  id="itsemail">
+   <div class="section-container section-container-new">
+      <div class="section">
+         <div class="main-heading">
+            <div class="mh-left">
+               <h1 class="edit-data">{{'Email' | translate }}</h1>
+            </div>
+            <div class="mh-right">
+               <a class="view-button" (click) = "goBack()">
+                  <i class="fa fa-angle-left"></i> {{'Back' | translate }}
+               </a>
+            </div>
+         </div>
+         <div class="form-element">
+            <div class="form-horizontal_">
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'When' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" id="trigger" [(ngModel)] = "reqData.eventafterbeforeemail" [ngModelOptions]="{standalone: true}">
+                           <option value="" disabled="">{{'Select Trigger' | translate }}</option>
+                           <option value="1">Before</option>
+                           <option value="2">After</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Select' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" [(ngModel)] = "reqData.dayandweeks" id="daysweek" [ngModelOptions]="{standalone: true}">
+                           <option value="0">Days</option>
+                           <option value="1">Weeks</option>
+                           
+                        </select>
+                     </div>
+                  </div>
+               </div>
+               
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Select' | translate }}</label> 
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" [(ngModel)] = "reqData.eventdayemail" [ngModelOptions]="{standalone: true}">
+                           <option value="0">0</option>
+                           <option value="1">1</option>
+                           <option value="2">2</option>
+                           <option value="3">3</option>
+                           <option value="4">4</option>
+                           <option value="5">5</option>
+                           <option value="6">6</option>
+                           <option value="7">7</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+               
+
+
+               <div class="col-md-6">
+
+                  <div class="form-group">
+                     <label for="message-text" class="col-form-label">{{'Subject' | translate }}:</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <input  class="form-control"  [(ngModel)] = "reqData.emailsubject" [ngModelOptions]="{standalone: true}">
+                     </div>  
+                  </div>
+               </div>
+
+
+               <div class="col-sm-6">
+                     <label  class="col-form-label">{{'Notification Time' | translate }}:</label>
+
+
+                  <div class="input-group date" id='datetimepicker7'>
+                     <div class="input-group-addon"><i class="icofont-clock-time"></i></div>
+                     <input atp-time-picker value="{{reqData.appointmenttime}}" class="form-control" placeholder=" Notification Time - hh:mm" [(ngModel)] = "reqData.notificationtime"/>
+
+                   </div>
+                        
+                  </div>
+
+
+               <div class="col-md-12">
+                  <div class="form-group">
+                     <label for="message-text" class="col-form-label">{{'Message' | translate }}:</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <textarea class="form-control" rows="10" [(ngModel)] = "reqData.messageemail" [ngModelOptions]="{standalone: true}"></textarea>
+                     </div>
+                  </div>
+               </div>
+               <a class="btn btngp btnsubmit" (click)="emailAction()">{{'Submit' | translate }}</a>
+               <button class="btn btngp btnsubmit" title = "emailblock" (click) ="emailblock()">{{'Preview' | translate }}</button>
+            </div>
+         </div>
+      </div>
+      
+   </div>
+</div>
+
+
+<div  id="itswp">
+   <div class="section-container section-container-new">
+      <div class="section">
+         <div class="main-heading">
+            <div class="mh-left">
+               <h1 class="edit-data">{{'WHATSAPP' | translate }}</h1>
+            </div>
+            <div class="mh-right">
+               <a class="view-button" (click) = "goBack()">
+                  <i class="fa fa-angle-left"></i> {{'Back' | translate }}
+               </a>
+            </div>
+         </div>
+         <div class="form-element">
+            <div class="form-horizontal_">
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'When' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" id="trigger" [(ngModel)] = "reqData.eventafterbeforewhatsapp" [ngModelOptions]="{standalone: true}">
+                           <option value="" disabled="">{{'Select Trigger' | translate }}</option>
+                           <option value="1">Before</option>
+                           <option value="2">After</option>
+                        </select>
+                     </div>
+                  </div>
+
+               </div>
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Select' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" id="daysweek" [(ngModel)] = "reqData.dayandweeks" value="reqData.dayandweeks" [ngModelOptions]="{standalone: true}">
+                           <option value="0">Days</option>
+                           <option value="1">Weeks</option>
+                           
+                        </select>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Select' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" [(ngModel)] = "reqData.eventdaywhatsapp" [ngModelOptions]="{standalone: true}">
+                           <option value="0">0</option>
+                           <option value="1">1</option>
+                           <option value="2">2</option>
+                           <option value="3">3</option>
+                           <option value="4">4</option>
+                           <option value="5">5</option>
+                           <option value="6">6</option>
+                           <option value="7">7</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Language' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" [(ngModel)] = "reqData.language" [ngModelOptions]="{standalone: true}">
+                           <option selected="" value="English">English</option>
+                           <option value="Hindi">Hindi</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="col-sm-6">
+                     <label  class="col-form-label">{{'Notification Time' | translate }}:</label>
+
+
+                  <div class="input-group date" id='datetimepicker7'>
+                     <div class="input-group-addon"><i class="icofont-clock-time"></i></div>
+                     <input atp-time-picker value="{{reqData.appointmenttime}}" class="form-control" placeholder=" Notification Time - hh:mm" [(ngModel)] = "reqData.notificationtime"/>
+
+                   </div>
+                        
+                  </div>
+               <div class="col-md-12">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Message' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <textarea class="form-control" rows="5"  [(ngModel)] = "reqData.messagewhatsapp" [ngModelOptions]="{standalone: true}"></textarea>
+                     </div>
+                  </div>
+               </div>
+               <a class="btn btngp btnsubmit" (click)="whatsappAction()">{{'Submit' | translate }}</a>
+               <button class="btn btngp btnsubmit" title = "whatsapp" (click) ="whatsapp()">{{'Preview' | translate }}</button> 
+            </div>
+         </div>
+      </div>
+      
+   </div>
+</div>
+
+
+
+
+
+<div  id="itsvoice">
+   <div class="section-container section-container-new">
+      <div class="section">
+         <div class="main-heading">
+            <div class="mh-left">
+               <h1 class="edit-data">{{'Voice' | translate }}</h1>
+            </div>
+            <div class="mh-right">
+               <a class="view-button" (click) = "goBack()">
+                  <i class="fa fa-angle-left"></i> {{'Back' | translate }}
+               </a>
+            </div>
+         </div>
+         <div class="form-element">
+            <div class="form-horizontal_">
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'When' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" id="trigger"  [(ngModel)] = "reqData.eventafterbeforevoice" [ngModelOptions]="{standalone: true}">
+                           <option value="" disabled="">{{'Select Trigger' | translate }}</option>
+                           <option value="1">Before</option>
+                           <option value="2">After</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Select' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" [(ngModel)] = "reqData.dayandweeks" [ngModelOptions]="{standalone: true}">
+                           <option value="0">Days</option>
+                           <option value="1">Weeks</option>
+                           
+                        </select>
+                     </div>                  
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Select' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" [(ngModel)] = "reqData.eventdayvoice" [ngModelOptions]="{standalone: true}">
+                           <option value="0">0</option>
+                           <option value="1">1</option>
+                           <option value="2">2</option>
+                           <option value="3">3</option>
+                           <option value="4">4</option>
+                           <option value="5">5</option>
+                           <option value="6">6</option>
+                           <option value="7">7</option>
+                        </select>
+                     </div>                  
+                  </div>
+               </div>
+
+               <div class="col-sm-6">
+                     <label  class="col-form-label">{{'Notification Time' | translate }}:</label>
+
+
+                  <div class="input-group date" id='datetimepicker7'>
+                     <div class="input-group-addon"><i class="icofont-clock-time"></i></div>
+                     <input atp-time-picker value="{{reqData.appointmenttime}}" class="form-control" placeholder=" Notification Time - hh:mm" [(ngModel)] = "reqData.notificationtime"/>
+
+                   </div>
+                        
+                  </div>
+               
+               <div class="col-md-12">
+                  <div class="form-group">
+                     <label for="message-text" class="col-form-label">{{'Message' | translate }}:</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <textarea class="form-control" rows="5" [(ngModel)] = "reqData.messagevoice" [ngModelOptions]="{standalone: true}"></textarea>
+                     </div>  
+                  </div>
+               </div> 
+               <a class="btn btngp btnsubmit" (click)="voiceAction()" >{{'Submit' | translate }}</a>
+               <button class="btn btngp btnsubmit" title = "voiceblock" (click) =
+               "voiceblock()">{{'Preview' | translate }}</button> 
+            </div>
+         </div>
+      </div>
+      
+   </div>
+</div>
+
+
+
+<!-- Modal For SMS -->
+
+<div id="smsblock" class="modal fade modalmsg" role="dialog">
+   <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="close_btn">
+            <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+         </div>
+         <div class="modal-body text-center">
+            <div class="modal-body_inner">
+               <div class="form-group">
+                  <!-- <div class="col-sm-8 "> -->
+                     <label for="recipient-name" class="col-form-label"><b>{{'Please write country code before the number' | translate }}</b></label>
+                     <div class="input-group">
+                        <div class="input-group-addon pop_addon">
+                       <i class="icofont-ui-dial-phone"></i>
+
+
+                        </div> 
+
+                        <input type="number" class="form-control mycontact"      [(ngModel)] = "reqData.mycontact" id="mycontact">
+                     </div> 
+                     <!-- </div> -->
+
+
+                  </div>
+               </div>
+
+
+            </div>
+            <div class="modal-footer border0">
+               <button type="button" class="btn btn-primary" (click) = "sendoverview()">{{'Send' | translate }}</button>
+               <button type="button" class="btn btn-default" data-dismiss="modal">{{'Close' | translate }}</button>
+            </div>
+         </div>
+
+      </div>
+   </div>
+
+
+   <!-- Modal For Email -->
+
+   <div id="emailblock" class="modal fade modalmsg" role="dialog">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="close_btn">
+               <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+            </div>
+            <div class="modal-body text-center">
+               <div class="modal-body_inner">
+
+                  <div class="form-group">
+                     
+                     <label for="message-text" class="col-form-label"><b>{{'Email' | translate }}:</b></label>
+                     <div class="input-group">
+
+                        <div class="input-group-addon pop_addon">
+                           <i class="icofont-email"></i>
+
+                           
+                        </div>
+
+                        <input type="email" class="form-control"  [(ngModel)] = "reqData.emailaddress" [ngModelOptions]="{standalone: true}" id="" (blur) = alidateEmail(reqData.emailaddress)>
+
+                        
+                        
+                     </div>  
+                  </div>
+               </div>
+
+            </div>
+            <br><br>
+            <div class="modal-footer border0">
+               <button type="button" class="btn btn-primary" (click) = "sendemail()">{{'Send' | translate }}</button>
+               <button type="button" class="btn btn-default" data-dismiss="modal">{{'Close' | translate }}</button>
+            </div>
+         </div>
+
+      </div>
+   </div>
+
+
+
+   <!-- Modal For Voice -->
+
+   <div id="voiceblock" class="modal fade modalmsg" role="dialog">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="close_btn">
+               <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+            </div>
+            <div class="modal-body text-center">
+               <div class="modal-body_inner">
+                  <div class="form-group">
+                     <!-- <div class="col-sm-8 "> -->
+                        <label for="recipient-name" class="col-form-label"><b>{{'Please write country code before the number' | translate }}</b></label>
+                        <div class="input-group">
+                           <div class="input-group-addon pop_addon">
+                              <i class="icofont-ui-dial-phone"></i>
+         <!--    <select [(ngModel)] = "reqData.countrycode">
+              <option [ngValue]="undefined" disabled selected>Code</option>
+               <option *ngFor="let item of countrycodes" [ngValue]="item.dial_code">{{item.dial_code}}</option>  
+            
+            </select> -->
+
+         </div> 
+
+         <input type="number" class="form-control mycontact"      [(ngModel)] = "reqData.mycontact" id="mycontact">
+      </div> 
+      <!-- </div> -->
+
+
+   </div>
+</div>
+</div>
+<div class="modal-footer border0">
+   <button type="button" class="btn btn-primary" (click) = "sendvoicemassage()">{{'Send' | translate }}</button>
+   <button type="button" class="btn btn-default" data-dismiss="modal">{{'Close' | translate }}</button>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+
+
+<!-- Modal For whatsapp -->
+
+<div id="whatsapp" class="modal fade modalmsg" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="close_btn">
+            <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+         </div>
+         <div class="modal-body text-center">
+            <div class="modal-body_inner">
+               <div class="form-group">
+                  <!-- <div class="col-sm-8 "> -->
+                     <label for="recipient-name" class="col-form-label"><b>{{'Please write country code before the number' | translate }}</b></label>
+                     <div class="input-group">
+                        <div class="input-group-addon pop_addon">
+                           <i class="icofont-ui-dial-phone"></i>
+         <!--    <select [(ngModel)] = "reqData.countrycode">
+              <option [ngValue]="undefined" disabled selected>Code</option>
+               <option *ngFor="let item of countrycodes" [ngValue]="item.dial_code">{{item.dial_code}}</option>  
+            
+            </select> -->
+
+         </div> 
+
+         <input type="number" class="form-control mycontact"      [(ngModel)] = "reqData.mycontact" id="mycontact">
+      </div> 
+      <!-- </div> -->
+
+
+   </div>
+</div>
+
+
+
+
+
+
+
+</div>
+<div class="modal-footer border0">
+   <button type="button" class="btn btn-primary" (click) = "sendwhatsappmassage()">{{'Send' | translate }}</button>
+   <button type="button" class="btn btn-default" data-dismiss="modal">{{'Close' | translate }}</button>
+</div>
+</div>
+
+</div><div *ngIf="numberstep == 2">
+   <div class="section-container section-container-new">
+      <div class="section">
+         <div class="main-heading">
+            <div class="mh-left">
+               <h1 class="edit-data">{{'SMS' | translate }}</h1>
+            </div>
+            <div class="mh-right">
+               <a class="view-button" (click) = "goBack()">
+                  <i class="fa fa-angle-left"></i> {{'Back' | translate }}
+               </a>
+            </div>
+         </div>
+         <div class="form-element">
+            <div class="form-horizontal_">
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'When' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" id="trigger" [(ngModel)] = "reqData.eventafterbeforesms" [ngModelOptions]="{standalone: true}">
+                           <option value="" disabled="">{{'Select Trigger' | translate }}</option>
+                           <option value="1">Before</option>
+                           <option value="2">After</option>
+                        </select>
+                     </div>
+                  </div>
+
+               </div>
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Days' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" [(ngModel)] = "reqData.eventdaysms" [ngModelOptions]="{standalone: true}">
+                           <option value="0">0</option>
+                           <option value="1">1</option>
+                           <option value="2">2</option>
+                           <option value="3">3</option>
+                           <option value="4">4</option>
+                           <option value="5">5</option>
+                           <option value="6">6</option>
+                           <option value="7">7</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Language' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" [(ngModel)] = "reqData.language" [ngModelOptions]="{standalone: true}">
+                           <option selected="" value="English">English</option>
+                           <option value="Hindi">Hindi</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Message' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <textarea class="form-control" rows="5"  [(ngModel)] = "reqData.messagesms" [ngModelOptions]="{standalone: true}"></textarea>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <a class="btn btngp btnsubmit" (click)="smsAction()">{{'Submit' | translate }}</a>
+      <button class="btn btngp btnsubmit" title = "smsblock" (click) ="smsblock()">{{'Preview' | translate }}</button>
+   </div>
+</div>
+<div *ngIf="numberstep == 1">
+   <div class="section-container section-container-new">
+      <div class="section">
+         <div class="main-heading">
+            <div class="mh-left">
+               <h1 class="edit-data">{{'Email' | translate }}</h1>
+            </div>
+            <div class="mh-right">
+               <a class="view-button" (click) = "goBack()">
+                  <i class="fa fa-angle-left"></i> {{'Back' | translate }}
+               </a>
+            </div>
+         </div>
+         <div class="form-element">
+            <div class="form-horizontal_">
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Event to fire' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" id="trigger" [(ngModel)] = "reqData.eventafterbeforeemail" [ngModelOptions]="{standalone: true}">
+                           <option value="" disabled="">{{'Select Trigger' | translate }}</option>
+                           <option value="1">Before</option>
+                           <option value="2">After</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Days' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" [(ngModel)] = "reqData.eventdayemail" [ngModelOptions]="{standalone: true}">
+                           <option value="0">0</option>
+                           <option value="1">1</option>
+                           <option value="2">2</option>
+                           <option value="3">3</option>
+                           <option value="4">4</option>
+                           <option value="5">5</option>
+                           <option value="6">6</option>
+                           <option value="7">7</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label for="message-text" class="col-form-label">Name:</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <input class="form-control"  [(ngModel)] = "reqData.emailname" [ngModelOptions]="{standalone: true}">
+                     </div>  
+                  </div>
+               </div>
+
+
+
+               <div class="col-md-6">
+
+                  <div class="form-group">
+                     <label for="message-text" class="col-form-label">Subject:</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <input  class="form-control"  [(ngModel)] = "reqData.emailsubject" [ngModelOptions]="{standalone: true}">
+                     </div>  
+                  </div>
+               </div>
+
+
+               <div class="col-md-12">
+                  <div class="form-group">
+                     <label for="message-text" class="col-form-label">{{'Message' | translate }}:</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <textarea class="form-control" rows="4" [(ngModel)] = "reqData.messageemail" [ngModelOptions]="{standalone: true}"></textarea>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <a class="btn btngp btnsubmit" (click)="emailAction()">{{'Submit' | translate }}</a>
+      <button class="btn btngp btnsubmit" title = "emailblock" (click) ="emailblock()">{{'Preview' | translate }}</button>
+   </div>
+</div>
+
+
+<div *ngIf="numberstep == 4">
+   <div class="section-container section-container-new">
+      <div class="section">
+         <div class="main-heading">
+            <div class="mh-left">
+               <h1 class="edit-data">{{'WHATSAPP' | translate }}</h1>
+            </div>
+            <div class="mh-right">
+               <a class="view-button" (click) = "goBack()">
+                  <i class="fa fa-angle-left"></i> {{'Back' | translate }}
+               </a>
+            </div>
+         </div>
+         <div class="form-element">
+            <div class="form-horizontal_">
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'When' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" id="trigger" [(ngModel)] = "reqData.eventafterbeforewhatsapp" [ngModelOptions]="{standalone: true}">
+                           <option value="" disabled="">{{'Select Trigger' | translate }}</option>
+                           <option value="1">Before</option>
+                           <option value="2">After</option>
+                        </select>
+                     </div>
+                  </div>
+
+               </div>
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Days' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" [(ngModel)] = "reqData.eventdaywhatsapp" [ngModelOptions]="{standalone: true}">
+                           <option value="0">0</option>
+                           <option value="1">1</option>
+                           <option value="2">2</option>
+                           <option value="3">3</option>
+                           <option value="4">4</option>
+                           <option value="5">5</option>
+                           <option value="6">6</option>
+                           <option value="7">7</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Language' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" [(ngModel)] = "reqData.language" [ngModelOptions]="{standalone: true}">
+                           <option selected="" value="English">English</option>
+                           <option value="Hindi">Hindi</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Message' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <textarea class="form-control" rows="5"  [(ngModel)] = "reqData.messagewhatsapp" [ngModelOptions]="{standalone: true}"></textarea>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <a class="btn btngp btnsubmit" (click)="whatsappAction()">{{'Submit' | translate }}</a>
+      <button class="btn btngp btnsubmit" title = "whatsapp" (click) ="whatsapp()">{{'Preview' | translate }}</button> 
+   </div>
+</div>
+
+
+
+
+
+<div *ngIf="numberstep == 3">
+   <div class="section-container section-container-new">
+      <div class="section">
+         <div class="main-heading">
+            <div class="mh-left">
+               <h1 class="edit-data">{{'Voice' | translate }}</h1>
+            </div>
+            <div class="mh-right">
+               <a class="view-button" (click) = "goBack()">
+                  <i class="fa fa-angle-left"></i> {{'Back' | translate }}
+               </a>
+            </div>
+         </div>
+         <div class="form-element">
+            <div class="form-horizontal_">
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Event to fire' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" id="trigger"  [(ngModel)] = "reqData.eventafterbeforevoice" [ngModelOptions]="{standalone: true}">
+                           <option value="" disabled="">{{'Select Trigger' | translate }}</option>
+                           <option value="1">Before</option>
+                           <option value="2">After</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label for="recipient-name" class="col-form-label">{{'Days' | translate }}</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <select class="form-control" [(ngModel)] = "reqData.eventdayvoice" [ngModelOptions]="{standalone: true}">
+                           <option value="0">0</option>
+                           <option value="1">1</option>
+                           <option value="2">2</option>
+                           <option value="3">3</option>
+                           <option value="4">4</option>
+                           <option value="5">5</option>
+                           <option value="6">6</option>
+                           <option value="7">7</option>
+                        </select>
+                     </div>                  
+                  </div>
+               </div>
+               <div class="col-md-12">
+                  <div class="form-group">
+                     <label for="message-text" class="col-form-label">{{'Message' | translate }}:</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">
+                           <img src="assets/Images/box-icon.png"/>
+                        </div>
+                        <textarea class="form-control" rows="4" [(ngModel)] = "reqData.messagevoice" [ngModelOptions]="{standalone: true}"></textarea>
+                     </div>  
+                  </div>
+               </div>  
+            </div>
+         </div>
+      </div>
+      <a class="btn btngp btnsubmit" (click)="voiceAction()" >{{'Submit' | translate }}</a>
+      <button class="btn btngp btnsubmit" title = "voiceblock" (click) =
+      "voiceblock()">{{'Preview' | translate }}</button>
+   </div>
+</div>
+
+
+
+<!-- Modal For SMS -->
+
+<div id="smsblock" class="modal fade modalmsg" role="dialog">
+   <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="close_btn">
+            <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+         </div>
+         <div class="modal-body text-center">
+            <div class="modal-body_inner">
+               <div class="form-group">
+                  <!-- <div class="col-sm-8 "> -->
+                     <label for="recipient-name" class="col-form-label"><b>{{'Please write country code before the number' | translate }}</b></label>
+                     <div class="input-group">
+                        <div class="input-group-addon pop_addon">
+                           <i class="icofont-ui-dial-phone"></i>
+         <!--    <select [(ngModel)] = "reqData.countrycode">
+              <option [ngValue]="undefined" disabled selected>Code</option>
+               <option *ngFor="let item of countrycodes" [ngValue]="item.dial_code">{{item.dial_code}}</option>  
+            
+            </select> -->
+
+         </div> 
+
+         <input type="number" class="form-control mycontact"      [(ngModel)] = "reqData.mycontact" id="mycontact">
+      </div> 
+      <!-- </div> -->
+
+
+   </div>
+</div>
+
+
+</div>
+<div class="modal-footer border0">
+   <button type="button" class="btn btn-primary" (click) = "sendoverview()">{{'Send' | translate }}</button>
+   <button type="button" class="btn btn-default" data-dismiss="modal">{{'Close' | translate }}</button>
+</div>
+</div>
+
+</div>
+</div>
+
+
+<!-- Modal For Email -->
+
+<div id="emailblock" class="modal fade modalmsg" role="dialog">
+   <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="close_btn">
+            <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+         </div>
+         <div class="modal-body text-center">
+            <div class="modal-body_inner">
+
+               <div class="form-group">
+                  
+                  <label for="message-text" class="col-form-label"><b>{{'Email' | translate }}:</b></label>
+                  <div class="input-group">
+
+                     <div class="input-group-addon pop_addon">
+                        <i class="icofont-email"></i>
+
+                        
+                     </div>
+                     <input type="email" class="form-control"  [(ngModel)] = "reqData.emailaddress" [ngModelOptions]="{standalone: true}" 
+                     id="emailaddress" required="emailaddress">
+                  </div>  
+               </div>
+            </div>
+
+         </div>
+         <br><br>
+         <div class="modal-footer border0">
+            <button type="button" class="btn btn-primary" (click) = "sendemail()">{{'Send' | translate }}</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{'Close' | translate }}</button>
+         </div>
+      </div>
+
+   </div>
+</div>
+
+
+
+<!-- Modal For Voice -->
+
+<div id="voiceblock" class="modal fade modalmsg" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="close_btn">
+            <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+         </div>
+         <div class="modal-body text-center">
+            <div class="modal-body_inner">
+               <div class="form-group">
+                  <!-- <div class="col-sm-8 "> -->
+                     <label for="recipient-name" class="col-form-label"><b>{{'Please write country code before the number' | translate }}</b></label>
+                     <div class="input-group">
+                        <div class="input-group-addon pop_addon">
+                           <i class="icofont-ui-dial-phone"></i>
+         <!--    <select [(ngModel)] = "reqData.countrycode">
+              <option [ngValue]="undefined" disabled selected>Code</option>
+               <option *ngFor="let item of countrycodes" [ngValue]="item.dial_code">{{item.dial_code}}</option>  
+            
+            </select> -->
+
+         </div> 
+
+         <input type="number" class="form-control mycontact"      [(ngModel)] = "reqData.mycontact" id="mycontact">
+      </div> 
+      <!-- </div> -->
+
+
+   </div>
+</div>
+</div>
+<div class="modal-footer border0">
+   <button type="button" class="btn btn-primary" (click) = "sendvoicemassage()">{{'Send' | translate }}</button>
+   <button type="button" class="btn btn-default" data-dismiss="modal">{{'Close' | translate }}</button>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+
+
+<!-- Modal For whatsapp -->
+
+<div id="whatsapp" class="modal fade modalmsg" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="close_btn">
+            <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+         </div>
+         <div class="modal-body text-center">
+            <div class="modal-body_inner">
+               <div class="form-group">
+                  <!-- <div class="col-sm-8 "> -->
+                     <label for="recipient-name" class="col-form-label"><b>{{'Please write country code before the number' | translate }}</b></label>
+                     <div class="input-group">
+                        <div class="input-group-addon pop_addon">
+                           <i class="icofont-ui-dial-phone"></i>
+         <!--    <select [(ngModel)] = "reqData.countrycode">
+              <option [ngValue]="undefined" disabled selected>Code</option>
+               <option *ngFor="let item of countrycodes" [ngValue]="item.dial_code">{{item.dial_code}}</option>  
+            
+            </select> -->
+
+         </div> 
+
+         <input type="number" class="form-control mycontact"      [(ngModel)] = "reqData.mycontact" id="mycontact">
+      </div> 
+      <!-- </div> -->
+
+
+   </div>
+</div>
+
+
+
+
+
+
+
+</div>
+<div class="modal-footer border0">
+   <button type="button" class="btn btn-primary" (click) = "sendwhatsappmassage()">{{'Send' | translate }}</button>
+   <button type="button" class="btn btn-default" data-dismiss="modal">{{'Close' | translate }}</button>
+</div>
+</div>
+
+</div>
+</div>
+</div>

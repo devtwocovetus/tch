@@ -1,0 +1,454 @@
+
+<div class="right-bar">
+	<div class="section-container section-container-new">
+		<div class="section">
+			<div class="main-heading ">
+				<div class="mh-left">
+					<h1>{{patientData?.Patient_First_Name}} {{patientData?.Patient_Last_Name}}</h1>
+				</div>
+
+				<div class="mh-right ">
+					<a class="view-button" (click) = "goBack()"><i class="fa fa-angle-left"></i> {{'Back' | translate }} </a>
+				</div>
+			</div>
+			<div class="form-element">
+				<div class="detail_patient">
+					<div class="table_one_bdy_inner">
+						<div class="table_one_bdy_left">
+							<table class="tbl_intro">
+								<tbody>
+									<tr>
+										<td>
+											<p class="txt-bold font-normal-two">{{'Name' | translate }}:</p>
+										</td>
+										<td>
+											<p class="txt-light font-normal">{{patientData?.Patient_Prefix}} {{patientData?.Patient_First_Name}} {{patientData?.Patient_Last_Name}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="txt-bold font-normal-two">{{'Birth Date' | translate }}:</p>
+										</td>
+										<td>
+											<p class="txt-light font-normal">{{patientData?.Patient_DOB | date: 'MM-dd-yyyy'}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="txt-bold font-normal-two">{{'Race' | translate }}:</p>
+										</td>
+										<td>
+											<p class="txt-light font-normal">{{patientData?.Patient_Race}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="txt-bold font-normal-two">{{'Height' | translate }}:</p>
+										</td>
+										<td>
+											<p class="txt-light font-normal">{{patientData?.Patient_Height_In_Ft}}′ {{patientData?.Patient_Height_In_Inch}}″</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="txt-bold font-normal-two">{{'Weight' | translate }}:</p>
+										</td>
+										<td>
+											<p class="txt-light font-normal">{{patientData?.Patient_Weight}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td rospan="2">
+											<p class="txt-bold font-normal-two">{{'Contact Information' | translate }}:</p>
+											{{'Primary Home' | translate }}
+											<br>
+											{{'Emergency Contact' | translate }}
+										</td>
+										<td rospan="2">
+											<p class="txt-light font-normal">&nbsp;</p>
+											{{patientData?.Patient_Primary_No}}
+											<br>
+											{{patientData?.Patient_Emergency_No}} 
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="table_one_bdy_right">
+							
+							<table class="tbl_intro">
+								<tbody>
+									<tr>
+										<td>
+											<p class="txt-bold font-normal-two">{{'Patient Code' | translate }}:</p>
+										</td>
+										<td>
+											<p class="txt-light font-normal">{{patientData?.Patient_Code}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="txt-bold font-normal-two">{{'Gender' | translate }}:</p>
+										</td>
+										<td>
+											<p class="txt-light font-normal">{{patientData?.Patient_Sex}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="txt-bold font-normal-two">{{'SSN' | translate }}:</p>
+										</td>
+										<td>
+											<p class="txt-light font-normal">{{patientData?.Patient_SSN}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="txt-bold font-normal-two">{{'Religious' | translate }}:</p>
+										</td>
+										<td>
+											<p class="txt-light font-normal">{{patientData?.Patient_Religion}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td rospan="2">
+											<p class="txt-bold font-normal-two">{{'Primary Home' | translate }}:</p>
+										</td>
+										<td  rospan="2">
+											<p class="txt-light font-normal">{{patientData?.Patient_Address1}} {{patientData?.Patient_Address2Patient_Address1}}</p>
+											<p class="txt-light font-normal">{{patientData?.Patient_City}}, {{patientData?.Patient_State}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td >
+											<p class="txt-bold font-normal-two">{{'Email' | translate }}:</p>
+											
+										</td>
+										<td>
+											<p class="txt-light font-normal">{{patientData?.Patient_Email}}</p>
+
+										</td>
+									</tr>
+									<tr>
+										<td >
+											<p class="txt-bold font-normal-two">{{'Language' | translate }}:</p>
+											
+										</td>
+										<td>
+											<p class="txt-light font-normal">{{patientData?.Patient_Language}}</p>
+
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="booking_heading_inner">
+					<div class="booking_heading">
+						<h1 class="booking_heading_txt">{{'Booking information' | translate }}</h1>
+					</div>
+					<div class="table_one_bdy_inner">
+						<div class="table_one_bdy_left">
+							<table class="tbl_intro">
+								<tbody>
+									<tr>
+										<td>
+											<p class="txt-bold font-normal-two">{{'Doctor' | translate }}</p>
+										</td>
+										<td>
+											<p class="txt-light font-normal">Dr. {{bookingData?.VCB_Doctor_Name}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="txt-bold font-normal-two">{{'Time Slot' | translate }}</p>
+										</td>
+										<td>
+											<p class="txt-light font-normal">15 Mins</p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="table_one_bdy_right">
+							<table class="tbl_intro">
+								<tbody>
+									
+									<tr>
+										<td>
+											<p class="txt-bold font-normal-two">{{'Appointment Date' | translate }}</p>
+										</td>
+										<td>
+											<p class="txt-light font-normal">{{bookingData?.VCB_Booking_Date | date: 'MM-dd-yyyy'}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="txt-bold font-normal-two">{{'Appointment Time' | translate }}</p>
+										</td>
+										<td>
+											<div class="radio" *ngFor = "let time of bookingData?.VCB_Booking_Time">
+												<label><input type="radio" name="optradio" class="txt-light font-normal" checked (change) = "setTime(time)">{{tConvert(time)}}</label>
+											</div>
+
+										</td>
+
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+					<div class="table_two_bdy" *ngIf = "bookingData?.VCB_Approved && bookingData?.VCB_Approved.length > 0">
+						<h3 class="heading_tbl_txt">{{'Approved Reason' | translate }}
+						</h3>
+						<div class="table_two_bdy_inner">
+							<table class="table_two_bdy_full tble_reject" >
+								<tbody>
+									<tr *ngFor = "let list of bookingData?.VCB_Approved; let i = index">
+										<td class="txt_lng_right">
+											<p class="txt- category_bold font-normal text-align_left">
+												{{list.RR_User_Name}} 
+											</p>
+											<p class="light text-align_left"> {{list.RR_Message}} </p>
+										</td>
+										<td>
+											<p class="txt-light font-normal text-align_right">
+												{{list.RR_Create_Date | date:'MM-dd-yyyy, hh:mm a'}} 
+											</p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="table_two_bdy" *ngIf = "bookingData?.VCB_Unapproved && bookingData?.VCB_Approved.length > 0">
+						<h3 class="heading_tbl_txt">{{'Unapproved Reason' | translate }}
+						</h3>
+						<div class="table_two_bdy_inner">
+							<table class="table_two_bdy_full tble_reject" >
+								<tbody>
+									<tr *ngFor = "let list of bookingData?.VCB_Unapproved; let i = index">
+										<td class="txt_lng_right">
+											<p class="txt- category_bold font-normal text-align_left">
+												{{list.RR_User_Name}} 
+											</p>
+											<p class="light text-align_left"> {{list.RR_Message}} </p>
+										</td>
+										<td>
+											<p class="txt-light font-normal text-align_right">
+												{{list.RR_Create_Date | date:'MM-dd-yyyy, hh:mm a'}} 
+											</p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="table_two_bdy" *ngIf = "bookingData?.VCB_Draft && bookingData?.VCB_Draft.length > 0">
+						<h3 class="heading_tbl_txt">{{'Draft Reason' | translate }}
+						</h3>
+						<div class="table_two_bdy_inner">
+							<table class="table_two_bdy_full tble_reject">
+								<tbody>
+									<tr *ngFor = "let list of bookingData?.VCB_Draft; let i = index">
+										<td>
+											<p class="txt- category_bold font-normal text-align_left">
+												{{list.RR_User_Name}} 
+											</p>
+											<p class="light text-align_left"> {{list.RR_Message}} </p>
+										</td>
+										<td>
+											<p class="txt-light font-normal text-align_right">
+												{{list.RR_Create_Date | date:'MM-dd-yyyy, hh:mm a'}} 
+											</p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="table_two_bdy" *ngIf = "bookingData?.VCB_Cancelled && bookingData?.VCB_Cancelled.length > 0">
+						<h3 class="heading_tbl_txt">{{'Cancelled Reason' | translate }}
+						</h3>
+						<div class="table_two_bdy_inner">
+							<table class="table_two_bdy_full tble_reject">
+								<tbody>
+									<tr *ngFor = "let list of bookingData?.VCB_Cancelled; let i = index">
+										<td>
+											<p class="txt- category_bold font-normal text-align_left">
+												{{list.RR_User_Name}} 
+											</p>
+											<p class="light text-align_left"> {{list.RR_Message}} </p>
+										</td>
+										<td>
+											<p class="txt-light font-normal text-align_right">
+												{{list.RR_Create_Date | date:'MM-dd-yyyy, hh:mm a'}} 
+											</p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="table_two_bdy" *ngIf = "bookingData?.VCB_Complete && bookingData?.VCB_Complete.length > 0">
+						<h3 class="heading_tbl_txt">{{'Complete Reason' | translate }}
+						</h3>
+						<div class="table_two_bdy_inner">
+							<table class="table_two_bdy_full tble_reject">
+								<tbody>
+									<tr *ngFor = "let list of bookingData?.VCB_Complete; let i = index">
+										<td>
+											<p class="txt- category_bold font-normal text-align_left">
+												{{list.RR_User_Name}} 
+											</p>
+											<p class="light text-align_left"> {{list.RR_Message}} </p>
+										</td>
+										<td>
+											<p class="txt-light font-normal text-align_right">
+												{{list.RR_Create_Date | date:'MM-dd-yyyy, hh:mm a'}} 
+											</p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="btngroup bottombar_slide fixed" >
+		<div *ngIf = "datePassed">
+			<input type="button" value="{{'Unapprove' | translate }}" name="" class="btn btngp btnsubmit my-12"  data-toggle="modal" data-target="#unapprove">
+			
+			<input type="button" value="{{'Cancelled' | translate }}" name="" class="btn btngp btnsubmit my-12"  data-toggle="modal" data-target="#cancelled">
+			<input type="button" value="{{'Complete' | translate }}" name="" class="btn btngp btnsubmit my-12"  data-toggle="modal" data-target="#complete">
+			<input type="button" value="{{'Cancel' | translate }}" name="" class="btn btngp btncancel my-12" (click) = "goBack()">
+		</div>
+		<div *ngIf = "!datePassed">
+
+			<input type="button" value="{{'Approve' | translate }}" name="" class="btn btngp btnsubmit my-12"  data-toggle="modal" data-target="#approve">
+			<input type="button" value="{{'Cancelled' | translate }}" name="" class="btn btngp btnsubmit my-12"  data-toggle="modal" data-target="#cancelled">
+			<input type="button" value="{{'Cancel' | translate }}" name="" class="btn btngp btncancel my-12" (click) = "goBack()">
+		</div>
+	</div>
+</div>
+
+
+<div id="draft" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Please enter the draft reason' | translate }}</h3>
+			</div>
+			<div class="col-md-12">
+				<textarea [(ngModel)] = "reasons.draft" class="form-control" style="height: 10em" placeholder="draft Reason..."></textarea>
+			</div>
+			<div class="modal-footer border0">
+				<input type="button" value="{{'Submit' | translate }}"  (click) = "saveRejectReason('Draft')"  class="btn btngp btnsubmit  my-12" />
+				<input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-dismiss="modal"  class="btn btngp btncancel  my-12" />
+
+			</div>
+		</div>
+
+	</div>
+</div>
+<div id="approve" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Please enter the approve reason' | translate }}</h3>
+			</div>
+			<div class="col-md-12">
+				<textarea [(ngModel)] = "reasons.approve" class="form-control" style="height: 10em" placeholder="Approve Reason..."></textarea>
+			</div>
+			<div class="modal-footer border0">
+				<input type="button" value="{{'Submit' | translate }}"  (click) = "saveRejectReason('Approved')"  class="btn btngp btnsubmit  my-12" />
+				<input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-dismiss="modal"  class="btn btngp btncancel  my-12" />
+
+			</div>
+		</div>
+
+	</div>
+</div>
+<div id="cancelled" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Please enter the cancelled reason' | translate }}</h3>
+			</div>
+			<div class="col-md-12">
+				<textarea [(ngModel)] = "reasons.cancelled" class="form-control" style="height: 10em" placeholder="cancelled Reason..."></textarea>
+			</div>
+			<div class="modal-footer border0">
+				<input type="button" value="{{'Submit' | translate }}"  (click) = "saveRejectReason('Cancelled')"  class="btn btngp btnsubmit  my-12" />
+				<input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-dismiss="modal"  class="btn btngp btncancel  my-12" />
+
+			</div>
+		</div>
+
+	</div>
+</div>
+<div id="complete" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Please enter the complete reason' | translate }}</h3>
+			</div>
+			<div class="col-md-12">
+				<textarea [(ngModel)] = "reasons.complete" class="form-control" style="height: 10em" placeholder="complete Reason..."></textarea>
+			</div>
+			<div class="modal-footer border0">
+				<input type="button" value="{{'Submit' | translate }}"  (click) = "saveRejectReason('Complete')"  class="btn btngp btnsubmit  my-12" />
+				<input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-dismiss="modal"  class="btn btngp btncancel  my-12" />
+
+			</div>
+		</div>
+
+	</div>
+</div>
+<div id="unapprove" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Please enter the unapproved reason' | translate }}</h3>
+			</div>
+			<div class="col-md-12">
+				<textarea [(ngModel)] = "reasons.unapproved" class="form-control" style="height: 10em" placeholder="Unapproved Reason..."></textarea>
+			</div>
+			<div class="modal-footer border0">
+				<input type="button" value="{{'Submit' | translate }}"  (click) = "saveRejectReason('Unapproved')"  class="btn btngp btnsubmit  my-12" />
+				<input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-dismiss="modal"  class="btn btngp btncancel  my-12" />
+
+			</div>
+		</div>
+
+	</div>
+</div>

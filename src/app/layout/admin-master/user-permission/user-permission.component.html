@@ -1,0 +1,74 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+	<div class="loader-img">
+		<img src="assets/Images/logo2.gif" alt="">
+	</div>
+</div>
+<div class="section-container section-container-new" >
+	<div class="main-heading main-heading1">
+		<div class="mh-left">
+			<h1 class="add-button">{{'User Permission' | translate }}</h1>
+		</div>
+		<div class="mh-right">
+			<a class="view-button" id="again-Back" (click) = "goBack()"><i class="fa fa-angle-left"></i> {{'Back' | translate }}</a>
+		</div>
+	</div>
+	<div class="form-element">
+		<div class="form-group">
+			<div class="row">
+				<div class="col-lg-3 col-md-4 col-sm-3">
+					<div class="boxList">
+						<div *ngFor = "let list of getCategoryList">
+							<label class="radio-inline"><input (change) = "getDataViaName(list.CD_Category_Name)" type="radio" name="optradio">{{list.CD_Category_Name}}</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-9 col-md-8 col-sm-9">		
+					<div id="Grid_Pagemaster" class="boxContain">
+						<div *ngFor = "let list of getpagesList;let i=index" class="listRep">
+							<input type="hidden" id="hf_permissionid{{i}}" value={{list.UP_Unique_ID}}>
+							<input type="hidden" id="hf_pageid{{i}}" value={{list.Page_ID}}>
+							<input type="hidden" id="hf_category{{i}}" value={{list.Category_Name}}>
+							<div class="row">
+								<div class="col-md-12">
+									<label class="text-capi" id="lbl_Pagename{{i}}">{{list.Page_Name}}</label>
+								</div>
+							</div>		
+							<label *ngIf = "list.Is_View" class="checkbox-inline">
+								<input type="checkbox" checked="" id="chk_0{{i}}">{{'View' | translate }}
+							</label>
+							<label *ngIf = "!list.Is_View" class="checkbox-inline">
+								<input type="checkbox" id="chk_0{{i}}">{{'View' | translate }}
+							</label>
+							<label *ngIf = "list.Is_Add" class="checkbox-inline">
+								<input type="checkbox" checked="" id="chk_1{{i}}">{{'Add' | translate }}
+							</label>
+							<label *ngIf = "!list.Is_Add" class="checkbox-inline">
+								<input type="checkbox" id="chk_1{{i}}">{{'Add' | translate }}
+							</label>
+							<label *ngIf = "list.Is_Edit" class="checkbox-inline">
+								<input type="checkbox" checked="" id="chk_2{{i}}">{{'Edit' | translate }}
+							</label>
+							<label *ngIf = "!list.Is_Edit" class="checkbox-inline">
+								<input type="checkbox"  id="chk_2{{i}}">{{'Edit' | translate }}
+							</label>
+							<label *ngIf = "list.Is_Delete" class="checkbox-inline">
+								<input type="checkbox" checked="" id="chk_3{{i}}">{{'Delete' | translate }}
+							</label>
+							<label *ngIf = "!list.Is_Delete" class="checkbox-inline">
+								<input type="checkbox"  id="chk_3{{i}}">{{'Delete' | translate }}
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">	
+					<div class="mh-right">
+						<a class="add-button" type="button" id="btn_submit" (click)="SubmitPermission()">{{'Submit' | translate }}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+

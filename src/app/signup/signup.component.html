@@ -1,0 +1,144 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+	<div class="loader-img">
+		<img src="assets/Images/logo2.gif" alt="">
+	</div>
+</div>
+
+<input type="hidden" id="BaseUrlPath" value="@ViewBag.BaseUrlPath" />
+<div class="form-body">
+	<div class="row">
+		<div class="form-holder">
+			<div class="form-content" style="background-color:#2ca36d !important">
+				<div class="form-items">
+					<div class="">
+						<a href="index.html">
+							<div class="logo">
+								<img class="logo-size" src="assets/Images/logo.png" alt="">
+							</div>
+						</a>
+					</div>
+					<h3></h3>
+					<p></p>
+					<div class="page-links">
+						<a href="javascript:void(0);" class="active unlink login">Signup</a>
+					</div>
+					<form>
+                      <div class="row">
+                      	<div class="col-sm-12">
+                      		<input class="form-control userNameCtrl" type="text" [(ngModel)] = "reqData.firstname" name="firstname" placeholder="First Name" required (keydown.enter)="onSignup()">
+                      	</div>
+                     <div class="col-sm-12">
+
+						<input class="form-control clientSecretCtrl" type="text" [(ngModel)] = "reqData.lastname" name="lastname" placeholder="Last Name" required (keydown.enter)="onSignup()">
+                      		
+                      	</div>
+
+                      	<div class="col-sm-12">
+                      		<input class="form-control clientSecretCtrl" type="number" [(ngModel)] = "reqData.number" name="number" placeholder="Phone Number" required (keydown.enter)="onSignup()"/>
+
+                     
+                      	</div>
+
+                      	<div class="col-sm-12">
+                      		  <div class="mat-datepicker">
+                      		  	 <mat-datepicker-toggle id="datefield" matSuffix [for]="picker">
+                        </mat-datepicker-toggle>
+						<mat-datepicker #picker></mat-datepicker>
+						<input matInput [matDatepicker]="picker"
+						class="form-control userNameCtrl" placeholder="DOB"  [(ngModel)] = "reqData.dob" name="dob"
+						required (keydown.enter)="onSignup()">
+                      		  </div>
+                      	</div>
+
+                      	<div class="col-sm-12">
+                      		<select class="form-control userNameCtrl" placeholder="Gender"[(ngModel)] = "
+						reqData.gender" name="gender"
+						required (keydown.enter)="onSignup()">
+						<option selected="" disabled="" value="">Select Gender</option>
+						<option value="Male">Male</option>
+						<option value="Female">Female</option>
+						<option value="Others">Others</option>
+					</select>
+                      	</div>
+                      	<div class="col-sm-12">
+                      		<input class="form-control userNameCtrl" type="text" [(ngModel)] = "reqData.email" name="email" placeholder="Email" (blur) = alidateEmail(reqData.email)
+					required (keydown.enter)="onSignup()">
+                      	</div>
+                      	<div class="col-sm-12">
+                      		 <input class="form-control clientSecretCtrl" type="password" [(ngModel)] = "reqData.password" name="password" placeholder="Password" required (keydown.enter)="onSignup()"> 
+                      	</div>
+
+                      </div>
+                      <!-- </div> -->	
+                      <div class="form-button">
+						<button id="submit" type="button" (click)= "onSignup();" class="ibtn loginBtn">Signup</button> 
+					<button id="submit" type="button" routerLink ="/login" class="ibtn loginBtn">Signin</button>
+						
+					</div> 
+				</form>
+				<div class="other-links">
+					<span>Version 0.0.1</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+
+<!-- 
+<select class="form-control userNameCtrl" [(ngModel)] = "reqData.slctGender" name="slctGender"
+						required (keydown.enter)="onLoggedin()">
+											<option selected="" disabled="" value="slctGender">Select Gender</option>
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
+											<option value="Others">Others</option>
+										</select> -->
+
+
+<!-- <div class="login-container">
+	<div class="col-md-7 login-left">
+		<div class="login-left-section">
+			<div class="text-center">
+				<img src="assets/Images/track_every_message.png" alt="" class="center-block">
+			</div>
+			<div class="text-left">
+			<h2>Complete Delivery Tracking</h2>
+			<h4>Track every single message sent out for your campaign</h4>
+			<ul class="login-list">
+				<li><i class="icofont-check"></i> Track your messages opens & clicks</li>
+				<li><i class="icofont-check"></i> Automatically handle bounce & feedback</li>
+				<li><i class="icofont-check"></i> Measure your campaign performance with insight reports</li>
+			</ul>
+		</div>
+		</div>
+	</div>
+	<div class="col-md-5 login-right">
+		<div class="login-right-pad">
+		<div class="login-right-logo text-center">
+			<img src="assets/Images/logo.png" class="">
+		</div>
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="text" class="form-control mb-20" name="" [(ngModel)] = "reqData.email" (keydown.enter)="onLoggedin()">
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" class="form-control" name="" [(ngModel)] = "reqData.password" (keydown.enter)="onLoggedin()">
+			</div>
+			<div class="form-group mt-25">
+				<div class="checkbox checkbox-success checkbox-inline ">
+							<input type="checkbox" class="styled" id="Remember" value="option1" >
+							<label for="Remember"> Remember me on this device </label>
+						</div>
+			</div>
+			<div class="mt-35">
+				<a href="#" class="btn btn-primary btn-block" (click) = "onLoggedin()">Login</a>
+			</div>
+			<div class="mt-25 text-center">
+				<a href="#" class="btm-links" routerLink = "/forgot-password">Forgot Password?</a>
+			</div>
+		</div>
+	</div>
+</div> -->
+

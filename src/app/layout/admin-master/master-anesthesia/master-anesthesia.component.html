@@ -1,0 +1,187 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+	<div class="loader-img">
+		<img src="assets/Images/logo2.gif" alt="">
+	</div>
+</div>	
+<div class="section-container section-container-new" >
+	<div class="main-heading main-heading1">
+		<div class="mh-left">
+			<h1 class="add-button">{{'Anesthesia' | translate }}</h1>
+			<h1 class="view-button"> {{'Add Anesthesia' | translate }}</h1>
+			<h1 class="view-delete-button">{{'Deleted Records' | translate }}</h1>
+			<h1 class="edit-data">{{'Edit Anesthesia' | translate }}</h1>
+			<!-- <a routerLink = "/master-block">Add Block</a> -->
+		</div>
+
+		<div class="mh-right">
+			<span *ngIf = "getPerDetails[0]?.Is_Add"><a class="add-button"   ><i class="fa fa-plus" aria-hidden="true" style="font-size: 15px;"></i> {{'Add Anesthesia' | translate }}</a></span>
+			<a class="view-button"  id="again-Back"><i class="fa fa-angle-left"></i> {{'Back' | translate }}</a>
+		</div>
+	</div>
+	<div class="form-element  hide-from">
+		<div class=" form-horizontal">
+			<form [formGroup]="form"> 
+				<div class="form-group">
+					<div class="col-sm-6">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="icofont-users-alt-1"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'Anesthesia Name' | translate }}"  formControlName =  "Anes_Name">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['Anes_Name'].valid  && ( form.controls['Anes_Name'].touched)">{{'Invalid name' | translate }}!!!</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="icofont-users-alt-1"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'Anesthesia Description' | translate }}"  formControlName =  "Anes_Type">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['Anes_Type'].valid  && ( form.controls['Anes_Type'].touched)">{{'Invalid type' | translate }}!!!</p>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div>
+			<input type="button" value="{{'Submit' | translate}}" id="submitdata" data-toggle="modal" data-target="#submitbtn"    [disabled] = "!form.valid"  class="btn btngp btnsubmit" />
+			<input type="button" value="{{'Cancel' | translate}}" id="cancel"  data-toggle="modal" data-target="#cancelbtn" class="btn btngp btncancel" />
+		</div>
+	</div>
+	<div class = "add-table">
+		<a (click) = "viewDeletedRdcs()" class="custom-link">{{'Deleted Records' | translate}}</a>
+		<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class = "table"   id = 'ansth_tablee'>
+			<thead>
+				<tr>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">#</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Name' | translate}}</th>
+					<!-- <th>Type</th> -->
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Created By' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Last Modify' | translate}}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Status' | translate}}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Action' | translate}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor = "let list of getRaceArray; let i = index">
+					<td class="hash-center">{{i+1}}</td>
+					<td><span class="info-tooltop"  data-toggle="tooltip" data-placement="right" title="{{list.Anes_Type}}">{{list.Anes_Name}}</span></td>
+					<!-- <td>{{list.Anes_Type}}</td> -->
+					<td>{{list.Anes_User_Name}}</td>
+					<td>{{list.Anes_Modify_Date | date: 'MM-dd-yyyy, hh:mm a'}} <span class="info"  data-toggle="tooltip" data-placement="left" title="{{list.Anes_Create_Date | date: 'MM-dd-yyyy, hh:mm aa'}}"><i *ngIf = "list.Anes_Modify_Date != list.Anes_Create_Date " class="icofont-info-circle"></i></span></td>
+					<td *ngIf = "list.Anes_Is_Active"><mat-slide-toggle (change) = "UpdateStatus(list, $event)" checked></mat-slide-toggle></td>
+					<td *ngIf = "!list.Anes_Is_Active"><mat-slide-toggle (change) = "UpdateStatus(list, $event)"></mat-slide-toggle></td>
+
+					<td class="edit-button"><i *ngIf = "getPerDetails[0]?.Is_Edit" class="fa fa-pencil-square-o " title = "{{'Edit' | translate}}"  aria-hidden="true" (click) = "editAnesthesiaList(list)"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span *ngIf = "getPerDetails[0]?.Is_Delete" (click) ="dataDeleted(list)">	<i class="fa fa-trash" aria-hidden="true" title = "{{'Delete' | translate}}"></i></span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class = "view-deleted">
+		<a (click) = "hideShow()" class="custom-link">{{'View Records' | translate}}</a>
+		<table datatable [dtOptions]="dtOptions1" [dtTrigger]="dtTrigger1" class = "table"   id = 'Anes_deleted_rc_yhyh'>
+			<thead>
+				<tr>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">#</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Name' | translate}}</th>
+					<!-- <th>Type</th> -->
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Created By' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Last Modify' | translate}}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Action' | translate}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor = "let list of getDeletedAnesArray; let i = index">
+					<td class="hash-center">{{i+1}}</td>
+					<td>{{list.Anes_Name}}</td>
+					<!-- <td>{{list.Anes_Type}}</td> -->
+					<td>{{list.Anes_User_Name}}</td>
+					<td>{{list.Anes_Modify_Date | date: 'MM-dd-yyyy, hh:mm a'}} <span class="info"  data-toggle="tooltip" data-placement="left" title="{{list.Anes_Create_Date | date: 'MM-dd-yyyy, hh:mm aa'}}"><i *ngIf = "list.Anes_Modify_Date != list.Anes_Create_Date " class="icofont-info-circle"></i></span></td>
+					<td class="edit-button">
+						<span *ngIf = "getPerDetails[0]?.Is_Delete" (click)  = "revertDeleted(list)" >	<i class="fa fa-trash" aria-hidden="true" title = "{{'Delete' | translate}}"></i></span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- Modal -->
+<div id="submitbtn" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to Submit ?' | translate}}</h3>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary" (click)  = "addAnesthesia()" >{{'Yes' | translate}}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- Modal -->
+<div id="cancelbtn" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to Cancel ?' | translate}}</h3>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary" (click)  = "goBack()" >{{'Yes' | translate}}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- Modal -->
+<div id="trash" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to delete ?' | translate}}</h3>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary" (click) = "isDeletedYes()">{{'Yes' | translate}}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!-- Modal -->
+<div id="revertDelete" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to Retrive data ?' | translate}}</h3>>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary" (click) = "revertData()">{{'Yes' | translate}}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+			</div>
+		</div>
+
+	</div>
+</div>

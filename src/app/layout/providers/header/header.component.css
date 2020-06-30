@@ -1,0 +1,7 @@
+.fullheader nav ul li > a {
+    color: #fff;
+    padding: 11px 0;
+}
+.rbmenu li a i{
+	margin-right: 3px;
+}

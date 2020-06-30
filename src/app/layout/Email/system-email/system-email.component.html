@@ -1,0 +1,321 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+	<div class="loader-img">
+		<img src="assets/Images/logo2.gif" alt="">
+	</div>
+</div>	
+<script src="https://cdn.ckeditor.com/4.10.1/full/ckeditor.js"></script>
+
+<div class="section-container section-container-new" >
+	<div class="main-heading main-heading1">
+		<div class="mh-left">
+			<h1 class="add-button">{{'System Email' | translate }}</h1>
+			<h1  class="view-button"> {{'Add System Email' | translate }}</h1>
+			<h1 class="view-delete-button">{{'Deleted Records' | translate }}</h1>
+			<h1 class="edit-data">{{'Edit System Email' | translate }}</h1>
+		</div>
+
+		<div class="mh-right">
+			<span id="showaddbtn"><a  class="add-button"><i  class="fa fa-plus" aria-hidden="true" style="font-size: 15px;"></i> {{'Add System Email' | translate }}</a></span>&nbsp;
+			<!-- <a class="add-button" (click)  ="getLastLocation()"><i class="fa fa-angle-left"></i> {{'Back' | translate }}</a> -->
+			<a class="view-button"  id="again-Back"><i class="fa fa-angle-left"></i> {{'Back' | translate }}</a>
+		</div>
+	</div>
+	<div class="form-element hide-from">
+		<div class="row">
+
+			<div class="col-md-12">
+				<div class="col-md-12 px-0 pull-left targetDiv" id="div1">
+					<div class="form-group">
+						<div class="col-sm-6">
+							<div class="input-group">
+								<div class="input-group-addon"><i class="icofont-users-alt-1"></i></div>
+								<input type="text" name="" class="form-control" placeholder="{{'Name (subject)' | translate }}" [(ngModel)] = "reqData.SET_Name">
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="input-group">
+								<div class="input-group-addon"><i class="icofont-users-alt-1"></i></div>
+								<input type="text" name="" class="form-control" placeholder="{{'Description' | translate }}" [(ngModel)] = "reqData.SET_Description">
+							</div>
+						</div>
+					</div>
+					<h3 class="title_text">{{'Email Header' | translate }}</h3>
+					
+					<div class="form-group">
+						<div class="col-sm-6">
+							<div class="input-group">
+								<div class="input-group-addon"><i class="icofont-users-alt-1"></i></div>
+								<input type="text" name="" class="form-control" placeholder="{{'From Email' | translate }}" [(ngModel)] = "reqData.SET_From_Email">
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="input-group">
+								<div class="input-group-addon"><i class="icofont-users-alt-1"></i></div>
+								<input type="text" name="" class="form-control" placeholder=" From Name" [(ngModel)] = "reqData.SET_From_Name">
+							</div>
+						</div>
+					</div>
+					<label><h4>{{'Header' | translate }}</h4></label>
+					<div  >
+					<div class="form-group col-md-12" [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorDark_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorDark_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorDark_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorDark_Hax : null)">
+						<img *ngIf = "surPhyImg" src="{{imageLink}}{{removeTildSign(surPhyImg)}}" height="47.58px" width="115px">
+						<img *ngIf = "!surPhyImg"  src="{{imageLink}}{{defaultLogo}}" height="47.58px" width="115px" style="background: green;">
+						
+					</div>	
+						
+					</div>
+				</div>
+				<div class="col-md-12 px-0 pull-left targetDiv" id="div2">
+					<label><h4>{{'TO' | translate }}</h4></label>
+					<div class="form-group col-md-12 my-10">
+
+						<tag-input [(ngModel)] = "reqData.To_Email"  #tagInput 
+						name="emails" 
+
+						[errorMessages]="errorMessages"
+						[validators]="validators" 
+						[editable]='true' 
+						[separatorKeyCodes]="[32,188,186,13,9]"
+						[secondaryPlaceholder]="'Enter email address'" 
+						[clearOnBlur]="true" 
+						[addOnPaste]="true"
+						[addOnBlur]="true"
+						[placeholder]="'Add email'" 
+						[onAdding]="onAddedFunc" 
+						theme='lite' 
+						required></tag-input>
+					</div>
+				</div>
+				<div class="col-md-12 px-0 pull-left targetDiv" id="div2">
+					<label><h4>{{'CC' | translate }}</h4></label>
+					<div class="form-group col-md-12 my-10">
+
+						<tag-input [(ngModel)] = "reqData.Cc_Email"  #tagInput 
+						name="emails" 
+
+						[errorMessages]="errorMessages"
+						[validators]="validators" 
+						[editable]='true' 
+						[separatorKeyCodes]="[32,188,186,13,9]"
+						[secondaryPlaceholder]="'Enter email address'" 
+						[clearOnBlur]="true" 
+						[addOnPaste]="true"
+						[addOnBlur]="true"
+						[placeholder]="'Add email'" 
+						[onAdding]="onAddedFunc" 
+						theme='lite' 
+						required></tag-input>
+					</div>
+				</div>
+				<div class="col-md-12 px-0 pull-left targetDiv" id="div9">
+					<label><h4>{{'BCC' | translate }}</h4></label>
+					<div class="form-group col-md-12 my-10">
+
+						<tag-input [(ngModel)] = "reqData.Bcc_Email"  #tagInput 
+						name="emails" 
+
+						[errorMessages]="errorMessages"
+						[validators]="validators" 
+						[editable]='true' 
+						[separatorKeyCodes]="[32,188,186,13,9]"
+						[secondaryPlaceholder]="'Enter email address'" 
+						[clearOnBlur]="true" 
+						[addOnPaste]="true"
+						[addOnBlur]="true"
+						[placeholder]="'Add email'" 
+						[onAdding]="onAddedFunc" 
+						theme='lite' 
+						required></tag-input>
+					</div>
+
+				</div>
+				<h3 class="title_text">{{'Body Header' | translate }}</h3>
+				<!-- <h3 class="title_text">Email Header</h3> -->
+				<div class="col-md-12 px-0 pull-left targetDiv" id="div3">
+					<label><h4>{{'Body' | translate }}</h4></label>
+					<ckeditor name="editor1"  [(ngModel)] = "reqData.SET_Message" language="en" [config]="config" ></ckeditor>	
+					<div class="form-group pull-left my-10 col-md-12 px-0">
+						<hr />
+
+					</div>	
+				</div>
+				<div class="col-md-12 px-0 pull-left targetDiv" id="div4">
+					<label><h4>{{'Footer' | translate }}</h4></label>
+					<!-- <div class="form-group col-md-12 my-10"> -->
+
+							<ckeditor name="editor1"  [(ngModel)] = "reqData.SET_Footer" language="en" [config]="config_footer" ></ckeditor>	
+							<div class="form-group pull-left my-10 col-md-12 px-0">
+								<hr />
+							</div>	
+					<!-- </div> -->
+				</div>
+			</div>
+		</div>
+		<div>
+			<input type="button" value="{{'Submit' | translate }}" id="submitdata" data-toggle="modal" data-target="#submitbtn"    class="btn btngp btnsubmit" />
+			<input type="button" value="Preview" id="preview" (click) = "showPreview()"    class="btn btngp btnsubmit" />
+			<input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-toggle="modal" data-target="#cancelbtn" class="btn btngp btncancel" />
+		</div>
+	</div>
+	<div class = "add-table">
+		<!-- <a class="add-button" style="float: right; color: grey"><i class="fa fa-plus" aria-hidden="true" style="font-size: 15px;"></i> Add Reference</a> -->
+		<table class = "table"  id = 'systenml' datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+			<thead>
+				<tr>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">#</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Name' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Description' | translate }}</th>
+					<!-- <th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Created By' | translate }}</th> -->
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Last Modify' | translate }}</th>
+					<!-- <th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Status' | translate }}</th> -->
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Action' | translate }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor = "let list of getListArray; let i = index">
+					<td class="hash-center">{{i+1}}</td>
+					<td>{{list.SET_Name}}</td>
+					<td>{{list.SET_Description}}</td>
+					<!-- <td>{{list.SET_User_Name}}</td> -->
+					<td>{{list.SET_Modify_Date | date: 'MM-dd-yyyy, hh:mm a'}}</td>
+					<td class="edit-button"> <i class="fa fa-edit" aria-hidden="true" title = "{{'Edit' | translate}}" (click) = editData(list)></i></td>
+					<!-- <td class="edit-button"> <i class="fa fa-edit" aria-hidden="true" title = "{{'Edit' | translate}}" (click) = preview(list)></i></td> -->
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+	<!-- Modal -->
+	<div id="submitbtn" class="modal fade modalmsg" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="close_btn">
+					<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+				</div>
+				<div class="modal-body text-center">
+					<h3>{{'Are you sure, you want to Submit ?' | translate }}</h3>
+				</div>
+				<div class="modal-footer border0">
+					<button type="button" class="btn btn-primary"  (click) = "addData()">{{'Yes' | translate }}</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- Modal -->
+	<div id="cancelbtn" class="modal fade modalmsg" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="close_btn">
+					<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+				</div>
+				<div class="modal-body text-center">
+					<h3>{{'Are you sure, you want to Cancel ?' | translate }}</h3>
+				</div>
+				<div class="modal-footer border0">
+					<button type="button" class="btn btn-primary" (click)  = "goBack()" >{{'Yes' | translate }}</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div id="trash" class="modal fade modalmsg" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="close_btn">
+					<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+				</div>
+				<div class="modal-body text-center">
+					<h3>{{'Are you sure, you want to delete ?' | translate }}"</h3>
+				</div>
+				<div class="modal-footer border0">
+					<button type="button" class="btn btn-primary" (click)  = "isDeletedYes()" >{{'Yes' | translate }}</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+	<div id="preview5454" class="modal fade modalmsg" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">	
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+					<h4 class="modal-title" id="myModalLabel">{{'Preview mail' | translate }}</h4>
+				</div>
+				<div class="modal-body text-center">
+					<div class="form-group">
+						<div class="col-sm-12">							
+							<input type="text" class="form-control" placeholder="Enter Email" [(ngModel)] = "reqData.sendEmail">
+						</div>
+					</div>
+					<table border="0" cellpadding="0" cellspacing="0" width="100%" id="previewTable">
+						<tbody>
+							<tr>
+								<td style="padding: 10px 0 30px 0;">
+									<table align="center" border="0" cellpadding="0" cellspacing="0" width="520" style="border: 1px solid #cccccc;border-collapse: collapse;width: 520px;max-width: 520px;">
+										<thead>
+											<tr *ngIf = "surPhyImg">
+												<th align="center" [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorDark_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorDark_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorDark_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorDark_Hax : null)" style="padding: 9px 10px;color: #2ca36d;font-size: 28px;font-weight: bold;font-family: Arial, sans-serif;text-align: center;">
+													<img src="{{imageLink}}{{removeTildSign(surPhyImg)}}" height="47.58px" width="115px">
+												</th>
+											</tr>
+											<tr *ngIf = "!surPhyImg">
+												<th align="center" [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorDark_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorDark_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorDark_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorDark_Hax : null)" style="padding: 9px 10px;color: #2ca36d;font-size: 28px;font-weight: bold;font-family: Arial, sans-serif;text-align: center;">
+													<img src="{{siteLink}}assets/Images/logo.png" height="47.58px" width="115px">
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td align="center" bgcolor="#ffffff" style="padding: 40px 10px;color: #000000;font-family: Arial, sans-serif;">
+													<div [innerHTML] = "showMsg"></div>
+												</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<td align="center" [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorDark_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorDark_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorDark_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorDark_Hax : null)" style="padding: 20px 10px;font-weight: bold;font-family: Arial, sans-serif;">
+													<p style="margin: 0; color: #ffffff;"  [innerHTML] = "showFooter"></p>
+												</td>
+											</tr>
+										</tfoot>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div>
+						
+					</div>
+
+					<div> 
+						
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="col-sm-12 mt-20">
+						<button type="button" class="btn btn-primary" (click)  = "sendPreviewemail()" >{{'Yes' | translate }}</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>

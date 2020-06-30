@@ -1,0 +1,276 @@
+#datefield{
+    position: absolute;
+    right: 0;
+    margin-bottom: 10px;
+    top: -3px;
+}
+
+.mat-datepicker {
+    position: relative;
+}
+
+.form-content .mat-datepicker  input {
+    padding-right: 35px;
+}
+
+.form-holder .form-content {
+  min-height: 100vh;
+  height: auto;
+}
+
+select option {
+    margin: 40px;
+    background: #2ca36d;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+.login-left{
+	background-image: url('/../assets/Images/login-bg.png');
+	background-size: 130%;
+	height: 100vh;
+}
+.login-left-section img {
+    height: 260px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+.login-left h2 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    font-style: normal;
+    font-weight: 600;
+}
+.login-left-section {
+    width: 466px;
+    text-align: center;
+    margin: 0 auto;
+}
+.login-left h4 {
+    font-size: 17px;
+    margin-bottom: 24px;
+    font-style: italic;
+}
+ul.login-list {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+ul.login-list li {
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+ul.login-list li i {
+    font-size: 21px;
+    /* font-size: 16px; */
+    margin-right: 4px;
+    color: #04a8c5;
+}
+.login-right {
+    background: #008000;
+    padding: 32px;
+    height: 100vh;
+}
+.login-container{
+	height: 100vh;
+}
+.login-right-pad{
+	padding: 24px 60px;
+}
+.login-right-pad label {
+    color: #fff;
+    font-weight: 600;
+    font-style: italic;
+    margin-bottom: 7px;
+}
+.login-right-logo {
+    margin-bottom: 45px;
+}
+.login-right input.form-control {
+    background: #fff;
+    box-shadow: none !important;
+    height: 40px;
+    outline: none;
+}
+
+select.form-control.userNameCtrl {
+    background-color: rgba(255, 255, 255, 0.15)!important;
+    margin-bottom: 10px !important;
+    color: #fff!important;
+}
+
+
+.login-right input.form-control:focus {
+    box-shadow: none !important;
+    outline: none !important;
+    border-color: transparent !important;
+}
+.mb-20 {
+    margin-bottom: 25px;
+}
+.mt-20 {
+    margin-top: 15px;
+}
+.mt-25 {
+    margin-top: 25px;
+}
+.mt-35 {
+    margin-top: 35px;
+}
+a.btm-links {
+    color: #fff;
+    padding: 10px;
+    text-decoration: underline;
+}
+.checkbox label{
+	font-style: normal;
+}
+.checkbox {
+  padding-left: 20px; }
+.checkbox label {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+    padding-left: 5px; }
+.checkbox label::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  left: 0;
+  margin-left: -20px;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  background-color: #fff;
+  -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+  -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+      transition: border 0.15s ease-in-out, color 0.15s ease-in-out; }
+.checkbox label::after {
+  display: inline-block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 0;
+  top: 0;
+  margin-left: -20px;
+  padding-left: 3px;
+  padding-top: 1px;
+  font-size: 11px;
+      color: #555555; }
+.checkbox input[type="checkbox"],
+.checkbox input[type="radio"] {
+  opacity: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+.checkbox input[type="checkbox"]:focus + label::before,
+.checkbox input[type="radio"]:focus + label::before {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+      outline-offset: -2px; }
+.checkbox input[type="checkbox"]:checked + label::after,
+.checkbox input[type="radio"]:checked + label::after {
+  font-family: "FontAwesome";
+  content: "\f00c";}
+.checkbox input[type="checkbox"]:indeterminate + label::after,
+.checkbox input[type="radio"]:indeterminate + label::after {
+  display: block;
+  content: "";
+  width: 10px;
+  height: 3px;
+  background-color: #555555;
+  border-radius: 2px;
+  margin-left: -16.5px;
+  margin-top: 7px;
+}
+.checkbox input[type="checkbox"]:disabled,
+.checkbox input[type="radio"]:disabled {
+    cursor: not-allowed;
+}
+.checkbox input[type="checkbox"]:disabled + label,
+.checkbox input[type="radio"]:disabled + label {
+      opacity: 0.65; }
+.checkbox input[type="checkbox"]:disabled + label::before,
+.checkbox input[type="radio"]:disabled + label::before {
+  background-color: #eeeeee;
+        cursor: not-allowed; }
+.checkbox.checkbox-circle label::before {
+    border-radius: 50%; }
+.checkbox.checkbox-inline {
+    margin-top: 0; }
+
+
+
+.checkbox-success input[type="checkbox"]:checked + label::before,
+.checkbox-success input[type="radio"]:checked + label::before {
+  background-color: #04a8c5;
+    border-color: #04a8c5;
+}
+.checkbox-success input[type="checkbox"]:checked + label::after,
+.checkbox-success input[type="radio"]:checked + label::after {
+  color: #fff;}
+
+
+
+
+.checkbox-success input[type="checkbox"]:indeterminate + label::before,
+.checkbox-success input[type="radio"]:indeterminate + label::before {
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+}
+
+.checkbox-success input[type="checkbox"]:indeterminate + label::after,
+.checkbox-success input[type="radio"]:indeterminate + label::after {
+  background-color: #fff;
+}
+
+
+
+input[type="checkbox"].styled:checked + label:after,
+input[type="radio"].styled:checked + label:after {
+  font-family: 'FontAwesome';
+  content: "\f00c"; }
+input[type="checkbox"] .styled:checked + label::before,
+input[type="radio"] .styled:checked + label::before {
+  color: #fff; }
+input[type="checkbox"] .styled:checked + label::after,
+input[type="radio"] .styled:checked + label::after {
+  color: #fff; }
+.checkbox label {
+    font-weight: 500 !important;
+}
+
+
+.checkbox-100 .checkbox{
+  width: 100%;
+  padding-left: 20px;
+    
+    margin-left: 0px;
+}
+.checkbox {
+    margin-left: 0px;
+}
+a.btn.btn-primary {
+    background: #04a8c5;
+    border-color: #04a8c5;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+a.btn.btn-primary:hover {
+    background: #0896af;
+    border-color: #0896af;
+}
+
+@media only screen and (max-width: 767px) {
+	.login-left{
+    height: auto;
+}
+.login-right {
+    height: auto;
+}
+}
+

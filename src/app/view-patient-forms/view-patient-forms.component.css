@@ -1,0 +1,41 @@
+.fullheader nav ul li > a {
+	color: #fff;
+	padding: 11px 0;
+}
+
+.newHeader{
+	overflow: hidden;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.footer{
+	width: calc(100%)!important;
+	margin-left:0!important;
+}
+.form-element_bdy {
+    overflow: hidden;
+}
+.form-element_bdy > .form-element {
+    width: 70% !important;
+    margin: 0 auto !important;
+    float: none !important;
+    overflow: hidden;
+}
+
+.header{
+	background-color: #FFFFFF!important;
+}
+
+.newft{
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.d-flex-center {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}

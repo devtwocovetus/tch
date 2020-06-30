@@ -1,0 +1,451 @@
+ <div class="loader-contaier" *ngIf = "showLoader">
+ 	<div class="loader-img">
+ 		<img src="assets/Images/logo2.gif" alt="">
+ 	</div>
+ </div>
+ <div class="section-container section-container-new" >
+ 	<div class="main-heading main-heading1">
+ 		<div class="mh-left">
+ 			<h1  *ngIf  = "getUserType == 'surgery'" class="add-button">{{'surgery' | translate}}</h1>
+ 			<h1  *ngIf  = "getUserType == 'physician'" class="add-button">{{'physician' | translate}}</h1>
+ 			<h1 *ngIf  = "getUserType == 'surgery' && admin.UM_Office_Type != 'P'" class="view-button" > {{'Add Staff' | translate}}</h1>
+ 			<h1 *ngIf  = "getUserType == 'physician' && admin.UM_Office_Type != 'A'" class="view-button" > {{'Add Staff' | translate}}</h1>
+ 			<h1 class="view-delete-button">{{'Deleted Records' | translate}}</h1>
+ 			<h1 *ngIf  = "getUserType == 'surgery'" class="edit-data">E{{'dit Staff' | translate}}</h1>
+ 			<h1 *ngIf  = "getUserType == 'physician'" class="edit-data">{{'Edit Staff' | translate}}</h1>
+ 		</div>
+
+ 		<div class="mh-right">
+ 			<span *ngIf = "getPerDetails[0]?.Is_Add">
+ 				<a *ngIf  = "getUserType == 'surgery'&& admin.UM_Office_Type != 'P'" class="add-button" >{{'Add Staff' | translate}}</a>
+ 			</span>
+ 			<span *ngIf = "getPerDetails[0]?.Is_Add">
+ 				<a *ngIf  = "getUserType == 'physician' && admin.UM_Office_Type != 'A'" class="add-button">{{'Add Staff' | translate}}</a>
+ 			</span>
+ 			<a class="view-button"  id="again-Back" (click) = "goBack()"><i class="fa fa-angle-left"></i> {{'Back' | translate}}</a>
+ 		</div>
+ 	</div>
+
+ 	<div class="form-element hide-from">
+ 		<div class=" form-horizontal">
+ 			<h3 class="title_text">{{'Personal Information' | translate}}</h3>
+ 			<form [formGroup]="form"> 
+ 				<div class="form-group">
+ 					<div class="col-sm-4">
+ 						<div class="input-group required" >
+ 							<div class="input-group-addon"><i class="icofont-user-alt-3"></i></div>
+ 							<input type="text" name="" class="form-control" placeholder="{{'First Name' | translate}}"  formControlName = "Staff_Name">
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_Name'].valid  && ( form.controls['Staff_Name'].touched)">{{'Invalid first name' | translate}}!!!</p>
+ 					</div>
+ 					<div class="col-sm-4">
+ 						<div class="input-group required" >
+ 							<div class="input-group-addon"><i class="icofont-user-alt-3"></i></div>
+ 							<input type="text" name="" class="form-control" placeholder="{{'Last name' | translate}}"  formControlName = "Staff_Last_Name">
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_Last_Name'].valid  && ( form.controls['Staff_Last_Name'].touched)">{{'Invalid last name' | translate}}!!!</p>
+ 					</div>
+ 					<div class="col-sm-4">
+ 						<div class="input-group required" >
+ 							<div class="input-group-addon"><i class="icofont-mobile-phone"></i></div>
+ 							<input type="text" name="" class="form-control phoneno" placeholder=" {{'Mobile Number' | translate}}" formControlName = "Staff_Mobile" (blur) = "validatphone()" maxlength="14" minlength="14"  minlength="14">
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_Mobile'].valid  && ( form.controls['Staff_Mobile'].touched)">{{'Invalid Mobile Number' | translate}}!!!</p>
+ 					</div>
+ 				</div>
+ 				<div class="form-group">
+ 					<div class="col-sm-4">
+ 						<div class="input-group required" >
+ 							<div class="input-group-addon"><i class="icofont-telephone"></i></div>
+ 							<input type="text" name="" class="form-control phoneno1" placeholder=" {{'Phone Number' | translate}}" formControlName = "Staff_PhoneNo" (blur) = "validatphone()" maxlength="14" minlength="14" >
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_PhoneNo'].valid  && ( form.controls['Staff_PhoneNo'].touched)">{{'Invalid Phone Number' | translate}}!!!</p>
+ 					</div>
+
+ 					<div class="col-sm-4">
+ 						<div class="input-group required" >
+ 							<div class="input-group-addon"><i class="icofont-telephone"></i></div>
+ 							<input type="text" name="" class="form-control phoneno2" placeholder=" {{'Alternate Number' | translate}}" formControlName = "Staff_AlternateNo" (blur) = "validatphone()" maxlength="14" minlength="14" >
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_AlternateNo'].valid  && ( form.controls['Staff_AlternateNo'].touched)">{{'Invalid Alternate number' | translate}}!!!</p>
+ 					</div>
+ 					<div class="col-sm-4">
+ 						<div class="input-group required" >
+ 							<div class="input-group-addon"><i class="icofont-telephone"></i></div>
+ 							<input type="text" name="" class="form-control phoneno3" placeholder=" {{'Emergency Contact' | translate}} Number"  formControlName = "Staff_Emergency_ContactNo" (blur) = "validatphone()" maxlength="14" minlength="14" >
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_Emergency_ContactNo'].valid  && ( form.controls['Staff_Emergency_ContactNo'].touched)">{{'Invalid Emergency number' | translate}}!!!</p>
+ 					</div>
+
+
+ 				</div>
+ 				<div class="form-group">
+ 					<div class="col-sm-4">
+ 						<div class="input-group required" >
+ 							<div class="input-group-addon"><i class="icofont-location-pin"></i></div>
+ 							<input id = "addrs1" ngx-google-places-autocomplete [options]='options' class="form-control" #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" formControlName = "Staff_Address1" placeholder="{{'Address 1' | translate}}" autocomplete="off"/>
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_Address1'].valid  && ( form.controls['Staff_Address1'].touched)">{{'Invalid Address' | translate}}!!!</p>
+ 					</div>
+ 					<div class="col-sm-4">
+ 						<div class="input-group">
+ 							<div class="input-group-addon"><i class="icofont-location-pin"></i></div>
+ 							<input type="text" name="" class="form-control" placeholder=" {{'Address 2' | translate}}" formControlName = "Staff_Address2">
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_Address2'].valid  && ( form.controls['Staff_Address2'].touched)">{{'Invalid Address 2' | translate}}!!!</p>
+ 					</div>
+ 					<div class="col-sm-4">
+ 						<div class="input-group required" >
+ 							<div class="input-group-addon"><i class="icofont-location-arrow"></i></div>
+ 							<input type="text" name="" class="form-control" placeholder=" {{'City' | translate}}"  formControlName = "Staff_City">
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_City'].valid  && ( form.controls['Staff_City'].touched)">{{'Invalid City' | translate}}!!!</p>
+ 					</div>
+
+ 				</div>
+ 				<div class="form-group">
+ 					
+ 					<div class="col-sm-4">
+
+ 						<div class="input-group required" >
+ 							<div class="input-group-addon"><i class="icofont-location-arrow"></i></div>
+ 							<input type="text" name="" class="form-control" placeholder=" {{'Country' | translate}}"  formControlName = "Staff_Country">
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_Country'].valid  && ( form.controls['Staff_Country'].touched)">{{'Invalid Country' | translate}}!!!</p>
+ 					</div>
+ 					<div class="col-sm-4">
+ 						<div class="input-group required" >
+ 							<div class="input-group-addon"><i class="icofont-location-arrow"></i></div>
+ 							<input type="text" name="" class="form-control" placeholder=" {{'State' | translate}}"  formControlName = "Staff_State">
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_State'].valid  && ( form.controls['Staff_State'].touched)">{{'Invalid State' | translate}}!!!</p>
+ 					</div>
+
+ 					<div class="col-sm-4">
+ 						<div class="input-group required" >
+ 							<div class="input-group-addon"><i class="icofont-location-arrow"></i></div>
+ 							<input type="text" name="" class="form-control" placeholder=" {{'Zip' | translate}}" pattern="[0-9]+" formControlName = "Staff_ZipCode">
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_ZipCode'].valid  && ( form.controls['Staff_ZipCode'].touched)">{{'Invalid Zip' | translate}} !!!</p>
+ 					</div>
+
+
+ 				</div>
+ 				<div class="form-group">
+
+ 					<div class="col-sm-4">
+ 						<div class="input-group required" >
+ 							<div class="input-group-addon"><i class="icofont-users-alt-4"></i></div>
+ 							<!-- <input type="text" name="" class="form-control" placeholder=" Gender"<div class="form-element2"> formControlName = "Staff_Sex"> -->
+ 							<select class="form-control" formControlName = "Staff_Sex">
+ 								<option selected="" value="Male">Male</option>
+ 								<option value="Female">Female</option>
+ 								<option value="Other">Other</option>
+ 							</select>
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_Sex'].valid  && ( form.controls['Staff_Sex'].touched)">{{'Invalid Gender' | translate }}!!!</p>
+ 					</div>
+ 					<div class="col-sm-4">
+ 						<div class="input-group required" >
+ 							<div class="input-group-addon"><i class="icofont-calendar"></i></div>
+ 							<input matInput [matDatepicker]="picker" id="mydate" class="custm-date" [max] = "maxDate" placeholder="{{'DOB' | translate }}" formControlName = "Staff_DOB">
+ 							<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+ 							<mat-datepicker #picker></mat-datepicker>
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_DOB'].valid  && ( form.controls['Staff_DOB'].touched)">{{'Invalid DOB' | translate }}!!!</p>
+ 					</div>
+ 					<div class="col-sm-4">
+ 						<div class="input-group required"  id="u22">
+ 							<div class="input-group-addon"><i class="icofont-contact-add"></i></div>
+ 							<input type="text" name="" class="form-control ssn" placeholder=" {{'SSN No' | translate }}" formControlName = "Staff_SSN_No" id="u22_input" (blur)="validateSSN()" maxlength="11">
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_SSN_No'].valid  && ( form.controls['Staff_SSN_No'].touched)">{{'Invalid SSN No' | translate }}!!!</p>
+ 					</div>
+ 				</div>
+ 				
+ 				<h3 class="title_text">{{'Employment Information' | translate }}</h3>
+ 				<div class="form-element personnel_form">
+ 				</div>
+ 				<div class="form-group">
+
+ 					
+ 					<div class="col-sm-4">
+ 						<div class="input-group required" >
+ 							<div class="input-group-addon"><i class="icofont-user-suited"></i></div>
+ 							<select class="form-control" formControlName = "Staff_Designation">
+ 								<option disabled="" value="selectDesig">{{'Select Designation' | translate }}</option>
+ 								<option *ngFor = "let desi of getDesignationArray" value="{{desi.Desi_Name}}">{{desi.Desi_Name}}</option>
+ 							</select>
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_Designation'].valid  && ( form.controls['Staff_Designation'].touched)">{{'Invalid Designation' | translate }}!!!</p>
+ 					</div>
+ 					<div class="col-sm-4">
+ 						<div class="input-group required" >
+ 							<div class="input-group-addon"><i class="icofont-contact-add"></i></div>
+ 							<input matInput [matDatepicker]="picker1" class="custm-date" [max] = "maxDate" placeholder="{{'DOJ' | translate }}" formControlName = "Staff_DOJ">
+ 							<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+ 							<mat-datepicker #picker1></mat-datepicker>
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_DOJ'].valid  && ( form.controls['Staff_DOJ'].touched)">{{'Invalid DOJ' | translate }}!!!</p>
+ 					</div>
+ 					<div class="col-sm-4">
+ 						<div class="input-group" >
+ 							<div class="input-group-addon"><i class="icofont-user-suited"></i></div>
+ 							<input type="text" name="" class="form-control" placeholder=" {{'Employee Code' | translate }}" formControlName = "Staff_Emp_Code">
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_Emp_Code'].valid  && ( form.controls['Staff_Emp_Code'].touched)">{{'Invalid Employee Code' | translate }}!!!</p>
+ 					</div>
+ 				</div>
+ 				<div class="form-group">
+ 					<div class="col-sm-4">
+ 						<div class="input-group" >
+ 							<div class="input-group-addon"><i class="icofont-user-suited"></i></div>
+ 							<input type="text" name="" class="form-control" placeholder=" {{'Doctor Code' | translate }}" formControlName = "Staff_Doc_Code">
+ 						</div>
+ 						<p style="color: #FF0000" *ngIf="!form.controls['Staff_Doc_Code'].valid  && ( form.controls['Staff_Doc_Code'].touched)">{{'Invalid Doctor Code' | translate }}!!!</p>
+ 					</div>
+ 				</div>
+
+ 				
+ 				<h3 class="title_text">{{'Login Credentials' | translate }}</h3>
+ 				<div class="form-element personnel_form">
+ 				</div>
+ 				<!-- <div class="form-group"> -->
+ 					<div  class="form-group" *ngIf = "getUserType == 'surgery' && admin.UM_Office_Type == 'A'">
+ 						<div class="col-sm-5">
+ 							
+ 							<div class="input-group required" >
+ 								<div class="input-group-addon"><i class="icofont-ui-user"></i></div>
+ 								<select class="form-control" formControlName = "Staff_Facility">
+ 									<option disabled="" selected="" value="Select Facility">{{'Select Facility' | translate }}</option>
+ 									<option *ngFor = "let slist of getSurgeryCenterArray" value="{{slist.SurgC_Unique_ID}}" (change) = "froTimeZone(slist)">{{slist.SurgC_DBA_Name}}</option>
+ 								</select>
+ 							</div>
+ 							<p style="color: #FF0000" *ngIf="!form.controls['Staff_Facility'].valid  && ( form.controls['Staff_Facility'].touched)">{{'Invalid Staff Facility Name' | translate}}!!!</p>
+ 						</div>
+ 					</div>
+ 					<div  class="form-group" *ngIf = "getUserType == 'physician' && admin.UM_Office_Type == 'S'">
+ 						<div class="col-sm-5">
+ 							
+ 							<div class="input-group">
+ 								<div class="input-group-addon"><i class="icofont-ui-user"></i></div>
+ 								<!-- <input type="text" name="" class="form-control" placeholder=" Role"<div class="form-element2"> formControlName = "Staff_Role_Name"> -->
+ 								<select class="form-control" formControlName = "Staff_Office">
+ 									<option disabled="" selected="" value="Select_Office">{{'Select Physician Office' | translate}}</option>
+ 									<option *ngFor = "let slist of filterPhyWithSCArray" value="{{slist.PhyO_Unique_ID}}" >{{slist.PhyO_DBA_Name}}</option>
+ 								</select>
+ 							</div>
+ 							<p style="color: #FF0000" *ngIf="!form.controls['Staff_Facility'].valid  && ( form.controls['Staff_Facility'].touched)">{{'Invalid Staff Facility Name' | translate}}!!!</p>
+ 						</div>
+ 					</div>
+
+ 					<div  class="form-group">
+ 						<div class="col-sm-5">
+ 							
+ 							<div class="input-group required" >
+ 								<div class="input-group-addon"><i class="icofont-ui-user"></i></div>
+ 								<!-- <input type="text" name="" class="form-control" placeholder=" Role"<div class="form-element2"> formControlName = "Staff_Role_Name"> -->
+ 								<select class="form-control" formControlName = "Staff_Role_Name">
+ 									<option disabled="" selected="" value="Select Role">{{'Select Role' | translate }}</option>
+ 									<option *ngFor = "let role of getRoleArray" value="{{role.ROM_Name}}" >{{role.ROM_Name}}</option>
+ 								</select>
+ 							</div>
+ 							<p style="color: #FF0000" *ngIf="!form.controls['Staff_Role_Name'].valid  && ( form.controls['Staff_Role_Name'].touched)">{{'Invalid Role Name' | translate }}!!!</p>
+ 						</div>
+ 					</div>
+ 					<div  class="form-group">
+ 						<div class="col-sm-5">
+ 							<div class="input-group required" >
+ 								<div class="input-group-addon"><i class="icofont-email"></i></div>
+ 								<input *ngIf = "!getUniqueid" type="text" name="" class="form-control" placeholder=" {{'Email (Username)' | translate }}" formControlName = "Staff_Email" (blur)="checkEmail(this.form.value.Staff_Email)">
+ 								<input *ngIf = "getUniqueid" type="text" name="" class="form-control" placeholder=" {{'Email (Username)' | translate }}" formControlName = "Staff_Email"    disabled="">
+ 							</div>
+ 							<p style="color: #FF0000" *ngIf="!form.controls['Staff_Email'].valid  && ( form.controls['Staff_Email'].touched)">{{'Invalid Email' | translate }}!!!</p>
+ 						</div>
+ 					</div>
+ 					<div class="form-group">
+ 						<div class="col-sm-5">
+ 							<div class="input-group required" >
+ 								<div class="input-group-addon"><i class="icofont-lock"></i></div>
+ 								<input type="Password" name="" class="form-control" placeholder=" {{'Password' | translate }}" formControlName = "Staff_Password">
+ 							</div>
+ 							<p style="color: #FF0000" *ngIf="!form.controls['Staff_Password'].valid  && ( form.controls['Staff_Password'].touched)">{{'Invalid Password' | translate }}!!!</p>
+ 						</div>
+ 					</div>
+ 					<div  class="form-group">
+
+ 						<div class="col-sm-5">
+ 							<div class="input-group required" >
+ 								<div class="input-group-addon"><i class="icofont-lock"></i></div>
+ 								<input type="Password" name="" class="form-control" placeholder=" {{'Confirm Password' | translate }}" formControlName = "Staff_Confirm_Password">
+ 							</div>
+ 							<p style="color: #FF0000" *ngIf="!form.controls['Staff_Confirm_Password'].valid  && ( form.controls['Staff_Confirm_Password'].touched)">{{'Invalid Confirm Password' | translate }}!!!</p>
+ 						</div>
+ 					</div>
+
+
+
+ 				</form>
+ 			</div>
+ 			<div>
+ 				<input type="button" value="{{'Submit' | translate }}" id="submitdata" data-toggle="modal" data-target="#submitbtn" [disabled] = "!form.valid"  class="btn btngp btnsubmit" />
+ 				<input type="button" value="{{'Cancel' | translate }}" id="cancel" data-toggle="modal" data-target="#cancelbtn" class="btn btngp btncancel" />
+ 			</div>
+ 		</div>
+ 		<div class = "add-table">
+ 			<a (click) = "viewDeletedRdcs()" class="custom-link">{{'Deleted Records' | translate}}</a>
+ 			<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class = "table"   id = 'Stafftable'>
+ 				<thead>
+ 					<tr>
+ 						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">#</th>
+ 						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Name' | translate}}</th>
+ 						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Email' | translate}}</th>
+ 						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Role' | translate}}</th>
+ 						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Phone No' | translate}}</th>
+ 						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Created By' | translate }}</th>
+ 						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Last Modify' | translate}}</th>
+ 						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Status' | translate}}</th>
+ 						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" >{{'Action' | translate}}</th>
+ 					</tr>
+ 				</thead>
+ 				<tbody>
+ 					<tr *ngFor = "let list of getUserArray; let i = index">
+ 						<td class="hash-center">{{i+1}}</td>
+ 						<td>{{list.Staff_Name}}</td>
+ 						<td>{{list.Staff_Email}}</td>
+ 						<td>{{list.Staff_Role_Name}}</td>
+ 						<td>{{list.Staff_PhoneNo}}</td>
+ 						<td>{{list.Staff_User_Name}}</td>
+ 						<td>{{list.Staff_Modify_Date | date: 'MM-dd-yyyy, hh:mm a'}} <span class="info"  data-toggle="tooltip" data-placement="left" title="{{list.Staff_Create_Date | date: 'MM-dd-yyyy, hh:mm aa'}}"><i *ngIf = "list.Staff_Modify_Date != list.Staff_Create_Date " class="icofont-info-circle"></i></span></td>
+ 						<td *ngIf = "list.Staff_Is_Active"><mat-slide-toggle (change) = "UpdateStatus(list, $event)" checked></mat-slide-toggle></td>
+ 						<td *ngIf = "!list.Staff_Is_Active"><mat-slide-toggle (change) = "UpdateStatus(list, $event)"></mat-slide-toggle></td>
+
+ 						<td class="edit-button">
+
+ 							<i *ngIf = "getPerDetails[0]?.Is_Edit" class="fa fa-pencil-square-o " title = "{{'Edit' | translate}}"  aria-hidden="true" (click) = "editStaffList(list)"></i>&nbsp;&nbsp;
+ 							<span *ngIf = "getPerDetails[0]?.Is_Delete" (click) = "dataDeleted(list)"><i class="fa fa-trash" aria-hidden="true" title = "{{'Delete' | translate}}"></i></span>&nbsp;&nbsp;
+ 							<span *ngIf = "userPermisioonBoolean" routerLink = "/user-permission/{{list.Staff_Unique_ID}}"><i class="fa fa-lock" title="{{'User Permission' | translate}}"  aria-hidden="true"></i></span>
+ 							
+ 						</td>
+ 					</tr>
+ 				</tbody>
+ 			</table>
+ 		</div>
+
+ 		<div class = "view-deleted">
+ 			<a (click) = "hideShow()" class="custom-link">{{'View Records' | translate}}</a>
+ 			<table datatable [dtOptions]="dtOptions1" [dtTrigger]="dtTrigger1" class = "table"   id = 'Staff_deleted_rc'>
+ 				<thead>
+ 					<tr>
+ 						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">#</th>
+ 						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Name' | translate}}</th>
+ 						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Email' | translate}}</th>
+ 						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Role' | translate}}</th>
+ 						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Phone No' | translate}}</th>
+ 						<!-- <th>Office Type</th> -->
+ 						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Last Modify' | translate}}</th>
+ 						<!-- <th>{{'Status' | translate}}</th> -->
+ 						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Action' | translate}}</th>
+ 					</tr>
+ 				</thead>
+ 				<tbody>
+ 					<tr *ngFor = "let list of getDeletedStaffArray; let i = index">
+ 						<td class="hash-center">{{i+1}}</td>
+ 						<td>{{list.Staff_Name}}</td>
+ 						<td>{{list.Staff_Email}}</td>
+ 						<td>{{list.Staff_Role_Name}}</td>
+ 						<td>{{list.Staff_PhoneNo}}</td>
+ 						<!-- <td>{{list.Staff_Office_Type}}</td> -->
+ 						<td>{{list.Staff_Modify_Date | date: 'MM-dd-yyyy, hh:mm a'}} <span class="info"  data-toggle="tooltip" data-placement="left" title="{{list.Staff_Create_Date | date: 'MM-dd-yyyy, hh:mm aa'}}"><i *ngIf = "list.Staff_Modify_Date != list.Staff_Create_Date " class="icofont-info-circle"></i></span></td>
+					<!-- <td *ngIf = "list.Staff_Is_Active"><mat-slide-toggle (change) = "UpdateStatus(list, $event)" checked></mat-slide-toggle></td>
+						<td *ngIf = "!list.Staff_Is_Active"><mat-slide-toggle (change) = "UpdateStatus(list, $event)"></mat-slide-toggle></td> -->
+
+						<td class="edit-button">
+							<span *ngIf = "getPerDetails[0]?.Is_Delete" (click)  = "revertDeleted(list)" >	<i class="fa fa-trash" aria-hidden="true" title = "{{'Delete' | translate}}"></i></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- Modal -->
+	<div id="submitbtn" class="modal fade modalmsg" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="close_btn">
+					<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+				</div>
+				<div class="modal-body text-center">
+					<h3>{{'Are you sure, you want to Submit ?' | translate}}</h3>
+				</div>
+				<div class="modal-footer border0">
+					<button type="button" class="btn btn-primary" (click)  = "addUser()" >{{'Yes' | translate}}</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- Modal -->
+	<div id="cancelbtn" class="modal fade modalmsg" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="close_btn">
+					<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+				</div>
+				<div class="modal-body text-center">
+					<h3>{{'Are you sure, you want to Cancel ?' | translate}}</h3>
+				</div>
+				<div class="modal-footer border0">
+					<button type="button" class="btn btn-primary" (click)  = "goBack()" >{{'Yes' | translate}}</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- Modal -->
+	<div id="trash" class="modal fade modalmsg" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="close_btn">
+					<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+				</div>
+				<div class="modal-body text-center">
+					<h3>{{'Are you sure, you want to delete ?' | translate}}</h3>
+				</div>
+				<div class="modal-footer border0">
+					<button type="button" class="btn btn-primary" (click) = "isDeletedYes()">{{'Yes' | translate}}</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div id="revertDelete" class="modal fade modalmsg" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="close_btn">
+					<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+				</div>
+				<div class="modal-body text-center">
+					<h3>{{'Are you sure, you want to Retrive data ?' | translate}}</h3>
+				</div>
+				<div class="modal-footer border0">
+					<button type="button" class="btn btn-primary" (click) = "revertData()">{{'Yes' | translate}}</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+				</div>
+			</div>
+
+		</div>
+	</div>

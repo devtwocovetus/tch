@@ -1,0 +1,177 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+	<div class="loader-img">
+		<img src="assets/Images/logo2.gif" alt="">
+	</div>
+</div>
+<div class="section-container section-container-new" >
+	<div class="main-heading main-heading1">
+		<div class="mh-left">
+			<h1 class="add-button">{{'Edit Physician Office' | translate }}</h1>
+		</div>
+		
+	</div>
+	<div class="form-element hide-from">
+		<h3 class="title_text">{{'Facility Information' | translate }}</h3>
+		<div class=" form-horizontal">
+			<form [formGroup]="form" autocomplete="off"> 
+				<div class="form-group">
+					<div class="col-sm-6">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="icofont-user-alt-7"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'Legal Name Of Facility' | translate }}" formControlName = "PhyO_DBA_Name">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_DBA_Name'].valid  && ( form.controls['PhyO_DBA_Name'].touched)">{{'Invalid name' | translate }}!!!</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="icofont-business-man-alt-1"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'DBA (If different from legal name)' | translate }}" formControlName ="PhyO_Name">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_Name'].valid  && ( form.controls['PhyO_Name'].touched)">{{'Invalid name' | translate }}!!!</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="icofont-location-pin"></i></div>
+							<input id = "addrs1" ngx-google-places-autocomplete [options]='options' class="form-control" #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" formControlName = "PhyO_Address" placeholder="{{'Address Line 1' | translate }}" autocomplete="off"/>
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_Address'].valid  && ( form.controls['PhyO_Address'].touched)">{{'Invalid address' | translate }} !!!</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="icofont-location-pin"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'Address Line 2' | translate }}" formControlName ="PhyO_Address2">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_Address2'].valid  && ( form.controls['PhyO_Address2'].touched)">{{'Invalid address' | translate }} !!!</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="icofont-location-arrow"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'City' | translate }}"formControlName = "PhyO_City">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_City'].valid  && ( form.controls['PhyO_City'].touched)">{{'Invalid city' | translate }}!!!</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="icofont-location-arrow"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'State' | translate }}" formControlName = "PhyO_State">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_State'].valid  && ( form.controls['PhyO_State'].touched)">{{'Invalid state' | translate }}!!!</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="icofont-location-arrow"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'Zip' | translate }}" formControlName ="PhyO_Zip" pattern="[0-9]+">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_Zip'].valid  && ( form.controls['PhyO_Zip'].touched)">{{'Invalid zip' | translate }}!!!</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="icofont-location-arrow"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'Country' | translate }}" formControlName ="PhyO_Country">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_Country'].valid  && ( form.controls['PhyO_Country'].touched)">{{'Invalid Country' | translate }}!!!</p>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="col-sm-6">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="icofont-ui-dial-phone"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'Facility Phone' | translate }}" formControlName="PhyO_MobileNo" >
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_MobileNo'].valid  && ( form.controls['PhyO_MobileNo'].touched)">{{'Invalid phone number' | translate }}!!!</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="icofont-fax"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'Fax Number' | translate }}" formControlName = "PhyO_FaxNo" >
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_FaxNo'].valid  && ( form.controls['PhyO_FaxNo'].touched)">{{'Invalid fax number' | translate }}!!!</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="icofont-email"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'Facility Email' | translate }}" formControlName = "PhyO_Email">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_Email'].valid  && ( form.controls['PhyO_Email'].touched)">{{'Invalid email' | translate }}!!!</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="icofont-web"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'Website' | translate }}" formControlName = "PhyO_Website_URL">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_Website_URL'].valid  && ( form.controls['PhyO_Website_URL'].touched)">{{'>Invalid url' | translate }}!!!</p>
+					</div>
+				</div>
+				<!-- <div class="form-group checkbox-100">
+					<div class="col-sm-12 checkbox-title">
+						<h4>Choose Specialities</h4>
+					</div>
+					<div *ngFor = "let sepec of getSpecialtiesArray; let i = index">
+						<div class="col-sm-3 newtableHaiye">
+							<div class="checkbox checkbox-success " >
+								<input type="checkbox" class="styled" id="{{sepec.Spec_Name}}" data-alertid="2" name="check" [checked] = isSelected(sepec) (change)="onChange(sepec, $event.target.checked)">
+								<label for="{{sepec.Spec_Name}}">{{sepec.Spec_Name}} </label>
+							</div>
+						</div>
+					</div>					
+				</div> -->
+
+			</form>
+		</div>
+		<div>
+			<input type="button" value="{{'Submit' | translate }}" id="submitdata" data-toggle="modal" data-target="#submitbtn" [disabled] = "!form.valid"  class="btn btngp btnsubmit" />
+
+			<input type="button" value="{{'Cancel' | translate }}" id="cancel" data-toggle="modal" data-target="#cancelbtn" class="btn btngp btncancel" />
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div id="submitbtn" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to Submit ?' | translate}}</h3>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary" (click) = "addPhysicianForm()" >{{'Yes' | translate }}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- Modal -->
+<div id="cancelbtn" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to Cancel ?' | translate }}</h3>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary" (click)  = "goBack()" >{{'Yes' | translate }}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+			</div>
+		</div>
+
+	</div>
+</div>

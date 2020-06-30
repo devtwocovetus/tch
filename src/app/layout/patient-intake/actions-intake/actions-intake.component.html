@@ -1,0 +1,132 @@
+<div class="section-container section-container-new">
+	<div class="section">
+		<div class="main-heading main-heading1">
+			<div class="mh-left"><h1 class="add-button">{{'Configuration your Action' | translate }}</h1></div>
+			<div class="mh-right">
+				<div class="dropdown_cust">
+					<a class="dropbtn add-button"   title=""><i aria-hidden="true" class="fa fa-plus" style="font-size: 15px;"></i> {{'Add Action' | translate }}</a>
+					<div class="dropdown_cust-content">
+						<div class="box">
+							<a title="" (click)="saveAction(1)"><i class="icofont-ui-email"></i>{{'Email' | translate }}</a>
+							<a title="" (click)="saveAction(2)"><i class="icofont-envelope-open"></i>{{'SMS' | translate }}</a>
+							<a title="" (click)="saveAction(3)">
+								<i class="fa fa-microphone" aria-hidden="true"></i>{{'Voice' | translate }}</a>
+								<a title="" (click)="saveAction(4)">
+									<i class="fa fa-whatsapp" aria-hidden="true"></i>{{'Whatsapp' | translate }}</a>
+
+
+								</div>
+							</div>
+						</div>&nbsp;&nbsp;&nbsp;
+						<a class="view-button" routerLink="/intake">
+							<i class="fa fa-angle-left"></i> {{'Back' | translate }}
+						</a>
+
+					</div>
+				</div>
+				<div class="form-element">
+
+					<div class="dataTables_wrapper">
+						<table class = "table"  id = 'nitiactsview'>
+							<thead>
+								<tr>
+									<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">{{'Icon' | translate }}</th>
+									<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Type' | translate }}</th>
+									<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Tittle' | translate }}</th>
+									<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'When' | translate }}</th>
+									<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Message' | translate }}</th>
+									<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Date' | translate }}</th>
+									<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Action' | translate }}</th>
+								</tr>
+							</thead> 
+
+							<tbody>
+
+								<tr *ngFor="let item of datanew; let j = index">
+									<!-- <td>{{j+1}}</td> -->
+
+									<td *ngIf = "item.NFA_Action_Type == 'Email'">
+										<i class="icofont-ui-email"></i>
+
+
+									</td>
+									<td *ngIf = "item.NFA_Action_Type == 'SMS'">
+										<i class="fa fa-envelope" aria-hidden="true"></i>
+
+
+									</td> 
+									<td *ngIf = "item.NFA_Action_Type == 'Voice'">
+										<i class="fa fa-microphone" aria-hidden="true"></i>
+
+
+									</td> 
+									<td *ngIf = "item.NFA_Action_Type == 'Whatsapp'">
+										<i class="fa fa-whatsapp" aria-hidden="true"></i>
+
+
+									</td> 
+									<!--  <td></td> -->
+									<td>{{item.NFA_Action_Type}}</td>
+									<td>{{item.NFA_Action_Title}}</td>
+									<td>{{item.NFA_Create_Date | date: 'MM-dd-yyyy, hh:mm a'}}</td>
+									<td>{{item.NFA_Message}}</td>
+									<td>{{item.NFA_Modify_Date | date: 'MM-dd-yyyy, hh:mm a'}}</td>
+
+									<td>&nbsp;
+
+										<i  routerLink = "/edit-intake/{{item.NFA_Unique_ID}}" class="fa fa-pencil-square-o"  aria-hidden="true" style="cursor: pointer;"  title = "{{'Edit' | translate}}"></i>
+										&nbsp;&nbsp;
+										<i class="fa fa-trash" aria-hidden="true" title = "{{'Delete' | translate}}" (click) =
+										"dataDeleted(item)"></i>
+										&nbsp;&nbsp;
+									</td>
+
+								</tr>
+								<!-- </ng-container> -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- Modal -->
+		<div id="cancelbtn" class="modal fade modalmsg" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="close_btn">
+						<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+					</div>
+					<div class="modal-body text-center">
+						<h3>{{'Are you sure, you want to Cancel ?' | translate }}</h3>
+					</div>
+					<div class="modal-footer border0">
+						<button type="button" class="btn btn-primary" >{{'Yes' | translate }}</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="trash" class="modal fade modalmsg" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="close_btn">
+						<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+					</div>
+					<div class="modal-body text-center">
+						<h3>{{'Are you sure, you want to delete ?' | translate }}"</h3>
+					</div>
+					<div class="modal-footer border0">
+						<button type="button" class="btn btn-primary" (click) = "isDeletedYes()">{{'Yes' | translate }}</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+					</div>
+				</div>
+
+			</div>
+		</div>

@@ -1,0 +1,62 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+	<div class="loader-img">
+		<img src="assets/Images/logo2.gif" alt="">
+	</div>
+</div>	
+<div class="section-container section-container-new" >
+	<div class="main-heading main-heading1">
+		<div class="mh-left">
+			<h1 class="add-button">{{'Appointment History' | translate }}</h1>
+		</div>
+		<div class="mh-right">
+			<a class="view-button" routerLink="/dashboard">
+				<i class="fa fa-angle-left"></i> {{'Back' | translate }}
+			</a>
+			
+		</div>
+	</div>
+	<div class = "add-table">
+		<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class = "table"  id = 'app_list_now_a'>
+			<thead>
+				<tr>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">#</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Patient Name' | translate }}</th>
+
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Order Date' | translate }}</th>
+					<th *ngIf = "admin.UM_Office_Type == 'P' || admin.UM_Office_Type == 'A'" [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Surgery' | translate }}</th>
+					<th *ngIf = "admin.UM_Office_Type == 'S'" [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Physician' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Request Date' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Status' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Actions' | translate }}</th>
+					
+				</thead>
+				<!-- gettotalappointment -->
+				<tbody>
+					<tr *ngFor = "let list of gettotalappointment; let i = index">
+						<td class="hash-center">{{i+1}}</td>
+						<td>{{list.PB_Patient_Name}} {{list.PB_Patient_Last_Name}}</td>
+						<td>{{list.PB_Create_Date | date: 'MM-dd-yyyy, hh:mm a'}}</td>
+						<td  *ngIf = "admin.UM_Office_Type == 'P' || admin.UM_Office_Type == 'A'">{{list.PB_Booking_Surgery_Center_Name}}</td>
+						<td *ngIf = "admin.UM_Office_Type == 'S'">{{list.PB_Booking_Physician_Office_Name}}</td>
+						<!-- <td>A</td> -->
+						<td>{{list.PB_Booking_Date | date: 'MM-dd-yyyy'}}, {{tConvert(list.PB_Booking_Time)}}</td>
+						<!-- <td *ngIf = "admin.UM_Office_Type == 'P'">In Review</td> -->
+						<td *ngIf = "admin.UM_Office_Type == 'P' && list.PB_Status == 'Action Required'">In Review</td>
+						<td *ngIf = "admin.UM_Office_Type == 'P' && list.PB_Status != 'Action Required'">{{list.PB_Status}}</td>
+						<td *ngIf = "admin.UM_Office_Type != 'P'">{{list.PB_Status}}</td>
+						<td class="spcing">&nbsp;<i class="fa fa-eye" title = "{{'View Booking' | translate}}" style="cursor: pointer;" aria-hidden="true" routerLink = "/view-appointment/{{list.PB_Unique_ID}}/{{list.PB_Patient_ID}}"></i>
+
+
+							<i routerLink = "/add-attachments/{{list.PB_Unique_ID}}" class="icofont-attachment" style="cursor: pointer; font-size: 16px;" title = "{{'Attachments' | translate}}"></i>
+
+							<i class="fa fa-wpforms" style="cursor: pointer;" routerLink = "/surgery-forms/{{list.PB_Unique_ID}}" title = "{{'Patient Forms' | translate}}"></i>
+
+							
+
+							<!-- <i class="fab fa-wpforms"></i> -->
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>

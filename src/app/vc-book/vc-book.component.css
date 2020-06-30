@@ -1,0 +1,48 @@
+.ngb-tp-spacer {
+	width: 4em;
+	text-align: center;
+}
+.time-group .ngb-tp-input-container.ngb-tp-hour, .time-group .ngb-tp-input-container {
+	min-width: 62px!important;
+}
+.ngb-tp-input-container{
+	width: 55px!important;
+}
+.mb-30{
+	margin-bottom: 30px;
+}
+.btnchnge {
+	margin: 10px 0px;
+}
+
+.form-inline .form-group, .form-inline .time-group, .form-inline ngb-timepicker {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+.bottombar_slide {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+    background: #e6e6e6;
+    padding: 4px 15px;
+    right: 0;
+    text-align: left;
+    margin-left: 290px;
+    margin-right: 40px;
+    -webkit-transition: bottom 500ms ease 0s;
+    transition: bottom 500ms ease 0s;
+}
+.mh-left.mtb_h {
+    margin-bottom: 14px;
+}
+.time-group.required2.left_alin_float {
+    display: inline-flex;
+}
+.left_alin_float_body span.text-danger {
+   display: flex !important;
+    align-items: flex-end !important;
+    margin-bottom: 20px;
+    color: red !important;
+}

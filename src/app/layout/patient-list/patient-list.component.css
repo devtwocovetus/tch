@@ -1,0 +1,28 @@
+.nav-tabs>li>a{
+	margin-right: -7px;
+}
+.btn{
+	     margin-top: 6px!important;
+
+}
+label{
+	font-weight: bold;
+}
+
+/**/
+.fa-pencil-square-o{
+	cursor: pointer;
+}
+.fa-trash{
+	cursor: pointer;
+}
+
+
+
+.add-button{
+  cursor: pointer;
+}
+.view-button{
+  cursor: pointer;
+}
+

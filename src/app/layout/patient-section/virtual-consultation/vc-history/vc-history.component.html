@@ -1,0 +1,91 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+	<div class="loader-img">
+		<img src="assets/Images/logo2.gif" alt="">
+	</div>
+</div>	
+<div class="section-container section-container-new" >
+	<div class="main-heading main-heading1">
+		<div class="mh-left">
+			<h1 class="add-button">{{'Virtual consultation History' | translate }}</h1>
+		</div>
+		<div class="mh-right">
+			<a  routerLink = "/patient-vc-list"><i class="fa fa-angle-left" aria-hidden="true" style="font-size: 15px;"></i> {{'Back' | translate }}</a>
+		</div>
+	</div>
+	<div class = "add-table">
+		<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class = "table"  id = 'myvchistrlist'>
+			<thead>
+				<tr>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">#</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Patient Name' | translate }}</th>
+
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Request Date' | translate }}</th>
+					
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Order Date' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{Created By</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Status' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Actions' | translate }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor = "let list of getListData; let i = index" [class.alertDanger]="list.expire">
+					<td class="hash-center">{{i+1}}</td>
+					<td>{{list.PB_Patient_Name}} {{list.PB_Patient_Last_Name}}</td>
+					<td>{{list.PB_Surgical_Procedure_Information?.SPI_Date | date: 'MM-dd-yyyy'}}, {{tConvert(list.PB_Booking_Time)}}</td>
+					<td>{{list.PB_Create_Date | date: 'MM-dd-yyyy, hh:mm a'}}</td>
+					<td>{{list.PB_User_Name}}</td>
+					<!-- <td *ngIf = "admin.UM_Office_Type == 'P'">In Review</td> -->
+					<td *ngIf = "admin.UM_Office_Type == 'P' && list.PB_Status == 'Action Required'">In Review</td>
+					<td *ngIf = "admin.UM_Office_Type == 'P' && list.PB_Status != 'Action Required'">{{list.PB_Status}}</td>
+					<td *ngIf = "admin.UM_Office_Type != 'P'">{{list.PB_Status}}</td>
+					<!-- <td>test details</td> -->
+					<!-- <td>test</td> -->
+					<td class="spcing">&nbsp;<i class="fa fa-eye" title = "{{'View Booking' | translate}}" style="cursor: pointer;" aria-hidden="true" routerLink = "/view-appointment/{{list.PB_Unique_ID}}/{{list.PB_Patient_ID}}"></i>
+
+						<i *ngIf = "admin.UM_Office_Type == 'P' && list.checkData" class="fa fa-pencil-square-o" aria-hidden="true" style="cursor: pointer;" routerLink = "/edit-appointment/{{list.PB_Unique_ID}}/{{list.PB_Patient_ID}}" title = "{{'Edit Booking' | translate}}"></i>
+
+						<i *ngIf = "admin.UM_Office_Type == 'S'" class="fa fa-pencil-square-o" aria-hidden="true" style="cursor: pointer;" routerLink = "/edit-appointment/{{list.PB_Unique_ID}}/{{list.PB_Patient_ID}}" title = "{{'Edit Booking' | translate}}"></i>
+
+						<i routerLink = "/add-attachments/{{list.PB_Unique_ID}}" class="icofont-attachment" style="cursor: pointer; font-size: 16px;" title = "{{'Attachments' | translate}}"></i>
+
+						<i class="fa fa-wpforms" style="cursor: pointer;" routerLink = "/surgery-forms/{{list.PB_Unique_ID}}" title = "{{'Patient Forms' | translate}}"></i>
+
+						<span><i *ngIf = "admin.UM_Office_Type != 'P'" class="icofont-notification" style="cursor: pointer;" title = "{{'Notification' | translate}}" routerLink = "/assign-notification-list/{{list.PB_Unique_ID}}"></i></span>
+
+						<span><i *ngIf = "admin.UM_Office_Type == 'S' && list.markAsComplete" class="fa fa-check-square-o" aria-hidden="true" style="cursor: pointer;" title = "{{'Mark as complete' | translate}}" data-toggle="modal" data-target="#myModal"></i></span>
+
+
+						<!-- <i class="fab fa-wpforms"></i> -->
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!-- Modal -->
+
+
+<div id="myModal" class="modal fade modalmsg" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="close_btn">
+					<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+				</div>
+				<div class="modal-body text-center">
+					<h3>{{'Please enter the completed status' | translate }}</h3>
+				</div>
+				<div class="col-md-12">
+					<textarea  class="form-control" style="height: 10em" placeholder="{{'completed status' | translate }}..."></textarea>
+				</div>
+				<div class="modal-footer border0">
+					<!-- <button type="button" class="btn btn-primary" (click) = "saveRejectReason('Incomplete')"></button> -->
+					<input type="button" value="{{'Submit' | translate }}"  class="btn btngp btnsubmit  my-12" data-dismiss="modal"/>
+					<input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-dismiss="modal"  class="btn btngp btncancel  my-12" />
+
+				</div>
+			</div>
+
+		</div>
+	</div>

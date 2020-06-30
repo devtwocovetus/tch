@@ -1,0 +1,89 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+	<div class="loader-img">
+		<img src="assets/Images/logo2.gif" alt="">
+	</div>
+</div>	
+<div class="section-container section-container-new" >
+	<div class="main-heading main-heading1">
+		<div class="mh-left">
+			<h1 class="add-button">{{'VIRTUAL CONSULTATION APPOINTMENT(S)' | translate }}
+</h1>
+		</div>
+		<div class="mh-right">
+			<a class="add-button" routerLink = "/vc-book" *ngIf = "admin.UM_Office_Type == 'P'"><i class="fa fa-plus" aria-hidden="true" style="font-size: 15px;"></i> {{'Add Appointment' | translate  }}</a>
+		</div>
+	</div>
+	<div class = "add-table">
+		<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class = "table"  id = 'vckistnow'>
+			<thead>
+				<tr>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">#</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Patient Name' | translate }}</th>
+
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Request Date' | translate }}</th>
+					
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Order Date' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Created By' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Status' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Actions' | translate }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor = "let list of getListData; let i = index" [class.alertDanger]="list.expire">
+					<td class="hash-center">{{i+1}}</td>
+					<td>{{list.VCB_Patient_Name}}  {{list.VCB_Patient_Last_Name}}</td>
+					<td>{{list.VCB_Booking_Date | date: 'MM-dd-yyyy'}}</td>
+					<td>{{list.VCB_Create_Date | date: 'MM-dd-yyyy, hh:mm a'}}</td>
+					<td>{{list.VCB_User_Name}}</td>
+					<td *ngIf = "list.VCB_Status == 'Action Required'">In Review</td>
+					<td *ngIf = "list.VCB_Status != 'Action Required'">{{list.VCB_Status}}</td>
+					<td class="spcing">&nbsp;<i class="fa fa-eye" title = "{{'View VC' | translate}}" style="cursor: pointer;" aria-hidden="true" routerLink = "/vc-view/{{list.VCB_Unique_ID}}"></i>
+
+						<i  class="fa fa-pencil-square-o" aria-hidden="true" style="cursor: pointer;" routerLink = "/vc-edit/{{list.VCB_Unique_ID}}" title = "{{'Edit Booking' | translate}}"></i>
+
+
+
+						<i routerLink = "/upload-doc/{{list.VCB_Unique_ID}}" class="icofont-attachment" style="cursor: pointer; font-size: 16px;" title = "{{'Attachments' | translate}}"></i>
+
+						<!-- <i class="fa fa-wpforms" style="cursor: pointer;" routerLink = "/surgery-forms/{{list.PB_Unique_ID}}" title = "{{'Patient Forms' | translate}}"></i> -->
+
+						<span><i class="icofont-notification" style="cursor: pointer;" title = "{{'Notification' | translate}}" routerLink = "/vc-notification/{{list.VCB_Unique_ID}}"></i></span>
+
+						<span *ngIf = "list.markAsComplete"><i class="fa fa-check-square-o" aria-hidden="true" style="cursor: pointer;" title = "{{'Mark as complete' | translate}}" data-toggle="modal" data-target="#markascomplete" (click) = "getMyId(list.VCB_Unique_ID)"></i></span>
+							<span ><i class="fa fa-video-camera" aria-hidden="true" style="cursor: pointer;" title="{{'Video Chat' | translate}}"  routerLink = "/video-chat/{{list.VCB_Unique_ID}}/{{list.VCB_Patient_Name}}_{{list.VCB_Patient_Last_Name}}"></i></span>
+
+
+						<!-- <i class="fab fa-wpforms"></i> -->
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!-- Modal -->
+
+
+<div id="markascomplete" class="modal fade modalmsg" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Please enter the complete reason' | translate }}</h3>
+			</div>
+			<div class="col-md-12">
+				<textarea  class="form-control" style="height: 10em" [(ngModel)] = "compReason" placeholder="complete Reason..."></textarea>
+			</div>
+			<div class="modal-footer border0">
+				<input type="button" value="{{'Submit' | translate }}"  (click) = "saveRejectReason('Complete')"  class="btn btngp btnsubmit  my-12" />
+				<input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-dismiss="modal"  class="btn btngp btncancel  my-12" />
+
+			</div>
+		</div>
+
+
+		</div>
+	</div>

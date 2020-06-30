@@ -1,0 +1,422 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+   <div class="loader-img">
+      <img src="assets/Images/logo2.gif" alt="">
+   </div>
+</div>
+<div class="main-contaier">
+   <div class="right-bar">
+      <input type="hidden" id="BaseUrlPath" value="https://tch2.azurewebsites.net/">
+      <div id="mainBody" class="section-container section-container-new" style="display:block;">
+         <div class="home-icon-div">
+         	<ul class="nav nav-pills" style="height:220px;" *ngIf = "admin.UM_Office_Type == 'A'">
+         		<li class="tableFilter">
+                  <a >
+                     <span style="font-weight:bold;">{{'Surgery Center' | translate }}</span>
+                     <img src="assets/Images/icon/1.png" style="height:80px;width:80px;"/>
+                     <div class="count-boxes">
+                        <svg data-name="Layer 1" viewBox="0 0 73.1 34.59">
+                           <path [style.fill]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="svg_stoke-1" d="M73.5,14.68V28.86c0,.14-.07.28-.1.41a6.14,6.14,0,0,1-4.18,5,8.66,8.66,0,0,1-.91.24H6.58a1,1,0,0,0-.15-.07,5.93,5.93,0,0,1-4.81-4.55c-.1-.32-.15-.66-.22-1V14.68c0-.12.07-.24.09-.36a6,6,0,0,1,6-5.18c1.93.07,3.86,0,5.79,0H55.37V1.55l.21.2c1.25,1.37,2.5,2.74,3.74,4.13.92,1,1.82,2.08,2.74,3.11a.66.66,0,0,0,.44.16c1.59,0,3.17,0,4.76,0a7.5,7.5,0,0,1,1.16,0,6,6,0,0,1,4.9,4.7C73.37,14.16,73.44,14.42,73.5,14.68Z" transform="translate(-0.9 -0.4)"></path>
+                        </svg>
+                        <span class="counttotal">{{getAdminCount.SC}}</span>
+                     </div>
+                  </a>
+               </li>
+               <li class="tableFilter">
+                  <a >
+                     <span style="font-weight:bold;">{{'Physician Office' | translate }}</span>
+                     <img src="assets/Images/icon/1.png" style="height:80px;width:80px;"/>
+                     <div class="count-boxes">
+                        <svg data-name="Layer 1" viewBox="0 0 73.1 34.59">
+                           <path [style.fill]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="svg_stoke-1" d="M73.5,14.68V28.86c0,.14-.07.28-.1.41a6.14,6.14,0,0,1-4.18,5,8.66,8.66,0,0,1-.91.24H6.58a1,1,0,0,0-.15-.07,5.93,5.93,0,0,1-4.81-4.55c-.1-.32-.15-.66-.22-1V14.68c0-.12.07-.24.09-.36a6,6,0,0,1,6-5.18c1.93.07,3.86,0,5.79,0H55.37V1.55l.21.2c1.25,1.37,2.5,2.74,3.74,4.13.92,1,1.82,2.08,2.74,3.11a.66.66,0,0,0,.44.16c1.59,0,3.17,0,4.76,0a7.5,7.5,0,0,1,1.16,0,6,6,0,0,1,4.9,4.7C73.37,14.16,73.44,14.42,73.5,14.68Z" transform="translate(-0.9 -0.4)"></path>
+                        </svg>
+                        <span class="counttotal">{{getAdminCount.PO}}</span>
+                     </div>
+                  </a>
+               </li>
+               <li class="tableFilter">
+                  <a >
+                     <span style="font-weight:bold;">{{'Patient' | translate }}</span>
+                     <img src="assets/Images/icon/1.png" style="height:80px;width:80px;"/>
+                     <div class="count-boxes">
+                        <svg data-name="Layer 1" viewBox="0 0 73.1 34.59">
+                           <path [style.fill]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="svg_stoke-1" d="M73.5,14.68V28.86c0,.14-.07.28-.1.41a6.14,6.14,0,0,1-4.18,5,8.66,8.66,0,0,1-.91.24H6.58a1,1,0,0,0-.15-.07,5.93,5.93,0,0,1-4.81-4.55c-.1-.32-.15-.66-.22-1V14.68c0-.12.07-.24.09-.36a6,6,0,0,1,6-5.18c1.93.07,3.86,0,5.79,0H55.37V1.55l.21.2c1.25,1.37,2.5,2.74,3.74,4.13.92,1,1.82,2.08,2.74,3.11a.66.66,0,0,0,.44.16c1.59,0,3.17,0,4.76,0a7.5,7.5,0,0,1,1.16,0,6,6,0,0,1,4.9,4.7C73.37,14.16,73.44,14.42,73.5,14.68Z" transform="translate(-0.9 -0.4)"></path>
+                        </svg>
+                        <span class="counttotal">{{getAdminCount.Patient}}</span>
+                     </div>
+                  </a>
+               </li>
+               <li class="tableFilter">
+                  <a >
+                     <span style="font-weight:bold;">{{'Booking' | translate }}</span>
+                     <img src="assets/Images/icon/1.png" style="height:80px;width:80px;"/>
+                     <div class="count-boxes">
+                        <svg data-name="Layer 1" viewBox="0 0 73.1 34.59">
+                           <path [style.fill]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="svg_stoke-1" d="M73.5,14.68V28.86c0,.14-.07.28-.1.41a6.14,6.14,0,0,1-4.18,5,8.66,8.66,0,0,1-.91.24H6.58a1,1,0,0,0-.15-.07,5.93,5.93,0,0,1-4.81-4.55c-.1-.32-.15-.66-.22-1V14.68c0-.12.07-.24.09-.36a6,6,0,0,1,6-5.18c1.93.07,3.86,0,5.79,0H55.37V1.55l.21.2c1.25,1.37,2.5,2.74,3.74,4.13.92,1,1.82,2.08,2.74,3.11a.66.66,0,0,0,.44.16c1.59,0,3.17,0,4.76,0a7.5,7.5,0,0,1,1.16,0,6,6,0,0,1,4.9,4.7C73.37,14.16,73.44,14.42,73.5,14.68Z" transform="translate(-0.9 -0.4)"></path>
+                        </svg>
+                        <span class="counttotal">{{getAdminCount.Booking}}</span>
+                     </div>
+                  </a>
+               </li>
+               <li class="tableFilter">
+                  <a >
+                     <span style="font-weight:bold;">{{'Complete Booking' | translate }}</span>
+                     <img src="assets/Images/icon/1.png" style="height:80px;width:80px;"/>
+                     <div class="count-boxes">
+                        <svg data-name="Layer 1" viewBox="0 0 73.1 34.59">
+                           <path [style.fill]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="svg_stoke-1" d="M73.5,14.68V28.86c0,.14-.07.28-.1.41a6.14,6.14,0,0,1-4.18,5,8.66,8.66,0,0,1-.91.24H6.58a1,1,0,0,0-.15-.07,5.93,5.93,0,0,1-4.81-4.55c-.1-.32-.15-.66-.22-1V14.68c0-.12.07-.24.09-.36a6,6,0,0,1,6-5.18c1.93.07,3.86,0,5.79,0H55.37V1.55l.21.2c1.25,1.37,2.5,2.74,3.74,4.13.92,1,1.82,2.08,2.74,3.11a.66.66,0,0,0,.44.16c1.59,0,3.17,0,4.76,0a7.5,7.5,0,0,1,1.16,0,6,6,0,0,1,4.9,4.7C73.37,14.16,73.44,14.42,73.5,14.68Z" transform="translate(-0.9 -0.4)"></path>
+                        </svg>
+                        <span class="counttotal">{{getAdminCount.CompleteBooking}}</span>
+                     </div>
+                  </a>
+               </li>
+               <li class="tableFilter">
+                  <a >
+                     <span style="font-weight:bold;">{{'Cancelled Booking' | translate }}</span>
+                     <img src="assets/Images/icon/1.png" style="height:80px;width:80px;"/>
+                     <div class="count-boxes">
+                        <svg data-name="Layer 1" viewBox="0 0 73.1 34.59">
+                           <path [style.fill]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="svg_stoke-1" d="M73.5,14.68V28.86c0,.14-.07.28-.1.41a6.14,6.14,0,0,1-4.18,5,8.66,8.66,0,0,1-.91.24H6.58a1,1,0,0,0-.15-.07,5.93,5.93,0,0,1-4.81-4.55c-.1-.32-.15-.66-.22-1V14.68c0-.12.07-.24.09-.36a6,6,0,0,1,6-5.18c1.93.07,3.86,0,5.79,0H55.37V1.55l.21.2c1.25,1.37,2.5,2.74,3.74,4.13.92,1,1.82,2.08,2.74,3.11a.66.66,0,0,0,.44.16c1.59,0,3.17,0,4.76,0a7.5,7.5,0,0,1,1.16,0,6,6,0,0,1,4.9,4.7C73.37,14.16,73.44,14.42,73.5,14.68Z" transform="translate(-0.9 -0.4)"></path>
+                        </svg>
+                        <span class="counttotal">{{getAdminCount.CancelledBooking}}</span>
+                     </div>
+                  </a>
+               </li>
+               <li class="tableFilter">
+                  <a >
+                     <span style="font-weight:bold;">{{'VC Complete' | translate }}</span>
+                     <img src="assets/Images/icon/1.png" style="height:80px;width:80px;"/>
+                     <div class="count-boxes">
+                        <svg data-name="Layer 1" viewBox="0 0 73.1 34.59">
+                           <path [style.fill]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="svg_stoke-1" d="M73.5,14.68V28.86c0,.14-.07.28-.1.41a6.14,6.14,0,0,1-4.18,5,8.66,8.66,0,0,1-.91.24H6.58a1,1,0,0,0-.15-.07,5.93,5.93,0,0,1-4.81-4.55c-.1-.32-.15-.66-.22-1V14.68c0-.12.07-.24.09-.36a6,6,0,0,1,6-5.18c1.93.07,3.86,0,5.79,0H55.37V1.55l.21.2c1.25,1.37,2.5,2.74,3.74,4.13.92,1,1.82,2.08,2.74,3.11a.66.66,0,0,0,.44.16c1.59,0,3.17,0,4.76,0a7.5,7.5,0,0,1,1.16,0,6,6,0,0,1,4.9,4.7C73.37,14.16,73.44,14.42,73.5,14.68Z" transform="translate(-0.9 -0.4)"></path>
+                        </svg>
+                        <span class="counttotal">{{getAdminCount.VCComplete}}</span>
+                     </div>
+                  </a>
+               </li>
+               <li class="tableFilter">
+                  <a >
+                     <span style="font-weight:bold;">{{'VC Cancelled' | translate }}</span>
+                     <img src="assets/Images/icon/1.png" style="height:80px;width:80px;"/>
+                     <div class="count-boxes">
+                        <svg data-name="Layer 1" viewBox="0 0 73.1 34.59">
+                           <path [style.fill]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="svg_stoke-1" d="M73.5,14.68V28.86c0,.14-.07.28-.1.41a6.14,6.14,0,0,1-4.18,5,8.66,8.66,0,0,1-.91.24H6.58a1,1,0,0,0-.15-.07,5.93,5.93,0,0,1-4.81-4.55c-.1-.32-.15-.66-.22-1V14.68c0-.12.07-.24.09-.36a6,6,0,0,1,6-5.18c1.93.07,3.86,0,5.79,0H55.37V1.55l.21.2c1.25,1.37,2.5,2.74,3.74,4.13.92,1,1.82,2.08,2.74,3.11a.66.66,0,0,0,.44.16c1.59,0,3.17,0,4.76,0a7.5,7.5,0,0,1,1.16,0,6,6,0,0,1,4.9,4.7C73.37,14.16,73.44,14.42,73.5,14.68Z" transform="translate(-0.9 -0.4)"></path>
+                        </svg>
+                        <span class="counttotal">{{getAdminCount.VCCancelled}}</span>
+                     </div>
+                  </a>
+               </li>
+               
+
+            </ul>
+
+            <ul class="nav nav-pills" style="height:220px;" *ngIf = "admin.UM_Office_Type == 'P' || admin.UM_Office_Type == 'S'">
+               <li class="tableFilter" (click) = "getPatientlistfORPhy('Total')">
+                  <a >
+                     <span style="font-weight:bold;">{{'Total' | translate }}</span>
+                     <img src="assets/Images/icon/1.png" style="height:80px;width:80px;"/>
+                     <div class="count-boxes">
+                        <svg data-name="Layer 1" viewBox="0 0 73.1 34.59">
+                           <path [style.fill]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="svg_stoke-1" d="M73.5,14.68V28.86c0,.14-.07.28-.1.41a6.14,6.14,0,0,1-4.18,5,8.66,8.66,0,0,1-.91.24H6.58a1,1,0,0,0-.15-.07,5.93,5.93,0,0,1-4.81-4.55c-.1-.32-.15-.66-.22-1V14.68c0-.12.07-.24.09-.36a6,6,0,0,1,6-5.18c1.93.07,3.86,0,5.79,0H55.37V1.55l.21.2c1.25,1.37,2.5,2.74,3.74,4.13.92,1,1.82,2.08,2.74,3.11a.66.66,0,0,0,.44.16c1.59,0,3.17,0,4.76,0a7.5,7.5,0,0,1,1.16,0,6,6,0,0,1,4.9,4.7C73.37,14.16,73.44,14.42,73.5,14.68Z" transform="translate(-0.9 -0.4)"></path>
+                        </svg>
+                        <span class="counttotal">{{getCountObject.Total}}</span>
+                     </div>
+                  </a>
+               </li>
+               <li class="active tableFilter" (click) = "getPatientlistfORPhy('Approved')">
+                  <a data-toggle="tab">
+                     <span style="font-weight:bold;">{{'Approved' | translate}}</span>
+                     <img src="assets/Images/icon/2.png" style="height:80px;width:80px;"/>
+                     <div class="count-boxes">
+                        <svg data-name="Layer 1" viewBox="0 0 73.1 34.59">
+                           <path [style.fill]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="svg_stoke-1" d="M73.5,14.68V28.86c0,.14-.07.28-.1.41a6.14,6.14,0,0,1-4.18,5,8.66,8.66,0,0,1-.91.24H6.58a1,1,0,0,0-.15-.07,5.93,5.93,0,0,1-4.81-4.55c-.1-.32-.15-.66-.22-1V14.68c0-.12.07-.24.09-.36a6,6,0,0,1,6-5.18c1.93.07,3.86,0,5.79,0H55.37V1.55l.21.2c1.25,1.37,2.5,2.74,3.74,4.13.92,1,1.82,2.08,2.74,3.11a.66.66,0,0,0,.44.16c1.59,0,3.17,0,4.76,0a7.5,7.5,0,0,1,1.16,0,6,6,0,0,1,4.9,4.7C73.37,14.16,73.44,14.42,73.5,14.68Z" transform="translate(-0.9 -0.4)"></path>
+                        </svg>
+                        <span class="counttotal">{{getCountObject.Approved}}</span>
+                     </div>
+                  </a>
+               </li>
+               <li *ngIf = "admin.UM_Office_Type != 'P'" (click) = "getPatientlistfORPhy('Action Required')">
+                  <a data-toggle="tab" class="textupdiv tableFilter">
+                     <span style="font-weight:bold;">{{'Action Required' | translate}}</span>
+                     <img src="assets/Images/icon/3.png" style="height:80px;width:80px;">
+                     <div class="count-boxes">
+                        <svg data-name="Layer 1" viewBox="0 0 73.1 34.59">
+                           <path [style.fill]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="svg_stoke-1" d="M73.5,14.68V28.86c0,.14-.07.28-.1.41a6.14,6.14,0,0,1-4.18,5,8.66,8.66,0,0,1-.91.24H6.58a1,1,0,0,0-.15-.07,5.93,5.93,0,0,1-4.81-4.55c-.1-.32-.15-.66-.22-1V14.68c0-.12.07-.24.09-.36a6,6,0,0,1,6-5.18c1.93.07,3.86,0,5.79,0H55.37V1.55l.21.2c1.25,1.37,2.5,2.74,3.74,4.13.92,1,1.82,2.08,2.74,3.11a.66.66,0,0,0,.44.16c1.59,0,3.17,0,4.76,0a7.5,7.5,0,0,1,1.16,0,6,6,0,0,1,4.9,4.7C73.37,14.16,73.44,14.42,73.5,14.68Z" transform="translate(-0.9 -0.4)"></path>
+                        </svg>
+                        <span class="counttotal">{{getCountObject.Action_Required}}</span>
+                     </div>
+                  </a>
+               </li>
+               <li *ngIf = "admin.UM_Office_Type != 'S'" (click) = "getPatientlistfORPhy('Action Required')">
+                  <a data-toggle="tab" class="tableFilter">
+                     <span style="font-weight:bold;">{{'In Review' | translate}} </span>
+                     <img src="assets/Images/icon/4.png" style="height:80px;width:80px;">
+                     <div class="count-boxes">
+                        <svg data-name="Layer 1" viewBox="0 0 73.1 34.59">
+                           <path [style.fill]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="svg_stoke-1" d="M73.5,14.68V28.86c0,.14-.07.28-.1.41a6.14,6.14,0,0,1-4.18,5,8.66,8.66,0,0,1-.91.24H6.58a1,1,0,0,0-.15-.07,5.93,5.93,0,0,1-4.81-4.55c-.1-.32-.15-.66-.22-1V14.68c0-.12.07-.24.09-.36a6,6,0,0,1,6-5.18c1.93.07,3.86,0,5.79,0H55.37V1.55l.21.2c1.25,1.37,2.5,2.74,3.74,4.13.92,1,1.82,2.08,2.74,3.11a.66.66,0,0,0,.44.16c1.59,0,3.17,0,4.76,0a7.5,7.5,0,0,1,1.16,0,6,6,0,0,1,4.9,4.7C73.37,14.16,73.44,14.42,73.5,14.68Z" transform="translate(-0.9 -0.4)"></path>
+                        </svg>
+                        <span class="counttotal">{{getCountObject.In_Review}}</span>
+                     </div>
+                  </a>
+               </li>
+               <li >
+                  <a data-toggle="tab" class="textupdiv tableFilter" (click) = "getPatientlistfORPhy('Incomplete')">
+                     <span style="font-weight:bold;">{{'Incomplete' | translate}}</span>
+                     <img src="assets/Images/icon/6.png" style="height:80px;width:80px;"/>
+                     <div class="count-boxes">
+                        <svg data-name="Layer 1" viewBox="0 0 73.1 34.59">
+                           <path [style.fill]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="svg_stoke-1" d="M73.5,14.68V28.86c0,.14-.07.28-.1.41a6.14,6.14,0,0,1-4.18,5,8.66,8.66,0,0,1-.91.24H6.58a1,1,0,0,0-.15-.07,5.93,5.93,0,0,1-4.81-4.55c-.1-.32-.15-.66-.22-1V14.68c0-.12.07-.24.09-.36a6,6,0,0,1,6-5.18c1.93.07,3.86,0,5.79,0H55.37V1.55l.21.2c1.25,1.37,2.5,2.74,3.74,4.13.92,1,1.82,2.08,2.74,3.11a.66.66,0,0,0,.44.16c1.59,0,3.17,0,4.76,0a7.5,7.5,0,0,1,1.16,0,6,6,0,0,1,4.9,4.7C73.37,14.16,73.44,14.42,73.5,14.68Z" transform="translate(-0.9 -0.4)"></path>
+                        </svg>
+                        <span class="counttotal">{{getCountObject.InComplete}}</span>
+                     </div>
+                  </a>
+               </li>
+               <li class="tableFilter" (click) = "getPatientlistfORPhy('Rejected')">
+                  <a data-toggle="tab">
+                     <span style="font-weight:bold;">{{'Rejected' | translate}}</span>
+                     <img src="assets/Images/icon/5.png" style="height:80px;width:80px;"/>
+                     <div class="count-boxes">
+                        <svg data-name="Layer 1" viewBox="0 0 73.1 34.59">
+                           <path [style.fill]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="svg_stoke-1" d="M73.5,14.68V28.86c0,.14-.07.28-.1.41a6.14,6.14,0,0,1-4.18,5,8.66,8.66,0,0,1-.91.24H6.58a1,1,0,0,0-.15-.07,5.93,5.93,0,0,1-4.81-4.55c-.1-.32-.15-.66-.22-1V14.68c0-.12.07-.24.09-.36a6,6,0,0,1,6-5.18c1.93.07,3.86,0,5.79,0H55.37V1.55l.21.2c1.25,1.37,2.5,2.74,3.74,4.13.92,1,1.82,2.08,2.74,3.11a.66.66,0,0,0,.44.16c1.59,0,3.17,0,4.76,0a7.5,7.5,0,0,1,1.16,0,6,6,0,0,1,4.9,4.7C73.37,14.16,73.44,14.42,73.5,14.68Z" transform="translate(-0.9 -0.4)"></path>
+                        </svg>
+                        <span class="counttotal">{{getCountObject.Rejected}}</span>
+                     </div>
+                  </a>
+               </li>
+               <li  *ngIf = "admin.UM_Office_Type != 'S'" (click) = "getPatientlistfORPhy('Draft')">
+                  <a data-toggle="tab" class="textupdiv tableFilter">
+                     <span style="font-weight:bold;">{{'Draft' | translate}}</span>
+                     <img src="assets/Images/icon/6.png" style="height:80px;width:80px;"/>
+                     <div class="count-boxes">
+                        <svg data-name="Layer 1" viewBox="0 0 73.1 34.59">
+                           <path [style.fill]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="svg_stoke-1" d="M73.5,14.68V28.86c0,.14-.07.28-.1.41a6.14,6.14,0,0,1-4.18,5,8.66,8.66,0,0,1-.91.24H6.58a1,1,0,0,0-.15-.07,5.93,5.93,0,0,1-4.81-4.55c-.1-.32-.15-.66-.22-1V14.68c0-.12.07-.24.09-.36a6,6,0,0,1,6-5.18c1.93.07,3.86,0,5.79,0H55.37V1.55l.21.2c1.25,1.37,2.5,2.74,3.74,4.13.92,1,1.82,2.08,2.74,3.11a.66.66,0,0,0,.44.16c1.59,0,3.17,0,4.76,0a7.5,7.5,0,0,1,1.16,0,6,6,0,0,1,4.9,4.7C73.37,14.16,73.44,14.42,73.5,14.68Z" transform="translate(-0.9 -0.4)"></path>
+                        </svg>
+                        <span class="counttotal">{{getCountObject.Draft}}</span>
+                     </div>
+                  </a>
+               </li>
+            </ul>
+            <div class="section">
+               <div class = "add-table">
+                  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id = 'new-dash' class="table" >
+                     <thead>
+                        <tr>
+                           <th style="width: 30px !important" [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">{{'#' | translate }}</th>
+                           <th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Patient Name' | translate}}</th>
+                           <th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Request Date' | translate}}</th>
+                           <th  [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Office' | translate}}</th>
+                           <th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Order Date' | translate}}</th>
+                           <th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Created By' | translate }}</th>
+                           <th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Status' | translate}}</th>
+                           <th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Actions' | translate}}</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr *ngFor = "let list of getListData; let i = index" [class.alertDanger]="list.expire">
+                           <td class="hash-center">{{i+1}}</td>
+                           <td>{{list.PB_Patient_Name}} {{list.PB_Patient_Last_Name}}</td>
+                           <td>{{list.PB_Surgical_Procedure_Information?.SPI_Date | date: 'MM-dd-yyyy'}}, {{tConvert(list.PB_Booking_Time)}}</td>
+                           <td  *ngIf = "admin.UM_Office_Type == 'P' || admin.UM_Office_Type == 'A'">{{list.PB_Booking_Surgery_Center_Name}}</td>
+                           <td *ngIf = "admin.UM_Office_Type == 'S' " >{{list.PB_Booking_Physician_Office_Name}}</td>
+                           <td>{{list.PB_Create_Date | date: 'MM-dd-yyyy, hh:mm a'}}</td>
+                           <td>{{list.PB_User_Name}}</td>
+                           <!-- <td *ngIf = "admin.UM_Office_Type == 'P'">In Review</td> -->
+                           <td *ngIf = "admin.UM_Office_Type == 'P' && list.PB_Status == 'Action Required'">In Review</td>
+                           <td *ngIf = "admin.UM_Office_Type == 'P' && list.PB_Status != 'Action Required'">{{list.PB_Status}}</td>
+                           <td *ngIf = "admin.UM_Office_Type != 'P'">{{list.PB_Status}}</td>
+                           <!-- <td>test details</td> -->
+                           <!-- <td>test</td> -->
+                           <td class="spcing">&nbsp;<i *ngIf = "getPerDetails[0]?.Is_View" class="fa fa-eye" title = "{{'View Booking' | translate}}" style="cursor: pointer;" aria-hidden="true" routerLink = "/view-appointment/{{list.PB_Unique_ID}}/{{list.PB_Patient_ID}}"></i>
+                              <span *ngIf = "getPerDetails[0]?.Is_Edit"><i *ngIf = "admin.UM_Office_Type == 'P' && list.checkData" class="fa fa-pencil-square-o" aria-hidden="true" style="cursor: pointer;" routerLink = "/edit-appointment/{{list.PB_Unique_ID}}/{{list.PB_Patient_ID}}" title = "{{'Edit Booking' | translate}}"></i></span>
+                              <span *ngIf = "getPerDetails[0]?.Is_Edit"><i *ngIf = "admin.UM_Office_Type == 'S'" class="fa fa-pencil-square-o" aria-hidden="true" style="cursor: pointer;" routerLink = "/edit-appointment/{{list.PB_Unique_ID}}/{{list.PB_Patient_ID}}" title = "{{'Edit Booking' | translate}}"></i></span>
+                              <i routerLink = "/add-attachments/{{list.PB_Unique_ID}}" class="icofont-attachment" style="cursor: pointer; font-size: 16px;" title = "{{'Attachments' | translate}}"></i>
+                              <i class="fa fa-wpforms" style="cursor: pointer;" routerLink = "/surgery-forms/{{list.PB_Unique_ID}}" title = "{{'Patient Forms' | translate}}"></i>
+                              <span><i *ngIf = "admin.UM_Office_Type != 'P'" class="icofont-notification" style="cursor: pointer;" title = "{{'Notification' | translate}}" routerLink = "/assign-notification-list/{{list.PB_Unique_ID}}"></i></span>
+                              <span><i *ngIf = "admin.UM_Office_Type == 'S' && list.markAsComplete" class="fa fa-check-square-o" aria-hidden="true" style="cursor: pointer;" title = "{{'Mark as complete' | translate}}" data-toggle="modal" data-target="#myModal" (click) = "getCompId(list)"></i></span>
+
+                              <!-- <span *ngIf = "list.PB_Forms != null && list.PB_Forms.length > 0"><i class="fa fa-list" aria-hidden="true" style="cursor: pointer;" title = "{{'View form list' | translate}}" routerLink = "/form-list/{{list.PB_Unique_ID}}"></i></span> -->
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+         <script>
+            $(document).ready(function () {
+             $('#tableid').DataTable({
+              "columns": [
+              { "width": "5%" },
+              { "width": "10%" },
+              { "width": "10%" },
+              { "width": "15%" },
+              { "width": "10%" },
+              { "width": "13%" },
+              { "width": "5%" },
+              { "width": "15%" },
+              { "width": "10%" },
+              { "width": "5%" },
+              { "width": "3%" }
+              ]
+           });
+          });
+       </script>
+       <script>
+         $(document).ready(function () {
+           $('#datetimepicker9').datetimepicker({
+             format: 'MM-DD-YYYY'
+          });
+           $('#datetimepicker10').datetimepicker({
+             format: 'MM-DD-YYYY'
+          });
+           $(".message img, .messagecount").click(function (e) {
+             $(".message img, .messagecount").parent().removeClass("graybg");
+             $(".message img, .messagecount").parent().prev('td').children("div").remove();
+
+             $(this).parent().addClass("graybg");
+             $(this).parent().prev('td').append("<div class='messagebox'><div class='messagehead'>Lorium Lipsum<div class='closeicon'><img src='assets/Images/close-icon.png' /></div></div>" +
+               "<div class='messagebody'><div class='messageleft messagetextdiv'><div class='nametext'>Up</div><div class='messagetext'>Authorization letter, LAB Uploaded Successfully</div><div class='messagedate'>11/05/2017 | 2.00 pm</div></div>" +
+               "<div class='messageleft messagetextdiv'><div class='nametext'>Up</div><div class='messagetext'>Authorization letter, LAB Uploaded Successfully</div><div class='messagedate'>11/01/2017 | 2.00 pm</div>" +
+               "</div><div class='messageright messagetextdiv'><div class='nametext'>Up</div><div class='messagetext'>Authorization letter, LAB Uploaded Successfully</div><div class='messagedate'>11/01/2019 | 2.00 pm</div></div><div class='clear'></div></div>" +
+               "<div class='messagefooter'><input type='text' placeholder='Type Here' /> <div class='attachmentdiv' ><input type='file' id='fileopen' style='display:none;' /><img src='assets/Images/attach-icon.png' /></div>" +
+               "<div class='messagesend'><img src='assets/Images/send-icon.png' /></div><div class='clear'></div></div></div>");
+          });
+
+           $(".patientname img").click(function (e) {
+             $(".patientname img").parent().removeClass("graybg");
+             $(".patientname img").parent().prev('td').children("div").remove();
+
+             $(this).parent().addClass("graybg");
+             $(this).parent().prev('td').append("<div class='messagebox'><div class='messagehead'>Lorium Lipsum<div class='closeicon'><img src='assets/Images/close-icon.png' /></div></div>" +
+               "<div class='messagebody'><div class='messageleft messagetextdiv'><div class='nametext'>Up</div><div class='messagetext'>Authorization letter, LAB Uploaded Successfully</div><div class='messagedate'>11/05/2017 | 2.00 pm</div></div>" +
+               "<div class='messageleft messagetextdiv'><div class='nametext'>Up</div><div class='messagetext'>Authorization letter, LAB Uploaded Successfully</div><div class='messagedate'>11/01/2019 | 2.00 pm</div>" +
+               "</div><div class='messageright messagetextdiv'><div class='nametext'>Up</div><div class='messagetext'>Authorization letter, LAB Uploaded Successfully</div><div class='messagedate'>11/01/2019 | 2.00 pm</div></div><div class='clear'></div></div>" +
+               "<div class='messagefooter'><input type='text' placeholder='Type Here' /> <div class='attachmentdiv' ><input type='file' id='fileopen' style='display:none;' /><img src='assets/Images/attach-icon.png' /></div>" +
+               "<div class='messagesend'><img src='assets/Images/send-icon.png' /></div><div class='clear'></div></div></div>");
+          });
+
+           $('body').on('click', '.img-swap', function () {
+             if ($(this).attr("class") == "img-swap") {
+               this.src = this.src.replace("_down", "_up");
+            } else {
+               this.src = this.src.replace("_up", "_down");
+            }
+            $(this).toggleClass("up");
+         });
+           $('.img-swap').trigger("click");
+        });
+     </script>
+     <script>
+      $(document).ready(function() {
+        $(document).on('click', '.closeicon img', function(){
+          $(this).parent().parent().parent(".messagebox").remove();
+          $(".message img, .messagecount, .patientname img").parent().removeClass("graybg");
+       });
+        $(document).on('click', '.attachmentdiv img', function(){
+          $('#fileopen').trigger('click');
+       });
+     });
+  </script>
+  <script type="text/javascript">
+   $(document).ready(function () {
+     var baseUrlPath = $('#BaseUrlPath').val();
+     $('body').on('click','.gotoPatientBooking',function ()
+     {
+       var id = $(this).data('patientid');
+       window.location.href = baseUrlPath + "Booking/LoadBooking?id=" + id+"&refId="+$('#userId').val();
+    })
+     $(".SearchDashPatientTxtBox").autocomplete({
+       source: function (request, response) {
+         $.ajax({
+           type: "GET",
+           url: baseUrlPath + "Booking/GetExistingPatient?patientName=" + request.term,
+           dataType: "json",
+           success: function (data) {
+             response($.map(data, function (item) {
+               return { label: item.Text, value: item.Value }
+            }));
+          },
+          error: function (data) {
+             alert(data);
+          }
+       });
+
+      },
+      minLength: 3,
+      select: function (event, ui) {
+         debugger;
+         $('.SearchDashPatientTxtBox').val(ui.item.label);
+         $("#SearchedDashPatient").val(ui.item.value);
+         return false;
+      }
+   });
+  });
+</script>
+<script type="text/javascript">
+   $(document).ready(function () {
+     $("#homepageid li").click(function () {
+       $('.section-container').css('display', 'none');
+       $('.section-container-new').css('display', 'block');
+       $('#information-ul li a').removeClass('active');
+       $(this).children('a').addClass("active");
+    });
+     $('.tableFilter').click(function () {
+       if ($(this).find('span').first().text() == "Total") {
+         $("#tableid td").parent().show();
+      }
+      else {
+         $("#tableid td.bookingDetCol:contains('" + $(this).find('span').first().text() + "')").parent().show();
+         $("#tableid td.bookingDetCol:not(:contains('" + $(this).find('span').first().text() + "'))").parent().hide();
+      }
+   });
+  });
+</script>
+</div>
+<div id="ajaxBusy" lass="ajaxContainer" style="display:none;margin: 0px; padding: 0px; position: fixed; right: 0px; top: 0px; width: 100%; height: 100%; background-color: rgb(102, 102, 102); z-index: 30001; opacity: 0.8;">
+   <p style="position: absolute; color: White; top: 50%; left: 45%;">
+      <img src="assets/Images/ajax-loader.gif" alt="Loading..." class="loader">
+   </p>
+</div>
+</div>
+</div>
+<div class="modal fade" id="messageModal">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-body">
+            <div class="errors">Do you want to proceed with this action?</div>
+            <div style="margin-top:15px;margin-left:60px;">
+               <input type="button" value="Proceed" id="saveAction" class="btn btngp btngp1 btnModalSave" style="width:100px;">
+               <input type="button" value="{{'Cancel' | translate }}" id="cancelAction" class="btn btngp btngp1 btnModalCancel" style="width:100px;">
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="messageInfo">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-body">
+            <div class="messageInfo">Insurance Details are sent for eligibility verification.</div>
+         </div>
+      </div>
+   </div>
+</div>
+<ul id="ui-id-1" tabindex="0" class="ui-menu ui-widget ui-widget-content ui-autocomplete ui-front" style="display: none;"></ul>
+<div role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div>
+<div id="myModal" class="modal fade modalmsg" role="dialog">
+   <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="close_btn">
+            <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+         </div>
+         <div class="modal-body text-center">
+            <h3>{{'Are you sure you want to update status' | translate}}</h3>
+         </div>
+         <div class="modal-footer border0">
+            <!-- <button type="button" class="btn btn-primary" (click) = "saveRejectReason('Incomplete')"></button> -->
+            <input type="button" value="{{'Submit' | translate }}"  class="btn btngp btnsubmit  my-12" (click) = "updateStatus('complete')"/>
+            <input type="button" value="{{'Cancel' | translate }}" id="cancel"  data-dismiss="modal"  class="btn btngp btncancel  my-12" />
+         </div>
+      </div>
+   </div>
+</div>

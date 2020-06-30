@@ -1,0 +1,472 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+	<div class="loader-img">
+		<img src="assets/Images/logo2.gif" alt="">
+	</div>
+</div>	
+<div class="main-contaier">
+	<input type="hidden" id="selectedStatus" value="" />
+</div>
+<div> 
+	<div class="left-bar"  [ngStyle]="setAccToSurgery?.PhyO_Appearance?{'background-color': setAccToSurgery?.PhyO_Appearance.App_NavigationColorLight_Hax} : {'background-color': 'green'}">
+		<div class="header">
+			<div class="logo">
+				<a routerLink = "/dashboard" *ngIf = "setAccToSurgery && setAccToSurgery.PhyO_Logo"  class="nav-toggle"><img src="{{imageLink}}{{removeTildSign(setAccToSurgery.PhyO_Logo.Logo_Navigation_Image)}}"></a>
+				<a routerLink = "/dashboard" *ngIf = "!setAccToSurgery?.PhyO_Logo"><img src="assets/Images/logo.png"></a>
+			</div>
+			<div class="menu-icon">
+				<a  class="nav-toggle" (click) = "addToggle()"><img src="assets/Images/menu-icon.png"></a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="main-menu">
+			<ul class="nav menu" >
+				<li >
+					<a routerLink = "/dashboard">
+						<img src="assets/Images/home-icon.png" class="inactiveimg" />
+						<img src="assets/Images/home-active-icon.png" class="activeimg" />
+						<span>{{'Dashboard' | translate }}</span>
+						<img src="assets/Images/right-arrow.png" class="inactiveimg1" />
+						<img src="assets/Images/right-arrow-active.png" class="activeimg1" />
+					</a>
+				</li>
+			</ul>
+			<ul class="nav menu" id="information-ul">
+				<li class="make_it_active" id="make_it_active_patientinformation">
+					<a title="" (click)="sectionScroll1(patientinformation);sectionScrollActive('make_it_active_patientinformation')">
+						<img src="assets/Images/patient-information-icon.png" class="inactiveimg" />
+						<img src="assets/Images/patient-information-active-icon.png" class="activeimg" />
+						<span>{{'Patient Information' | translate }}</span>
+						<img src="assets/Images/right-arrow.png" class="inactiveimg1" />
+						<img src="assets/Images/right-arrow-active.png" class="activeimg1" />
+					</a>
+				</li>
+				<li class="make_it_active" id="make_it_active_bookingInfo">
+					<a title="" (click)="sectionScroll1(bookingInfo);sectionScrollActive('bookingInfo')">
+						<img src="assets/Images/patient-information-icon.png" class="inactiveimg" />
+						<img src="assets/Images/patient-information-active-icon.png" class="activeimg" />
+						<span>{{'Booking information' | translate }}</span>
+						<img src="assets/Images/right-arrow.png" class="inactiveimg1" />
+						<img src="assets/Images/right-arrow-active.png" class="activeimg1" />
+					</a>
+				</li>
+				<li>
+					<a (click)="onLoggedout()">
+						<img src="assets/Images/logout.png" class="inactiveimg" />
+						<img src="assets/Images/logout-active.png" class="activeimg" />
+						<span>{{'Logout' | translate }}</span>
+
+					</a>
+				</li>
+			</ul>
+			<!--  -->
+		</div>
+	</div> 
+
+	<div class="right-bar">
+		<div class="section-container section-container-new">
+			<div class="section" id="patient-information" #patientinformation>
+				<div class="main-heading main-heading1">
+					<div class="mh-left">
+						<h1>{{'Virtual Consultation BOOKING' | translate }}</h1>
+					</div>
+
+					<div class="mh-right d-flex ">
+						<div style="float: left;width:250px;margin-right: 10px;">
+							<input type="text " [(ngModel)] = "searchTextForSSN" class = "form-control SearchPatientTxtBox" placeholder = "{{'Search by SSN/Patient Name' | translate }}" (keyup)="onTextChangeOfMedName(searchTextForSSN,$event.target.value)" [matAutocomplete]="auto1"  (keydown.backspace) = "searchBackSpace()">
+							
+							<mat-autocomplete #auto1="matAutocomplete" style="width:100%">
+								<mat-option *ngFor="let option of productNameSuggestion" [value]="option.Patient_First_Name" >
+									<p (click) = "getAllDataOfSearch(option)"  id = "getSuggestionName">{{option.Patient_First_Name}}, {{getAge(option.Patient_DOB)}},  {{option.Patient_City}}</p>
+								</mat-option>
+							</mat-autocomplete>
+							
+
+							
+						</div>
+					</div>
+				</div>
+				<div class="form-element" >
+					<form [formGroup]="patient_info" autocomplete="off">
+						<div class=" form-horizontal">
+							<div class="form-group">
+								<div class="col-sm-12">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-user-alt-7"></i></div>
+										<select class = "form-control prefixCtrl" formControlName = "Patient_Prefix">
+											<option value="" selected="" disabled="">{{'Select Prefix' | translate }}</option>
+											<option value="Master">Master</option>
+											<option value="Mr">Mr</option>
+											<option value="Mrs">Mrs</option>
+											<option value="Ms">Ms</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-4">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-stretcher"></i></div>
+										<input type="text" class="form-control" placeholder="{{'Patient First Name' | translate }}" id="ptfn" formControlName = "Patient_First_Name" autocomplete="off">
+
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_First_Name'].valid  && ( patient_info.controls['Patient_First_Name'].touched)">{{'Invalid First Name' | translate }}!!!</p>
+								</div>
+								<div class="col-sm-4">
+									<div class="input-group">
+										<div class="input-group-addon"><i class="icofont-stretcher"></i></div>
+										<input type="text" class="form-control" placeholder="{{'Patient Middle Name' | translate }}" formControlName = "Patient_Middle_Name">
+
+									</div>
+
+								</div>
+								<div class="col-sm-4">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-stretcher"></i></div>
+										<input type="text" class="form-control" placeholder="{{'Patient Last Name' | translate }}" id="ptln"  formControlName = "Patient_Last_Name" />
+
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Last_Name'].valid  && ( patient_info.controls['Patient_Last_Name'].touched)">{{'Invalid Last Name' | translate }}!!!</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-4">
+									<div class="input-group calendergreencon date required" id='datetimepicker1'>
+										<div class="input-group-addon calenderleft"><i class="icofont-ui-calendar"></i></div>
+										<input matInput [matDatepicker]="picker" class="custm-date" [max] = "maxDate" placeholder="{{'DOB' | translate }}" id="getdob" formControlName = "Patient_DOB" id="getdob">
+										<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+										<mat-datepicker #picker></mat-datepicker>
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_DOB'].valid  && ( patient_info.controls['Patient_DOB'].touched)">{{'Invalid DOB' | translate }}!!!</p>
+								</div>
+								<div class="col-sm-4">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-users-alt-4"></i></div>
+										<select class = "form-control selectbox genderCtrl" formControlName = "Patient_Sex">
+											<option selected="" disabled="" value="">{{'Select Gender' | translate }}</option>
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
+											<option value="Others">Others</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="input-group">
+										<div class="input-group-addon" id="u22"><i class="icofont-contact-add"></i></div>
+										<input type="text" class="form-control ssn" placeholder="{{'SSN' | translate }}" formControlName = "Patient_SSN" id="u22_input"  (blur)="validateSSN(); checkSSNData(patient_info.value.Patient_SSN)" maxlength="11">
+
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_SSN'].valid  && ( patient_info.controls['Patient_SSN'].touched)">{{'Invalid SSN' | translate }}!!!</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-6">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-location-pin"></i></div>
+										<input id = "addrs1" ngx-google-places-autocomplete [options]='options' class="form-control" #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event, 'patient')" formControlName = "Patient_Address1" placeholder="{{'Address 1' | translate }}" autocomplete="off"/>
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Address1'].valid  && ( patient_info.controls['Patient_Address1'].touched)">{{'Invalid Address1' | translate }}!!!</p>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="input-group">
+										<div class="input-group-addon"><i class="icofont-location-pin"></i></div>
+										<input type="text" class="form-control" placeholder="{{'Address 2' | translate }}" formControlName = "Patient_Address2">
+
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-4">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-location-arrow"></i></div>                                
+										<input type="text" class = "form-control patientCityName" placeholder="{{'City' | translate }}" formControlName = "Patient_City">
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_City'].valid  && ( patient_info.controls['Patient_City'].touched)">{{'Invalid City' | translate }}!!!</p>
+								</div>
+								<div class="col-sm-4">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-location-arrow"></i></div>
+										<input type="text" class = "form-control patientStateName" placeholder="{{'State' | translate }}" formControlName = "Patient_State">
+
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_State'].valid  && ( patient_info.controls['Patient_State'].touched)">{{'Invalid State' | translate }}!!!</p>
+								</div>
+								<div class="col-sm-4">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-location-arrow"></i></div>
+										<input type="text" class = "form-control patientZipCode" placeholder="{{'Zip' | translate }}" formControlName = "Patient_Zipcode">
+
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Zipcode'].valid  && ( patient_info.controls['Patient_Zipcode'].touched)">{{'Invalid Zip' | translate }}!!!</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-4">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-ui-dial-phone"></i></div>
+										<input type="text" class="form-control phoneno" placeholder="{{'Primary Phone' | translate }}" id="ptno"  formControlName = "Patient_Primary_No" (blur) = "validatphone()" maxlength="14"/>
+
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Primary_No'].valid  && ( patient_info.controls['Patient_Primary_No'].touched)">{{'Invalid Primary Phone' | translate }}!!!</p>
+								</div>
+								<div class="col-sm-4">
+									<div class="input-group">
+										<div class="input-group-addon"><i class="icofont-ui-dial-phone"></i></div>
+										<input type="text" class="form-control phoneno1" placeholder="{{'Secondary Phone' | translate }}" formControlName = "Patient_Secondary_No"  (blur) = "validatphone()" maxlength="14">
+
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Secondary_No'].valid  && ( patient_info.controls['Patient_Secondary_No'].touched)">{{'Invalid Secondary Phone' | translate }}!!!</p>
+								</div>
+								<div class="col-sm-4">
+									<div class="input-group">
+										<div class="input-group-addon"><i class="icofont-ui-dial-phone"></i></div>
+										<input type="text" class="form-control phoneno8" placeholder="{{'Spouse Phone' | translate }}" formControlName = "Patient_Spouse_No"  (blur) = "validatphone()" maxlength="14">
+
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Secondary_No'].valid  && ( patient_info.controls['Patient_Secondary_No'].touched)">{{'Invalid Secondary Phone' | translate }}!!!</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-4">
+									<div class="input-group">
+										<div class="input-group-addon"><i class="icofont-bag-alt"></i></div>
+										<input type="text" class="form-control phoneno2" placeholder="{{'Work' | translate }}" formControlName = "Patient_Work_No" (blur) = "validatphone()" maxlength="14">
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Work_No'].valid  && ( patient_info.controls['Patient_Work_No'].touched)">{{'Invalid Work number' | translate }}!!!</p>
+								</div>
+								<div class="col-sm-4">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-phone"></i></div>
+										<input type="text" class="form-control phoneno3" placeholder="{{'Emergency' | translate }}" formControlName = "Patient_Emergency_No" (blur) = "validatphone()" maxlength="14">
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Emergency_No'].valid  && ( patient_info.controls['Patient_Emergency_No'].touched)">{{'Invalid Emergency number' | translate }}!!!</p>
+								</div>
+								<div class="col-sm-4">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-email"></i></div>
+										<input type="text" class="form-control" placeholder="{{'Email Id' | translate }}" formControlName = "Patient_Email" (blur)="checkEmail(this.patient_info.value.Patient_Email)">
+
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Email'].valid  && ( patient_info.controls['Patient_Email'].touched) " >{{'Invalid Email' | translate }}!!!</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-6">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-holding-hands"></i></div>
+										<select class = "form-control selectbox " formControlName = "Patient_Religion">
+											<option value="" selected="" disabled="">{{'Select Religion' | translate }}</option>
+											<option *ngFor = "let reli of getReligionArray" value="{{reli.Reli_Name}}">{{reli.Reli_Name}}</option>
+
+										</select>
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Religion'].valid  && ( patient_info.controls['Patient_Religion'].touched)">{{'Invalid Religion' | translate }}!!!</p>
+								</div>
+								<div class="col-sm-6">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-users-alt-5"></i></div>
+										<select class = "form-control selectbox " formControlName = "Patient_Ethinicity">
+											<option value="" selected="" disabled="">{{'Select Ethnicity' | translate }}</option>
+											<option *ngFor = "let ethi of getEthnicityArray" value="{{ethi.Ethi_Name}}">{{ethi.Ethi_Name}}</option>
+
+										</select>
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Ethinicity'].valid  && ( patient_info.controls['Patient_Ethinicity'].touched)">{{'Invalid Ethnicity' | translate }}!!!</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-6">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-users"></i></div>
+										<select class = "form-control selectbox " formControlName = "Patient_Race">
+											<option value="" selected="" disabled="">{{'Select Race' | translate }}</option>
+											<option  *ngFor = "let rce of getRaceArray" value="{{rce.Race_Name}}">{{rce.Race_Name}}</option>
+										</select>
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Race'].valid  && ( patient_info.controls['Patient_Race'].touched)">{{'Invalid Race' | translate }}!!!</p>
+								</div>
+								<div class="col-sm-6">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-users-alt-2"></i></div>
+										<select class = "form-control selectbox "formControlName = "Patient_Marital_Status">
+											<option value="" selected="" disabled="">{{'Select Marital Status' | translate }}</option>
+											<option value="Divorced">Divorced</option>
+											<option value="Married">Married</option>
+											<option value="Other">Other</option>
+											<option value="Separated">Separated</option>
+											<option value="Single">Single</option>
+											<option value="Unknown or other">Unknown or other</option>
+											<option value="Widowed">Widowed</option>
+										</select>
+
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Marital_Status'].valid  && ( patient_info.controls['Patient_Marital_Status'].touched)">{{'Invalid Marital Status' | translate }}!!!</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-6">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-flag"></i></div>
+										<select class = "form-control selectbox " formControlName = "Patient_Nationality">
+											<option value="" selected="" disabled="">{{'Select Nationality' | translate }}</option>
+											<option *ngFor = "let nat of getNationalityArray" value="{{nat.Nati_Name}}">{{nat.Nati_Name}}</option>
+										</select>
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Nationality'].valid  && ( patient_info.controls['Patient_Nationality'].touched)">{{'Invalid Nationality' | translate }}!!!</p>
+								</div>
+								<div class="col-sm-6">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-globe"></i></div>
+										<select class = "form-control selectbox " formControlName = "Patient_Language">
+											<option value="" selected="" disabled="">{{'Select Language' | translate }}</option>
+											<option *ngFor = "let lng of getLanguageArray" value="{{lng.Lang_Name}}">{{lng.Lang_Name}}</option>
+										</select>
+
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Language'].valid  && ( patient_info.controls['Patient_Language'].touched)">{{'Invalid Language' | translate }}!!!</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-3">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-user-alt-1"></i></div>
+										<input type="text" class="form-control" placeholder="{{'Height' | translate }} ({{'Feet' | translate }})" pattern="[0-9]+"  formControlName = "Patient_Height_In_Ft">
+
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Height_In_Ft'].valid  && ( patient_info.controls['Patient_Height_In_Ft'].touched)">{{'Invalid Height' | translate }}!!!</p>
+								</div>
+								<div class="col-sm-3 ">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-user-alt-1"></i></div>
+										<input type="text" class="form-control" placeholder="{{'Height' | translate }} ({{'Inch' | translate }})" pattern="[0-9]+"  formControlName = "Patient_Height_In_Inch">
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Height_In_Inch'].valid  && ( patient_info.controls['Patient_Height_In_Inch'].touched)">{{'Invalid Height' | translate }}!!!</p>
+								</div>
+								<div class="col-sm-3">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-muscle-weight"></i></div>
+										<input type="text" class="form-control weightTxtBox" placeholder="{{'Weight' | translate }} ({{'Pounds' | translate }})" (blur) = "blurweight($event.target.value)"   pattern="[0-9]+([\.,][0-9]+)?" formControlName = "Patient_Weight">
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Weight'].valid  && ( patient_info.controls['Patient_Weight'].touched)">{{'Invalid Weight' | translate }}!!!</p>
+								</div>
+								<div class="col-sm-3">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-muscle-weight"></i></div>
+										<input id="lblBMIText"  class="form-control" placeholder="{{'BodyMassIndex' | translate }}" pattern="[0-9]+([\.,][0-9]+)?"   formControlName = "Patient_Body_Mass_Index"/>
+									</div>
+									<p style="color: #FF0000" *ngIf="!patient_info.controls['Patient_Body_Mass_Index'].valid  && ( patient_info.controls['Patient_Body_Mass_Index'].touched)">{{'Invalid Body Mass Index' | translate }}!!!</p>
+								</div>
+							</div>
+						</div>
+					</form>
+
+
+				</div>
+			</div>
+			<div class="form-element " class="section" id="bookingInfo">
+				<div class="main-heading main-heading1">
+					<div class="mh-left">
+						<h1 >{{'Booking information' | translate }}</h1>
+					</div>
+				</div>
+				<div class=" form-element">
+					<form [formGroup]="bookingInfo" autocomplete="off">
+						<div class=" form-horizontal">
+							<div class="form-group">
+								<div class="col-sm-6">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-user-alt-7"></i></div>
+										<select class = "form-control prefixCtrl" formControlName = "VCB_Doctor_Name">
+											<option value="" selected="" disabled=""> {{'Select Doctor' | translate }}</option>
+											<option>John Gregory</option>
+											<option>Rob Smith</option>
+											<option>Steve Austin</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="input-group required">
+										<div class="input-group-addon"><i class="icofont-clock-time"></i></div>
+										<select class = "form-control prefixCtrl" formControlName = "VCB_Time_Slot">
+											<option value="" selected="" disabled="">{{'Choose Time Slot' | translate }}</option>
+											<option value="15">15 mins</option>
+											<option value="30">30 mins</option>
+											<option value="45">45 mins</option>
+											<option value="60">60 mins</option>
+											
+										</select>
+									</div>
+								</div>
+
+							</div>
+							<div class="booking_heading_inner">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="mh-left mtb_h">
+											<h1>{{'SELECT DATE' | translate }}</h1>
+										</div>
+										
+									</div>
+									<div class="col-md-6">
+										<div class="mh-left mtb_h">
+											<h1>{{'SELECT TIME' | translate }}</h1>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="calender_bdy">
+
+											<jqxCalendar [width]="420" [height]="320"  formControlName = "VCB_Booking_Date"></jqxCalendar>
+
+										</div>
+									</div>
+
+									<div class="col-sm-6">
+										<div class="left_alin_float_body">
+											<div class="time-group required2 left_alin_float">
+												<div class="form-inline">
+													<span>{{'Option 1' | translate }}&nbsp;&nbsp;</span>
+													<ngb-timepicker [(ngModel)]="getSlotsData.date1" [ngModelOptions]="{standalone: true}" [meridian]="meridian"></ngb-timepicker>
+												</div>
+												<span class='text-danger'>*</span>
+											</div>
+
+										</div>
+										<div class="left_alin_float_body">
+											<div class="time-group left_alin_float">
+												<div class="form-inline">
+													<span>{{'Option 2' | translate }}&nbsp;&nbsp;</span>
+													<ngb-timepicker [(ngModel)]="getSlotsData.date2" [ngModelOptions]="{standalone: true}" [meridian]="meridian"></ngb-timepicker>
+												</div>
+											</div>
+										</div>
+										<div class="left_alin_float_body">
+											<div class="time-group left_alin_float">
+												<div class="form-inline">
+													<span>{{'Option 3' | translate }}&nbsp;&nbsp;</span>
+													<ngb-timepicker [(ngModel)]="getSlotsData.date3" [ngModelOptions]="{standalone: true}" [meridian]="meridian"></ngb-timepicker>
+												</div>
+											</div>
+										</div>	
+									</div>
+								</div>
+							</div>
+						</div>
+						<br>
+					</form>
+				</div>
+
+			</div>
+
+			<div class="section"></div>
+			<div id="showTempDialog" style="display:none;align-content:center;"></div>
+			<div class="btngroup bottombar_slide" id="btndiv">
+				<!-- <input type="button" value="check" (click) = "saveFinalBooing('1')"  class="btn btngp btnsubmit my-12" /> -->
+				<input type="button" value="{{'Save and Exit' | translate }}" (click) = "saveFinalBooing('Draft')" class="btn btngp btnsubmit my-12" [disabled] = "!patient_info.valid" />
+				<input type="button" value="{{'Submit' | translate }}" id="submitdata" (click) = "saveFinalBooing('Action Required')" class="btn btngp btnsubmit my-12" [disabled] = "!patient_info.valid"/>
+				<input type="button" value="{{'Cancel' | translate }}" class="btn btngp btncancel my-12" (click) = "goLastLocation()" />
+			</div>
+		</div>
+	</div>
+

@@ -1,0 +1,120 @@
+ <div class="section-container section-container-new">
+ 	<div class="section">
+ 		<div class="main-heading">
+ 			<h1>{{'Add Appointment' | translate }}</h1>
+ 			<div class="mh-right">
+ 				<a class="view-button" routerLink="/patient-dashboard">
+ 					<i class="fa fa-angle-left"></i> {{'Back' | translate }}
+ 				</a>
+ 				<a (click) = "logOut()"> <i class="icofont-logout"></i></a>
+
+ 			</div>
+ 		</div>
+
+ 		<div class="form-element">	
+ 			<div class="form-horizontal">
+ 				<div class="form-group">
+ 					<div class="col-sm-12">
+							<label for="recipient-name" class="col-form-label"> {{'Select Prefix' | translate }}</label>
+							<div class="input-group required">
+								<div class="input-group-addon"><i class="icofont-user-alt-7"></i></div>
+								<select class="form-control" 
+								 [(ngModel)] = "reqData.slctPrefix" value="reqData.slctPrefix">
+									<option value="" selected="" disabled="">{{'Select Prefix' | translate }}</option>
+									<option value="Master">Master</option>
+									<option value="Mr">Mr</option>
+									<option value="Mrs">Mrs</option>
+									<option value="Ms">Ms</option>
+								</select>
+							</div>
+						</div>
+ 					<div class="col-sm-6">
+ 						<label for="recipient-name" class="col-form-label">{{'First Name' | translate }}:</label>
+ 						<div class="input-group required">
+ 							<div class="input-group-addon"><i class="icofont-stretcher"></i></div>
+ 							<input type="text" class="form-control"  [(ngModel)] = "reqData.firstname" value="reqData.firstname">
+ 						</div>
+ 					</div>
+ 					<div class="col-sm-6">
+ 						<label for="recipient-name" class="col-form-label">{{'Last Name' | translate }}:</label>
+ 						<div class="input-group required">
+ 							<div class="input-group-addon"><i class="icofont-stretcher"></i></div>
+ 							<input type="text" class="form-control"  [(ngModel)] = "reqData.lastname" value="reqData.lastname">
+
+ 						</div>
+ 					</div>
+ 					<div class="col-sm-6">
+ 						<label for="recipient-name" class="col-form-label">{{'Email' | translate }}:</label>
+ 						<div class="input-group required">
+ 							<div class="input-group-addon"><i class="icofont-email"></i></div>	
+ 							<input type="text" class="form-control"  [(ngModel)] = "reqData.email"  value="reqData.email"  (blur) = alidateEmail(reqData.email) >
+
+ 						</div>
+ 					</div>
+ 					<div class="col-sm-6">
+ 						<label  class="col-form-label"> {{'Phone' | translate }}:</label>
+ 						<div class="input-group required">
+ 							<div class="input-group-addon"><i class="icofont-ui-dial-phone"></i></div>
+ 							<input type="number" class="form-control" (blur)= "phonenumber() "
+ 							[(ngModel)] = "reqData.phone" value="reqData.phone">
+
+ 						</div>
+ 					</div>
+ 					<div class="col-sm-6">
+ 						<label  class="col-form-label">{{'Appointment Date' | translate }}:</label>
+ 						
+
+ 							<div class="input-group required calendergreencon date" id='datetimepicker2'>
+ 								<div class="input-group-addon calenderleft"><i class="icofont-ui-calendar"></i></div>
+ 								<input matInput [matDatepicker]="picker1" class="custm-date"  [min] = "todayDate"
+ 								[(ngModel)] = "reqData.appointmentdate" >
+ 								<mat-datepicker-toggle matSuffix1 [for]="picker1"></mat-datepicker-toggle>
+ 								<mat-datepicker  #picker1></mat-datepicker>
+
+
+ 							</div>
+ 						</div>
+
+
+ 						<div class="col-sm-6">
+ 							<label  class="col-form-label">{{'Appointment Time' | translate }}:</label>
+
+
+						<div class="input-group date required" id='datetimepicker7'>
+							<div class="input-group-addon"><i class="icofont-clock-time"></i></div>
+							<input atp-time-picker value="{{reqData.appointmenttime}}" class="form-control" placeholder=" Notification Time - hh:mm" [(ngModel)] = "reqData.appointmenttime"/>
+
+					</div>
+								
+								</div>
+	
+
+ 				</div>
+
+ 				<br/>
+ 				<input class="btn btngp btnsubmit" type="button" value="{{'Submit' | translate }}" (click)="finalAction()"/>
+ 				<input type="button" value="{{'Cancel' | translate }}" id="cancel" data-toggle="modal" data-target="#cancelbtn" class="btn btngp btncancel"/>
+ 			</div>
+
+ 		</div>
+
+ 		</div>
+
+ 		<!-- Modal -->
+ 		<div id="cancelbtn" class="modal fade modalmsg" role="dialog">
+ 			<div class="modal-dialog">
+ 				<!-- Modal content--> 
+ 				<div class="modal-content">
+ 					<div class="close_btn">
+ 						<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+ 					</div>
+ 					<div class="modal-body text-center">
+ 						<h3>{{'Are you sure, you want to Cancel ?' | translate }}</h3>
+ 					</div>
+ 					<div class="modal-footer border0">
+ 						<button type="button" class="btn btn-primary" data-dismiss="modal" >{{'Yes' | translate }}</button>
+ 						<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+ 					</div>
+ 				</div>
+ 			</div>
+ 		</div>

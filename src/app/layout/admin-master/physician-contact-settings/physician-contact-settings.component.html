@@ -1,0 +1,245 @@
+<div class="section-container section-container-new">
+   <div class="main-heading main-heading1">
+      <div class="mh-left">
+         <h1 class="add-button">{{'Contact' | translate }} - <span>{{getSurgeryName}}</span></h1>
+         <h1 class="view-button"> {{'Add Contact' | translate }}</h1>
+         <h1 class="view-delete-button">{{'Deleted Records' | translate }}</h1>
+         <h1 class="edit-data">{{'Edit Contact' | translate }}</h1>
+         <!-- <a routerLink = "/master-block">Add Block</a> -->
+      </div>
+
+      <div class="mh-right">        
+         <!-- <a routerLink = "/master-physician" >{{'Back' | translate }}</a> -->
+         <!-- <a class="view-button" id="again-Back"><i class="fa fa-angle-left"></i> {{'Back' | translate }}</a> -->
+      </div>
+   </div> 
+         
+   <div class="form-element add-table pull-left hide-from">
+      <div class="pull-right">
+               <a class="view-button" id="again-Back">{{'Back to Contact' | translate }}</a>
+            </div>
+      <form  [formGroup]="form"> 
+         <div class="form-group pull-left">
+            <div class="col-sm-5">
+               <div class="input-group">
+                  <div class="input-group-addon">
+                     <i class="icofont-users-alt-1"></i>
+                  </div>
+                  <select class="form-control" formControlName = "PCS_Contact_Type">
+                     <option value="selectType" >{{'Select Contact Type' | translate }}</option>   
+                     <option value="Administrator" selected="">Administrator</option> 
+                     <option value="Primary Contact" >Primary Contact</option>   
+                     <option value="Nursing Director">Nursing Director</option> 
+                     <option value="Medical Director">Medical Director</option>
+                     <option value="Business Manager">Business Manager</option>
+                  </select>
+               </div>
+            </div>
+         </div>
+         <div class="form-group pull-left">
+            <div class="col-sm-5">
+               <div class="input-group">
+                  <div class="input-group-addon">
+                     <i class="icofont-user-alt-3"></i>
+                  </div>
+                  <input class="form-control" placeholder="{{'First Name' | translate }}" type="text" formControlName = "PCS_First_Name">
+               </div>
+               <p style="color: #FF0000" *ngIf="!form.controls['PCS_First_Name'].valid  && ( form.controls['PCS_First_Name'].touched)">{{'Invalid first name' | translate }}!!!</p>
+            </div>
+         </div>
+         <div class="form-group pull-left">
+            <div class="col-sm-5">
+               <div class="input-group">
+                  <div class="input-group-addon">
+                     <i class="icofont-user-alt-3"></i>
+                  </div>
+                  <input class="form-control" placeholder="{{'Last Name' | translate }}" type="text" formControlName = "PCS_Last_Name">
+               </div>
+               <p style="color: #FF0000" *ngIf="!form.controls['PCS_Last_Name'].valid  && ( form.controls['PCS_Last_Name'].touched)">{{'Invalid last name' | translate }}!!!</p>
+            </div>
+         </div>
+
+         <div class="form-group pull-left">
+          <div class="col-sm-5">
+            <div class="input-group">
+               <div class="input-group-addon">
+                  <i class="icofont-telephone"></i>
+               </div>
+               <input class="form-control" placeholder="{{'Phone Number' | translate }}" type="text" formControlName = "PCS_Phone_No" pattern="[0-9]+">
+            </div>
+            <p style="color: #FF0000" *ngIf="!form.controls['PCS_Phone_No'].valid  && ( form.controls['PCS_Phone_No'].touched)">{{'Invalid phone number' | translate }}!!!</p>
+         </div>
+      </div>
+      <div class="form-group pull-left">
+         <div class="col-sm-5">
+            <div class="input-group">
+               <div class="input-group-addon">
+                  <i class="icofont-email"></i>
+               </div>
+               <input class="form-control" name="" placeholder="{{'Email' | translate }}" type="text" formControlName = "PCS_Email">
+            </div>
+            <p style="color: #FF0000" *ngIf="!form.controls['PCS_Email'].valid  && ( form.controls['PCS_Email'].touched)">{{'Invalid email' | translate }}!!!</p>
+         </div>
+
+      </div>
+      <div class="form-group pull-left col-md-12 px-0">
+         <div class="col-md-12">
+            <hr class="my-0" />
+         </div>
+      </div>
+      <div class="form-group pull-left col-md-12 px-0">
+         <div class="col-md-12">
+            <div class="pull-left">
+               <input class="btn btngp btnsubmit" data-target="#submitbtn" data-toggle="modal" id="submitdata "  [disabled] = "!form.valid" type="button" value="{{'Submit' | translate}}">
+               <input class="btn btngp btncancel" data-target="#cancelbtn" data-toggle="modal" id="cancel" type="button" value="{{'Cancel' | translate}}">
+            </div>
+         </div>
+      </div>
+   </form>
+</div>
+<div class = "add-table">
+      
+   <div class="row">
+
+   <div class="pull-right">
+      <a class="add-button text-right mr-15">{{'Add Contact' | translate }}</a>
+      <a (click) = "viewDeletedRdcs()" class="custom-link">{{'Deleted Records' | translate}}</a>
+   </div>
+   </div>
+   <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class = "table"   id = 'nationality'>
+      <thead>
+         <tr>
+            <th class="hash-center">#</th>
+            <th>{{'Name' | translate}}</th>
+            <th>Type</th>
+            <th>Phone</th>
+            <!-- <th{{'Created By' | translate }}</th> -->
+            <!-- <th>{{'Last Modify' | translate}}</th> -->
+            <th>{{'Status' | translate}}</th>
+            <th>{{'Action' | translate}}</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr *ngFor = "let list of getContactArray.PhyO_ContactSetting; let i = index">
+            <td class="hash-center">{{i+1}}</td>
+            <td>{{list.PCS_First_Name}}</td>
+            <td>{{list.PCS_Contact_Type}}</td>
+            <td>{{list.PCS_Phone_No }}</td>
+            <!-- <td>{{list.PCS_CB_Name}}</td> -->
+            <!-- <td>{{list.PCS_Create_Date | date: 'MM-dd-yyyy, hh:mm a'}} <span class="info"  data-toggle="tooltip" data-placement="left" title="{{list.PCS_Modify_Date | date: 'MM-dd-yyyy, hh:mm aa'}}"><i *ngIf = "list.PCS_Modify_Date != list.PCS_Create_Date " class="icofont-info-circle"></i></span></td> -->
+            <td *ngIf = "list.PCS_Is_Active"><mat-slide-toggle (change) = "UpdateStatus(list, $event)" checked></mat-slide-toggle></td>
+            <td *ngIf = "!list.PCS_Is_Active"><mat-slide-toggle (change) = "UpdateStatus(list, $event)"></mat-slide-toggle></td>
+            <td class="edit-button"><i class="fa fa-pencil-square-o " title = "{{'Edit' | translate}}"  aria-hidden="true" (click) = "editRelationList(list)"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <span (click) ="dataDeleted(list)"> <i class="fa fa-trash" aria-hidden="true" title = "{{'Delete' | translate}}"></i></span>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+<div class = "view-deleted">
+   <a (click) = "hideShow()" class="custom-link">{{'View Records' | translate}}</a>
+   <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class = "table"   id = 'PCS_deleted_rc'>
+      <thead>
+         <tr>
+            <th class="hash-center">#</th>
+            <th>{{'Name' | translate}}</th>
+            <th>{{'Created By' | translate }}</th>
+            <th>{{'Last Modify' | translate}}</th>
+            <th>{{'Action' | translate}}</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr *ngFor = "let list of getDeletedPCSArray; let i = index">
+            <td class="hash-center">{{i+1}}</td>
+            <td>{{list.PCS_Name}}</td>
+            <td>{{list.PCS_CB_Name}}</td>
+            <td>{{list.PCS_Modify_Date | date: 'MM-dd-yyyy, hh:mm a'}} <span class="info"  data-toggle="tooltip" data-placement="left" title="{{list.PCS_Create_Date | date: 'MM-dd-yyyy, hh:mm aa'}}"><i *ngIf = "list.PCS_Modify_Date != list.PCS_Create_Date " class="icofont-info-circle"></i></span></td>
+            <td class="edit-button">
+               <span (click)  = "revertDeleted(list)" >  <i class="fa fa-trash" aria-hidden="true" title = "{{'Delete' | translate}}"></i></span>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+</div>
+
+<!-- Modal -->
+<div id="submitbtn" class="modal fade modalmsg" role="dialog">
+ <div class="modal-dialog">
+
+  <!-- Modal content-->
+  <div class="modal-content">
+   <div class="close_btn">
+    <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+ </div>
+ <div class="modal-body text-center">
+   <h3>{{'Are you sure, you want to Submit ?' | translate}}</h3>
+ </div>
+ <div class="modal-footer border0">
+    <button type="button" class="btn btn-primary" (click)  = "addRelation()" >{{'Yes' | translate}}</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+ </div>
+</div>
+
+</div>
+</div>
+<!-- Modal -->
+<div id="trash" class="modal fade modalmsg" role="dialog">
+   <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="close_btn">
+            <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+         </div>
+         <div class="modal-body text-center">
+            <h3>{{'Are you sure, you want to delete ?' | translate}}</h3>
+         </div>
+         <div class="modal-footer border0">
+            <button type="button" class="btn btn-primary" (click) = "isDeletedYes()">{{'Yes' | translate}}</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+         </div>
+      </div>
+
+   </div>
+</div>
+
+<!-- Modal -->
+<div id="revertDelete" class="modal fade modalmsg" role="dialog">
+   <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="close_btn">
+            <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+         </div>
+         <div class="modal-body text-center">
+            <h3>{{'Are you sure, you want to Retrive data ?' | translate}}</h3>>
+         </div>
+         <div class="modal-footer border0">
+            <button type="button" class="btn btn-primary" (click) = "revertData()">{{'Yes' | translate}}</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+         </div>
+      </div>
+
+   </div>
+</div>
+<div id="cancelbtn" class="modal fade modalmsg" role="dialog">
+   <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="close_btn">
+            <button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+         </div>
+         <div class="modal-body text-center">
+            <h3>{{'Are you sure, you want to Cancel ?' | translate}}</h3>
+         </div>
+         <div class="modal-footer border0">
+            <button type="button" class="btn btn-primary" (click)  = "goBack()" >{{'Yes' | translate}}</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+         </div>
+      </div>
+
+   </div>
+</div>

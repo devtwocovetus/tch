@@ -1,0 +1,58 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+	<div class="loader-img">
+		<img src="assets/Images/logo2.gif" alt="">
+	</div>
+</div>
+
+<input type="hidden" id="BaseUrlPath" value="@ViewBag.BaseUrlPath" />
+<div class="login-container">
+	<div class="col-md-7 px-0">
+		<swiper class="swiper-container  swiper2" fxFlex="auto" [config]="config" >
+			<div *ngFor="let slide of slides" class="swiper-slide">
+				<div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+					<img class="login-bg-img" src="/../assets/Images/login-bg.png" alt="Los Angeles">
+					<div class="login-left-section">	
+						<img src="assets/Images/track_every_message.png" alt="Los Angeles">
+						<div class="text-left">
+							<h2>Complete Delivery Tracking</h2>
+							<h4>Track every single message sent out for your campaign</h4>
+							<ul class="login-list">
+								<li><i class="icofont-check"></i> Track your messages opens & clicks</li>
+								<li><i class="icofont-check"></i> Automatically handle bounce & feedback</li>
+								<li><i class="icofont-check"></i> Measure your campaign performance with insight reports</li>
+							</ul>
+						</div>
+					</div>			
+				</div>
+			</div>
+		</swiper>
+	</div>
+	<div class="col-md-5 login-right">
+		<div class="login-right-pad">
+			<div class="login-right-logo text-center">
+				<div class="logoBox"><img src="assets/Images/logo.png" class=""></div>
+
+			</div>
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="text" class="form-control mb-20" name="" [(ngModel)] = "reqData.email" (keydown.enter)="onLoggedin()">
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" class="form-control" name="" [(ngModel)] = "reqData.password" (keydown.enter)="onLoggedin()">
+			</div>
+			<!-- <div class="form-group mt-25">
+				<div class="checkbox checkbox-success checkbox-inline ">
+					<input type="checkbox" class="styled" id="Remember" value="option1" >
+					<label for="Remember"> Remember me on this device </label>
+				</div>
+			</div> -->
+			<div class="mt-35">
+				<a class="btn btn-primary btn-block" (click) = "onLoggedin()">Login</a>
+			</div>
+			<div class="mt-25 text-center">
+				<a  class="btm-links" routerLink = "/forgot-password">Forgot Password?</a>
+			</div>
+		</div>
+	</div>
+</div>

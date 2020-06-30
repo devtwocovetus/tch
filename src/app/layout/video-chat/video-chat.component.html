@@ -1,0 +1,76 @@
+
+<style type="text/css">
+	
+	* /deep/ video {
+		width: 100%;
+		min-width: 100%;
+	}
+	* /deep/ div#remote-media .instructions {
+		position: absolute;
+		top: -32px;
+	}
+</style>
+
+<a hidden="" class="generttknmy" onclick = 'GenerateToken()'></a>
+<div class="section-container section-container-new">
+
+	<div class="row">
+		<div class="col-md-8">
+
+			<div class="full_video">
+				<div id="remote-media"></div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div id="controls" class="container_vedio_chat">
+				<div class="row">
+					<div class="col-md-12">
+						<div id="preview">
+							<p class="instructions">Hello {{getbookingObject?.VCB_Patient_Name}}  {{getbookingObject?.VCB_Patient_Last_Name}}</p>
+							<div>
+								<div id="local-media"></div>
+								<button  onclick='return PreviewButton()' id="button-preview" class="btn btn-primary btn-block">
+
+									<i class="fa fa-video-camera icon_video" aria-hidden="true"></i>Preview My Camera
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">				
+						<div id="room-controls">
+							<p class="instructions">Room Name</p>
+							<div class="instruction_input">
+								<input id="room-name" type="text" placeholder="Enter a room name" class="form-control" [(ngModel)] = "roomName"/>
+							</div>
+							<div class="btn-video_section">
+								<a onclick='return JoinVideo()' id="button-join"		
+								class="btn btn-primary btn-video_call" (click) = "joinedRoom()">
+								Start Meeting
+							</a>
+							<a id="button-leave" onclick='return LeaveVideo()'
+							type="submit"
+							class="btn btn-primary btn-video_call">
+							End Meeting
+						</a>
+					</div>					
+				</div>
+			</div>
+			<div class="col-md-12">
+				<p class="instructions">Meeting Status</p>
+				<div class="join_status_log">
+					<div id="log" >
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>
+</div>
+
+
+
+
+</div>

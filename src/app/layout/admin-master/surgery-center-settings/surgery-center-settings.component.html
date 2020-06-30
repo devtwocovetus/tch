@@ -1,0 +1,551 @@
+	<div class="loader-contaier" *ngIf = "showLoader">
+		<div class="loader-img">
+			<img src="assets/Images/logo2.gif" alt="">
+		</div>
+	</div>
+	<script src="https://cdn.tiny.cloud/1/eehmrylq1knkiug50suy9n39d9exqo9qp69fdb9wn578p68v/tinymce/5/tinymce.min.js"></script>
+	<div class="section-container section-container-new">
+		<div class="main-heading main-heading1">
+			<div class="mh-left">
+				<h1 class="add-button">{{'Settings' | translate}} - <span *ngIf = "getSurgeryDetails">{{getSurgeryDetails?.SurgC_DBA_Name}}</span></h1> 
+			</div>
+			<div class="mh-right">
+				<!-- <a routerLink = "/master-surgery" class="view-button" id="again-Back"><i class="fa fa-angle-left"></i> {{'Back' | translate }}</a> -->
+			</div>
+		</div>   
+		<div class="form-element add-table pull-left w-100">
+			<div class="row">
+				<div class="col-md-3">
+					<ul class="kt-nav kt-nav--bold kt-nav--md-space kt-nav--v4" role="tablist">
+						<li class="kt-nav__item">
+							<!-- <a id="showall">All</a> -->
+							<a class="kt-nav__link showSingle active" target="1">
+								<span class="kt-nav__link-text">{{'Site URL' | translate}}</span>
+							</a>
+						</li>
+						
+						<li class="kt-nav__item">
+							<a class="kt-nav__link showSingle" target="2">
+								<span class="kt-nav__link-text">{{'Appearance' | translate}}</span>
+							</a>
+						</li>
+						<li class="kt-nav__item">
+							<a class="kt-nav__link showSingle" target="3">
+								<span class="kt-nav__link-text">{{'Logo' | translate}}</span>
+							</a>
+						</li>
+						<li class="kt-nav__item">
+							<a class="kt-nav__link showSingle" target="4">
+								<span class="kt-nav__link-text">{{'Slider' | translate}}</span>
+							</a>
+						</li>
+						<li class="kt-nav__item">
+							<a class="kt-nav__link showSingle" target="7">
+								<span class="kt-nav__link-text">{{'Notification' | translate}}</span>
+							</a>
+						</li>
+						<li class="kt-nav__item">
+							<a class="kt-nav__link showSingle" target="5">
+								<span class="kt-nav__link-text">{{'Footer' | translate}}</span>
+							</a>
+						</li>
+
+						<li id = "twilio_show" class="kt-nav__item" >
+							<a class="kt-nav__link showSingle" target="7" >
+								<span  class="kt-nav__link-text">{{'Twilio Settings' | translate}}</span>
+							</a>
+						</li>
+						<li id = "gcloud_show" class="kt-nav__item" >
+							<a class="kt-nav__link showSingle" target="8">
+								<span class="kt-nav__link-text">{{'Google Cloud Settings' | translate}}</span>
+							</a>
+						</li>
+						<li class="kt-nav__item">
+							<a class="kt-nav__link showSingle" target="6">
+								<span  class="kt-nav__link-text">{{'Miscellaneous' | translate}}</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-9">
+					<!-- Url slug -->
+					<!-- <form  [formGroup]="form">  -->
+						<div class="col-md-12 px-0 pull-left targetDiv" id="div1" >
+							<form  [formGroup]="siteUrl"> 
+								<div class="form-group col-md-12" *ngIf = "admin.UM_Office_Type == 'A'">
+									<label class="text-dark">{{'Domain Name' | translate}}</label>	
+									<input  class="form-control" placeholder="{{'Domain Name' | translate}} (https://example.com)"  type="text" formControlName = "Site_Domain"/>
+									<p style="color: #FF0000" *ngIf="!siteUrl.controls['Site_Domain'].valid  && ( siteUrl.controls['Site_Domain'].touched)">{{'Invalid domain name' | translate}}!!!</p>
+								</div>
+								<div class="form-group col-md-12">
+									<div class="input-group" *ngIf = "admin.UM_Office_Type == 'A'">							
+										<input class="form-control" placeholder="{{'URL' | translate}}" type="text" formControlName = "Site_URL" (blur) = "isURLExist($event.target.value)"/>
+										<div class="input-group-addon">
+											<span *ngIf = "checksiteUrlFromNew == siteUrl.value.Site_URL"><i *ngIf= "getSiteUrlFromDB" class="icofont-check-alt"></i></span>
+											<span *ngIf = "checksiteUrlFromNew != siteUrl.value.Site_URL"> <i *ngIf= "!getSiteUrlFromDB" class="icofont-close-line"></i></span>
+										</div>
+									</div>	
+									<label class="text-dark my-10"><span>
+										<span>{{siteLink}}/login/{{siteUrl.value.Site_URL}}</span></span>&nbsp; &nbsp; &nbsp;
+										<span (click)="copyInputMessage(siteLink
+										+'/login/'+siteUrl.value.Site_URL)" title="Dismissible popover" data-toggle="popover" data-trigger="focus" data-content="Click anywhere in the document to close this popover"><img src="assets/Images/copy.png" width="16px"></span>&nbsp; &nbsp; &nbsp;
+										<span>
+											<a href="{{siteLink}}/login/{{siteUrl.value.Site_URL}}" target="_blank">
+												<!-- <img src="assets/Images/newWindow.png" width="16px"> -->
+												
+											</a>
+										</span>
+
+
+									</label>
+								</div>	
+								<div class="form-group pull-left my-10 col-md-12 px-0 btm_btn">
+									<hr />
+									<div class="mh-right pull-right">
+										<input type="button" class="btn btngp btnsubmit my-12" (click) = "saveSiteUrl()" value="{{'Save' | translate }}">
+									</div>
+								</div>	
+							</form>		
+						</div>
+						<!-- Appearance -->
+						<div class="col-md-12 px-0 pull-left targetDiv" style="display: none;" id="div2">
+							<div class="pull-left form-group col-md-12 my-10 px-0">
+								<div class="my-10 col-md-3">
+									<label><strong class="text-dark"><small>{{'Navigation Dark' | translate}}</small></strong></label>
+									<!-- Color picker field -->
+									<color-sketch  color = "{{appearance.App_NavigationColorDark_Hax}}"  (onChangeComplete)="navigationDark($event)"></color-sketch>
+									
+								</div>
+								<div class="my-10 col-md-3">
+									<label><strong class="text-dark"><small>{{'Navigation Light' | translate}}</small></strong></label>
+									<!-- Color picker field -->
+									<color-sketch  color="{{appearance.App_NavigationColorLight_Hax}}"  (onChangeComplete)="navigationLight($event)"></color-sketch>
+									
+								</div>
+								<div class="my-10 col-md-3">
+									<label><strong class="text-dark"><small>{{'Hyperlink text' | translate}}</small></strong></label>
+									<!-- Color picker field -->
+									<color-sketch  color="{{gethyperLinkText}}"  (onChangeComplete)="hyperLinkText($event)"></color-sketch>
+									
+								</div>
+								<div class="my-10 col-md-3">
+									<label><strong class="text-dark"><small>{{'Button Background' | translate}}</small></strong></label>
+									<!-- Color picker field -->
+									<color-sketch  color="{{getbuttonBG}}"  (onChangeComplete)="buttonBG($event)"></color-sketch>
+									
+								</div>
+								<div class="my-10 col-md-3">
+									<label><strong class="text-dark"><small>{{'Button Text' | translate}}</small></strong></label>
+									<!-- Color picker field -->
+									<color-sketch  color="{{getbuttontext}}"  (onChangeComplete)="buttontext($event)"></color-sketch>
+									
+								</div>
+								<div class="my-10 col-md-3">
+									<label><strong class="text-dark"><small>{{'Button Mouse Hover' | translate}}</small></strong></label>
+									<!-- Color picker field -->
+									<color-sketch  color="{{getbtnMouseHover}}"  (onChangeComplete)="btnMouseHover($event)"></color-sketch>
+									
+								</div>
+								<div class="my-10 col-md-3">
+									<label><strong class="text-dark"><small>{{'Hyperlink Hover Text' | translate}}</small></strong></label>
+									<!-- Color picker field -->
+									<color-sketch  color="{{gethyperlinkHovertxt}}"  (onChangeComplete)="hyperlinkHovertxt($event)"></color-sketch>
+									
+								</div>
+								<div class="my-10 col-md-3">
+									<label><strong class="text-dark"><small>{{'Title 1' | translate}}</small></strong></label>
+									<!-- Color picker field -->
+									<color-sketch  color="{{gettitle1color}}"  (onChangeComplete)="title1color($event)"></color-sketch>
+									
+								</div>
+								<div class="my-10 col-md-3">
+									<label><strong class="text-dark"><small>{{'Title 2' | translate}}</small></strong></label>
+									<!-- Color picker field -->
+									<color-sketch  color="{{gettitle2color}}"  (onChangeComplete)="title2color($event)"></color-sketch>
+									
+								</div>
+								<div class="my-10 col-md-3">
+									<label><strong class="text-dark"><small>{{'Login Background' | translate}}</small></strong></label>
+									<!-- Color picker field -->
+									<color-sketch  color="{{getloginBgcolor}}"  (onChangeComplete)="loginBgcolor($event)"></color-sketch>
+									
+								</div>
+								<div class="my-10 col-md-3">
+									<label><strong class="text-dark"><small>{{'Login Text' | translate}}</small></strong></label>
+									<!-- Color picker field -->
+									<color-sketch  color="{{getlogintextColor}}"  (onChangeComplete)="logintextColor($event)"></color-sketch>
+									
+								</div>
+								<div class="my-10 col-md-3">
+									<label><strong class="text-dark"><small>{{'Login Button' | translate}}</small></strong></label>
+									<!-- Color picker field -->
+									<color-sketch  color="{{getloginBtncolor}}"  (onChangeComplete)="loginBtncolor($event)"></color-sketch>
+									
+								</div>
+							</div>
+							<div class="form-group pull-left my-10 col-md-12 px-0">
+								<hr />
+								<div class="mh-right pull-right">
+									
+									<input type="button" class="btn btngp btnsubmit my-12" (click) = "saveAppearance()" value="{{'Save' | translate }}">
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+						<!-- Notification -->
+
+						<div class="col-md-12 px-0 pull-left targetDiv" style="display: none;" id="div7">
+
+
+
+
+							<div class="form-group"> 
+								<div class="col-sm-7">
+								<label><strong class="text-dark"><small>{{'Notification Time' | translate }}</small></strong></label>
+
+									<div class="input-group date required" id='datetimepicker7'>
+										<div class="input-group-addon"><i class="icofont-clock-time"></i></div>
+										<input atp-time-picker value="{{reqData.notificationstime}}" class="form-control" placeholder=" {{'Notification Time' | translate }} - hh:mm" [(ngModel)] = "reqData.notificationstime"/>
+
+									</div>
+								</div>
+							</div>			
+							<div class="form-group pull-left my-10 col-md-12 px-0 btm_btn">
+								<hr>
+								<div class="mh-right pull-right">
+									
+									<input class="btn btngp btnsubmit my-12" type="button" (click) = "finalAction()" value="{{'Save' | translate }}">
+									<!-- <a class="view-button btn-light">Reset to Default</a> -->
+								</div>
+							</div>	
+
+
+							<!-- <input type="button" value="{{'Cancel' | translate}}" id="cancel" data-toggle="modal" data-target="#cancelbtn" class="btn btngp btncancel"/> -->
+
+
+						</div>
+
+						
+						<!-- Logo -->
+						<div class="col-md-12 px-0 pull-left targetDiv" style="display: none;" id="div3">
+							<form method="POST" enctype="multipart/form-data">
+								<div class="form-group pull-left my-10 col-md-6">
+									<div class="well-light">
+										<div class="col-md-12 px-0">
+											<!-- File uploader -->
+											<label><strong class="text-dark"><small>{{'Login' | translate }}</small></strong></label>
+											<input type="file" name = "ImagePath"  class="form-control" />
+										</div>
+										<div class="col-md-12 px-0 my-10">
+											<!-- File View Box -->
+											<div class="squreBox">							
+												<img src="{{getImagepath}}{{removeTildSign(LogoLoginImage)}}"/>
+												<button class="btn btn-danger"><i aria-hidden="true" class="fa fa-trash" (click) = "deletelogotemp()"></i></button>
+											</div>
+										</div>
+										<div class="col-md-12 my-10 px-0">
+											<span class="text-hint">{{'Select an image file for a login, it should be 300x60 pixel' | translate }}</span>
+										</div>
+
+									</div>
+								</div>
+								<div class="form-group pull-left my-10 col-md-6">
+									<div class="well-light">
+										<div class="col-md-12 px-0">
+											<!-- File uploader {{'-->
+											<label><strong class="text-dark"><small>{{'Naviagtion' | translate }}</small></strong></label>					
+											<input type="file" name = "ImagePath"  class="form-control"/>
+										</div>
+										<div class="col-md-12 px-0 my-10">
+											<!-- File View Box -->
+											<div class="squreBox logo">							
+												<img src="{{getImagepath}}{{removeTildSign(LogoNavigationImage)}}"/>
+												<button class="btn btn-danger"><i aria-hidden="true" class="fa fa-trash" (click) = "deleteNavitemp()"></i></button>
+											</div>								
+										</div>
+										<div class="col-md-12 my-10 px-0">
+											<span class="text-hint">{{'Select an image file for a naviagtion, it should be 145x60 pixel' | translate }}</span>
+										</div>
+									</div>
+								</div>
+								<div class="form-group pull-left my-10 col-md-6">
+									<div class="well-light">
+										<div class="col-md-12 px-0">
+											<!-- File uploader -->
+											<label><strong class="text-dark"><small>{{'Favicon' | translate }}</small></strong></label>					
+											<input type="file" id="make_blank" name = "ImagePath"  class="form-control"/>
+											<span *ngIf = "validmessage" class="text-danger">{{'Select an image file for a naviagtion, it should be ico file' | translate }}</span>
+										</div>
+										<div class="col-md-12 px-0 my-10">
+											<!-- File View Box -->
+											<div class="squreBox logo">							
+												<img src="{{getImagepath}}{{removeTildSign(Logo_Fav_Image)}}"/>
+												<button class="btn btn-danger"><i aria-hidden="true" class="fa fa-trash" (click) = "deleteNavitemp()"></i></button>
+											</div>								
+										</div>
+										<div class="col-md-12 my-10 px-0">
+											<div class="col-md-12 my-10 px-0">
+												<span class="text-hint">{{'Select an image file for a favicon, it should be 32x32 pixel' | translate }}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group pull-left my-10 col-md-12 px-0 btm_btn">
+									<hr />
+									<div class="mh-right pull-right">
+										
+										<input type="button" type="button" class="btn btngp btnsubmit my-12" (click) = "saveLogo()" value="{{'Save' | translate }}">
+									</div>
+								</div>	
+							</form>				
+						</div>
+						<!-- Slider -->	
+						<div class="col-md-12 px-0 pull-left targetDiv" style="display: none;" id="div4">
+							<div class="form-group pull-left my-10 col-md-12 px-0">
+								<div class="welld">	
+									<div class="form-group pull-left my-10 col-md-12 px-0">
+										<div class="form-group col-md-12">
+											<div class="mh-right pull-right">		
+												<a class="add-button" id="add_more">
+													<i class="fa fa-plus"></i>&nbsp;{{'Add Slider' | translate }}
+												</a>
+											</div>
+											<div class="pull-left ">
+
+												<h1 class="add-slider" >{{'Add Slider' | translate }}</h1>	
+												<h1 class="edit-slider" >{{'Edit Slider' | translate }}</h1>	
+
+											</div>
+											<a class="view-button custom-back" id="back_btn">
+												<span class="text-right">< {{'Back' | translate }}</span>
+											</a>
+										</div>
+									</div>
+									<div id="tableGrid"class="form-group pull-left my-10 col-md-12 px-0">
+										<div class="form-group col-md-12">
+											<table class="table_ts" id="role-master">
+												<thead>
+													<tr>
+														<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">#</th>
+														<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Preview' | translate }}</th>
+														<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)"> {{'Slider Name' | translate}}</th>
+														<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Description' | translate }}</th>
+														<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Created By' | translate }}</th> 
+														<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Last Modify' | translate}}</th>	
+														<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Status' | translate}}</th>
+														<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Action' | translate}}</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr *ngFor = "let data of getSliderArray; let i = index">
+														<td>{{i+1}}</td>
+														<td>
+															<div class="squreBox-xm" >
+															<a href="{{getImagepath}}{{removeTildSign(data.Slider_Slider_Image)}}" target="_blank">				
+																<img src="{{getImagepath}}{{removeTildSign(data.Slider_Slider_Image)}}"/>
+																</a>
+															</div>
+														</td>
+														<td>{{data.Slider_Title}}</td>
+														<td>{{data.Slider_Description}}</td>
+														<td>Owner</td>
+														<td>01-01-1990</td>
+														<td *ngIf = "data.Slider_Is_Active"><mat-slide-toggle (change) = "updateSliderStatus(data, $event)" checked></mat-slide-toggle></td>
+														<td *ngIf = "!data.Slider_Is_Active"><mat-slide-toggle (change) = "updateSliderStatus(data, $event)"></mat-slide-toggle></td>
+														<td>
+														<!-- <span class="add_more_edit"><i aria-hidden="true"  class="fa fa-pencil-square-o " title = "{{'Edit' | translate}}"  (click) = "editSlider(data)"></i></span>
+															&nbsp;&nbsp;&nbsp; -->
+															<span class = "trash" (click)  = "dataDeleted(data)" >	<i class="fa fa-trash" aria-hidden="true" title = "{{'Delete' | translate}}"></i></span>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div id="addsliderBox" class="form-group pull-left my-10 col-md-12 px-0">
+										<form [formGroup]="slider">
+											<div class="welld">									
+												<div class="form-group col-md-12">
+													<label><strong class="text-dark"><small>{{'Title' | translate }}</small></strong></label>
+													<!-- <editor apiKey="test" [init]="{plugins: 'link'}"></editor> -->
+													<input type="text" class="form-control" placeholder="{{'Name' | translate }}"   formControlName = "Slider_Title"/>
+												</div>
+												<div class="form-group col-md-12">
+													<label><strong class="text-dark"><small>{{'Description' | translate }}</small></strong></label>
+													<!-- <textarea rows="4" class="form-control" placeholder="Google Analytics code"></textarea> -->
+													<!-- <editor id = "gettiny" formControlName= "Slider_Description" ></editor> -->
+													<textarea class="form-control" rows="5" cols="110" formControlName= "Slider_Description"></textarea>
+
+												</div>
+												<div class="form-group col-md-12">
+													<!-- File uploader -->								
+													<label><strong class="text-dark"><small>{{'Background Image' | translate }}</small></strong></label>
+													<input type="file" name=""  class="form-control" id="bgImg" />
+												</div>
+												<div class="form-group pull-left my-10 col-md-12 px-0">
+													<div class="col-md-4">
+														<!-- File View Box -->
+														<div class="squreBox">							
+															<img src="{{reqData.poster}}"/>
+															<button class="btn btn-danger"><i aria-hidden="true" class="fa fa-trash"></i></button>
+														</div>
+													</div>
+												</div>
+												<div class="form-group col-md-12">
+													<!-- File uploader -->								
+													<label><strong class="text-dark"><small>{{'Slider Image' | translate }}</small></strong></label>
+													<input type="file" name=""  class="form-control" id="sliderImg" />
+												</div>
+												<div class="col-md-4">
+													<!-- File View Box -->
+													<div class="squreBox">							
+														<img src="{{reqData.poster}}"/>
+														<button class="btn btn-danger"><i aria-hidden="true" class="fa fa-trash"></i></button>
+													</div>
+												</div>
+												<div class="form-group pull-left my-10 col-md-12 px-0 btm_btn">
+													<hr />
+												</div>
+											</div>
+										</form>
+										<div class="mh-right pull-right">
+											<input type="button" class="btn btngp btnsubmit my-12" [disabled] = "!slider.valid" (click) = "saveSlider()" value="{{'Save' | translate }}">
+										</div>
+									</div>	
+
+
+								</div>
+							</div>	
+							
+						</div>
+						<!-- Footer -->
+						<div class="col-md-12 px-0 pull-left targetDiv" style="display: none;" id="div5">
+							<form [formGroup]="footer">
+								<div class="form-group col-md-12 my-10">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="icofont-copyright"></i>
+										</div>
+										<input class="form-control" placeholder="{{getSurgeryDetails?.SurgC_DBA_Name}}" type="text" formControlName= "Footer_Text"/>
+									</div>
+								</div>
+								<div class="form-group col-md-12 my-10" *ngIf = "admin.UM_Office_Type == 'A'">
+									<div class="input-group">
+										<hr>
+										<p>{{'Show powered by' | translate }} <b>The Cloud Health</b></p>
+
+										<mat-radio-group aria-label="Select an option" formControlName = "Footer_Is_Show">
+											<mat-radio-button value="true" >{{'Yes' | translate }}</mat-radio-button>
+											<mat-radio-button value="false" >{{'No' | translate }}</mat-radio-button>
+										</mat-radio-group>
+									</div>
+								</div>
+								<div class="form-group pull-left my-10 col-md-12 px-0 btm_btn">
+									<hr />
+									<div class="mh-right pull-right">
+										<input class="btn btngp btnsubmit my-12" type="button" (click) = "saveFooter()" value="{{'Save' | translate }}">
+									</div>
+								</div>
+							</form>					
+						</div>
+						<!-- MISC -->
+						<div class="col-md-12 px-0 pull-left targetDiv" style="display: none;" id="div6">
+							<form [formGroup]="misc">
+								<div class="form-group col-md-12 my-10">
+									<label><strong class="text-dark"><small>{{'Google Analytics code' | translate }}</small></strong></label>
+									<textarea rows="4" class="form-control" placeholder="{{'Google Analytics code' | translate }}"formControlName= "Misc_GoogleAnalytics_Code"></textarea>
+								</div>
+								<div class="form-group col-md-12 my-10">
+									<label><strong class="text-dark"><small>{{'Header code' | translate }}</small></strong></label>
+									<textarea rows="4" class="form-control" placeholder="Header code"formControlName= "Misc_Header_Code"></textarea>
+								</div>
+								<div class="form-group col-md-12 my-10">
+									<label><strong class="text-dark"><small>{{'Body code (Start)' | translate }}</small></strong></label>
+									<textarea rows="4" class="form-control" placeholder="Body code (Start)"formControlName= "Misc_BodyStart_Code"></textarea>
+								</div>
+								<div class="form-group col-md-12 my-10">
+									<label><strong class="text-dark"><small>{{'Body code (End)' | translate }}</small></strong></label>
+									<textarea rows="4" class="form-control" placeholder="Body code (End)" formControlName= "Misc_BodyEnd_Code"></textarea>
+								</div>
+								<div class="form-group pull-left my-10 col-md-12 px-0">
+									<hr />
+									<div class="mh-right pull-right">
+										
+										<input type="button" class="btn btngp btnsubmit my-12" (click) = "saveMisc()" value="{{'Save' | translate }}">
+										<!-- <a class="view-button btn-light">Reset to Default</a> -->
+									</div>
+								</div>	
+							</form>				
+						</div>	
+						<!-- Footer -->
+						<div class="col-md-12 px-0 pull-left targetDiv" style="display: none;" id="div7" *ngIf = "admin.UM_Office_Type == 'A'">
+							<!-- <form [formGroup]="footer"> -->
+								<div class="form-group col-md-12 my-10">
+									<div class="input-group">
+										<!-- <div class="input-group-addon">
+											<i class="icofont-copyright"></i>
+										</div> -->
+										<input class="form-control" placeholder="{{'twilio' | translate }} " type="text"/>
+									</div>
+								</div>
+								
+								<div class="form-group pull-left my-10 col-md-12 px-0 btm_btn">
+									<hr />
+									<div class="mh-right pull-right">
+										
+										<input type="button" class="btn btngp btnsubmit my-12" value="{{'Save' | translate }}">
+									</div>
+								</div>
+								<!-- </sform>					 -->
+							</div>	
+							<div class="col-md-12 px-0 pull-left targetDiv" style="display: none;" id="div8" *ngIf = "admin.UM_Office_Type == 'A'">
+								<!-- <form [formGroup]="footer"> -->
+									<div class="form-group col-md-12 my-10">
+										<div class="input-group">
+										<!-- <div class="input-group-addon">
+											<i class="icofont-copyright"></i>
+										</div> -->
+										<input type="button" class="form-control" placeholder="{{'Cloud setings' | translate }}" type="text"/>
+									</div>
+								</div>
+								
+								<div class="form-group pull-left my-10 col-md-12 px-0">
+									<hr />
+									<div class="mh-right pull-right">
+										<!-- <a class="add-button mr-15">{{'Save' | translate }}</a> -->
+										<input type="button" class="btn btngp btnsubmit my-12" value="{{'Save' | translate }}">
+									</div>
+								</div>
+								<!-- </form>					 -->
+							</div>		
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- Modal -->
+			<div id="trash" class="modal fade modalmsg" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="close_btn">
+							<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+						</div>
+						<div class="modal-body text-center">
+							<h3>{{'Are you sure, you want to delete ?' | translate}}</h3>
+						</div>
+						<div class="modal-footer border0">
+							<button type="button" class="btn btn-primary" (click) = "isDeletedYes()">{{'Yes' | translate}}</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+						</div>
+					</div>
+
+				</div>
+			</div>

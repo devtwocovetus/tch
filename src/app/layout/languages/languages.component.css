@@ -1,0 +1,81 @@
+.nav-tabs>li>a{
+	margin-right: -7px;
+}
+.btn{
+ margin-top: 12px;
+
+}
+label{
+	font-weight: bold;
+}
+
+
+.fa-pencil-square-o{
+	cursor: pointer;
+}
+.fa-trash{
+	cursor: pointer;
+ font-size: 16px;
+}
+
+
+
+.add-button{
+  cursor: pointer;
+}
+.view-button{
+  cursor: pointer;
+}
+
+.view-list-language{
+  background: #fff;
+  padding: 20px 20px 10px 20px;
+  /* padding: 35px 20px 1px 20px; */
+  -webkit-box-shadow: 0px 0px 6px 0px #cdcdcd;
+  box-shadow: 0px 0px 6px 0px #cdcdcd;
+  -moz-box-shadow: 0px 0px 6px 0px #cdcdcd;
+}
+
+.goback{
+  background: #04a8c5;
+  color: #ffffff;
+  font-weight: 300;
+  border: 1px solid #04a8c5;
+  font-size: 17px;
+  padding: 6px 20px;
+  border-radius: 20px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+.goback:hover, .goback:focus {
+  background: #ffffff;
+  color: #04a8c5;
+  text-decoration: none;
+}
+.icofont-speech-comments{
+  cursor: pointer;
+  font-size: 16px
+}
+.button_top a{
+  cursor: pointer;
+}
+.add-phr{
+  margin-right: 33em;
+  color: #fff;
+  font-weight: 500;
+  padding: 6px 20px;
+  border-radius: 20px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background: #04a8c5;
+  font-size: 15px;
+  text-decoration: none !important;
+  border: 1px solid #04a8c5;
+}
+
+a.add-phr:hover {
+  color: #04a8c5;
+  background: #fff;
+  }

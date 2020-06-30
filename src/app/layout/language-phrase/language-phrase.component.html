@@ -1,0 +1,197 @@
+	<div class="loader-contaier" *ngIf = "showLoader">
+		<div class="loader-img">
+			<img src="assets/Images/logo2.gif" alt="">
+		</div>
+	</div>	
+	<div class="section-container section-container-new" >
+		<div class="main-heading main-heading1">
+			<div class="mh-left">
+				<h1 class="add-button">Phrase - {{getQueryStringID}}</h1>
+				<h1 class="view-button"> Add Phrases</h1>
+				<h1 class="view-delete-button">General &nbsp;&nbsp; Menu  &nbsp; &nbsp; Forms </h1>
+				<h1 class="edit-data">Edit Phrase</h1>
+			</div>
+			<div class="mh-right">
+				<a class="add-button" >Add Phrases</a>
+				<a class="view-button"  id="again-Back"><i class="fa fa-angle-left"></i> {{'Back' | translate }}</a>
+			</div>
+		</div>
+		
+		<div class="form-element hide-from">
+			<div class=" form">
+				<!-- <form >  -->
+					<div class="row">
+						<div class="col-md-6">
+						<div class="table-row" *ngFor="let tr of totalTr;let i = index;">
+							<div class="col-md-12">
+								<div class="form-group">
+									<div class="input-group">
+										<!-- <div class="input-group-btn">
+											{{i+1}}
+										</div> -->
+										<input type="text" class="form-control" placeholder="Phrase Name" [(ngModel)]="reqData[i]">
+										<div class="input-group-btn">
+											<button class="btn btn-danger" type="button" (click)="removeRow(i)">
+												<i class="fa fa-trash"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+						<div class="pull-left">
+					<input type="button" value="{{'Submit' | translate }}" id="submitdata" data-toggle="modal" data-target="#submitbtn"   class="btn btngp btnsubmit" />
+					<input type="button" value="{{'Cancel' | translate }}" id="cancel" data-toggle="modal" data-target="#cancelbtn"  class="btn btngp btncancel" />
+				</div>
+						
+						<div class="pull-right">
+							<input type="button" value="+ Add More" class="btn btngp btnsubmit" (click)="addRow()" />
+						</div>
+
+				
+					</div>
+					</div>
+
+					<!-- </form> -->
+				</div>
+
+			</div>
+			<div class = "add-table">
+				<div style="float: right; padding: 3px;">
+					<a class="extra-btn" [ngClass]="{'active': activeClass == 'General'}" (click) = "getActiveClass('General')">  <i class="icofont-list"></i> General </a> &nbsp; &nbsp;
+					<a class="extra-btn" [ngClass]="{'active': activeClass == 'Menu'}" (click) = "getActiveClass('Menu')">  <i class="icofont-listing-box"></i> Menu </a> &nbsp; &nbsp;
+					<a class="extra-btn" [ngClass]="{'active': activeClass == 'Forms'}" (click) = "getActiveClass('Forms')">  <i class="icofont-papers"></i> Forms </a>&nbsp; &nbsp;
+
+				</div>
+				<table class = "table"  id = 'Ethitable'>
+					<thead>
+						<tr>
+							<th class="hash-center">#</th>
+							<th>Phrase</th>
+							<th>Label</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="hash-center">1</td>
+							<td>user_name</td>
+							<td><input type="text" name="" class="form-control" placeholder="label" ></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class = "view-deleted">
+				<a (click) = "hideShow()" class="custom-link">View Records</a>
+				<table class = "table"  id = 'Ethi_deleted_rc'>
+					<thead>
+						<tr>
+							<th class="hash-center">#</th>
+							<th>{{'Name' | translate }}</th>
+							<!-- <th>{{'Description' | translate }}</th> -->
+							<th>Created By</th>
+							<th>{{'Last Modify' | translate }}</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor = "let list of getDeletedEthinicityArray; let i = index">
+							<td class="hash-center">{{i+1}}</td>
+							<td>{{list.Ethi_Name}}</td>
+							<!-- <td>{{list.Ethi_Type}}</td> -->
+							<td>{{list.Ethi_User_Name}}</td>
+							<td>{{list.Ethi_Modify_Date | date: 'MM-dd-yyyy'}} <span class="info"  data-toggle="tooltip" data-placement="left" title="{{list.Ethi_Create_Date | date: 'MM-dd-yyyy, hh:mm aa'}}"><i *ngIf = "list.Ethi_Modify_Date != list.Ethi_Create_Date " class="icofont-info-circle"></i></span></td>
+							<td class="edit-button">
+								<span (click)  = "revertDeleted(list)" >	<i class="fa fa-trash" aria-hidden="true" title = "{{'Delete' | translate}}"></i></span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- Modal -->
+		<div id="submitbtn" class="modal fade modalmsg" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="close_btn">
+						<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+					</div>
+					<div class="modal-body text-center">
+						<h3>{{'Are you sure, you want to Submit ?' | translate }}</h3>
+					</div>
+					<div class="modal-footer border0">
+						<button type="button" class="btn btn-primary" (click) = "addEthincity()" >{{'Yes' | translate }}</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- Modal -->
+		<div id="cancelbtn" class="modal fade modalmsg" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="close_btn">
+						<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+					</div>
+					<div class="modal-body text-center">
+						<h3>{{'Are you sure, you want to Cancel ?' | translate }}</h3>
+					</div>
+					<div class="modal-footer border0">
+						<button type="button" class="btn btn-primary" (click)  = "goBack()" >{{'Yes' | translate }}</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div id="trash" class="modal fade modalmsg" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="close_btn">
+						<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+					</div>
+					<div class="modal-body text-center">
+						<h3>{{'Are you sure, you want to delete ?' | translate }}"</h3>
+					</div>
+					<div class="modal-footer border0">
+						<button type="button" class="btn btn-primary" (click) = "isDeletedYes()">{{'Yes' | translate }}</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div id="revertDelete" class="modal fade modalmsg" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="close_btn">
+						<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+					</div>
+					<div class="modal-body text-center">
+						<h3>Are you sure, you want to Retrive data ?</h3>>
+					</div>
+					<div class="modal-footer border0">
+						<button type="button" class="btn btn-primary" (click) = "revertData()">{{'Yes' | translate }}</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+					</div>
+				</div>
+
+			</div>
+		</div>

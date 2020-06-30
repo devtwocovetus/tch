@@ -1,0 +1,39 @@
+.nav-tabs>li>a{
+	margin-right: -7px;
+}
+.btn{
+	     margin-top: 6px!important;
+
+}
+label{
+	font-weight: bold;
+}
+
+
+.fa-pencil-square-o{
+	cursor: pointer;
+}
+.fa-trash{
+	cursor: pointer;
+}
+
+
+
+.add-button{
+  cursor: pointer;
+}
+.view-button{
+  cursor: pointer;
+}
+
+h3.title_text {
+    font-size: 21px;
+    color: #2ca36c;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+h3.title_text span {
+    font-weight: normal;
+}

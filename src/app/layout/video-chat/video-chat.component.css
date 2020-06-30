@@ -1,0 +1,94 @@
+div#controls {
+    width: 100%;
+    padding:0px!important;
+    max-width: 100%;
+}
+div#preview {
+    width: auto !important;
+    margin: 0px !important;
+}
+div#controls div#preview div#local-media {
+    width: 100% !important;
+    height: 202px;
+    border: 1px solid #cececc;
+    box-sizing: border-box;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiI…IiPjwvcGF0aD4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+);
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    margin-bottom: 19px !important;
+}
+.btn-video_section {
+    margin-top: 10px;
+}
+.btn-video_section {
+    margin-top: 10px;
+}
+
+.btn-video_section .btn + .btn {
+    margin-left: 0px!important;
+     margin-right: 0px!important;
+}
+.btn-video_section {
+    display: flex;
+    justify-content: space-between;
+}
+.icon_video{
+	margin-right: 5px!important
+}
+.join_status_log{
+	width: 100%;
+    height: 242px;
+    border: 2px solid #ddd;
+    overflow-y: scroll;
+}
+div#remote-media {
+    border: 1px solid #fff;
+    width: 80%;
+    height: 300px;
+    margin-bottom: 30px;
+    display: block;
+}
+.full_video{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.full_video {
+    position: relative;
+}
+
+.full_video video {
+    height: 100%;
+    width: 100%;
+}
+
+div#participantContainer-Chirag {
+    background: #e6e6e6;
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.full_video {
+    height: calc(100vh - 130px);
+}
+
+div#remote-media {
+    min-width: 100%;
+    min-height: 100%;
+}
+
+div#local-media {
+    overflow: hidden;
+}
+
+div#local-media video {
+    width: 100%;
+}
+
+div#remote-media {
+    position: relative;
+    margin-top: 90px;
+}

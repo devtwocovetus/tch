@@ -1,0 +1,80 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+	<div class="loader-img">
+		<img src="assets/Images/logo2.gif" alt="">
+	</div>
+</div>	
+
+<div class="section-container section-container-new" >
+
+	<div class="main-heading main-heading1">
+		<div class="mh-left">
+			<h1 class="add-button">{{'Assign Patient Intake' | translate }} </h1>
+			<!-- <h1 class="view-button"> Add Incident</h1>
+			<h1 class="view-delete-button">Deleted Records</h1>
+			<h1 class="edit-data">Edit Incident</h1> -->
+		</div>
+
+		<div class="mh-right">			
+			<a class="view-button"  id="again-Back" (click) = "goBack()"><i class="fa fa-angle-left"></i> {{'Back' | translate }}</a>
+		</div>
+	</div>
+	<div class="add-table">
+		<!-- <a class="add-custom-link mr-15"  routerLink="/add-notification-type"><i aria-hidden="true" class="fa fa-plus" style="font-size: 15px;"></i> Add Notification Type</a> -->
+		<div class="dataTables_wrapper">
+			<table class = "table"  id = 'Ethitable'>
+				<thead>
+					<tr>
+						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">#</th>
+						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Category' | translate }}</th>
+						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Name' | translate }}</th>
+						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Description' | translate }}</th>
+						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Last Modify' | translate }}</th>
+						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Assign' | translate }}</th><!-- 
+						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Action' | translate }}</th> -->
+					</tr>
+				</thead> 
+				
+				<tbody>
+					<tr *ngFor = "let list of dataListArray; let i = index">
+						<td class="hash-center">{{i+1}}</td>
+						<td><span>{{list.NFT_Category_Name}}
+							<input type="hidden" id="NFTUniqueID_{{i+1}}"  value={{list.NFT_Unique_ID}} />
+						</span></td>
+						<td>{{list.NFT_Name}}</td> 
+						<td>{{list.NFT_Description}}</td>
+						<td>{{list.NFT_Modify_Date | date: 'MM-dd-yyyy'}} <span class="info"  data-toggle="tooltip" data-placement="left" title="{{list.NFT_Create_Date | date: 'MM-dd-yyyy, hh:mm aa'}}"><i *ngIf = "list.NFT_Modify_Date != list.NFT_Create_Date " class="icofont-info-circle"></i></span></td>
+						
+						<td><input type="checkbox" name="Notification"
+						 id="Chk_{{i+1}}" value={{list.NFT_Unique_ID}}>
+
+
+						</td>
+					</tr> 
+				</tbody> 
+
+			</table>
+		</div>
+		<input class="btn btngp btnsubmit" type="button" value="{{'Submit' | translate }}" (click)="Submit()" />
+		<input type="button" value="{{'Cancel' | translate }}" id="cancel" data-toggle="modal" data-target="#cancelbtn" class="btn btngp btncancel" />
+	</div>
+	
+</div>
+
+<!-- Modal -->
+<div id="cancelbtn" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content--> -->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to Cancel ?' | translate }}</h3>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary"data-dismiss="modal" >{{'Yes' | translate }}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,322 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+	<div class="loader-img">
+		<img src="assets/Images/logo2.gif" alt="">
+	</div>
+</div>
+<div class="section-container section-container-new" >
+	<div class="main-heading main-heading1">
+		<div class="mh-left">
+			<h1 class="add-button">{{'Physician Offices' | translate }}</h1>
+			<h1 *ngIf = "admin.UM_Office_Type == 'S'" class="view-button" >{{'Add Office' | translate }}</h1>
+			<h1   class="view-delete-button">{{'Deleted Records' | translate }}</h1>
+			<h1 class="edit-data">{{'Edit Office' | translate }}</h1>
+			
+		</div>
+		<div class="mh-right">
+			<a class="add-button" *ngIf = "admin.UM_Office_Type == 'S'"><i class="fa fa-plus" aria-hidden="true" style="font-size: 15px;"></i> {{'Add Office' | translate }}</a>
+			<a class="view-button"  id="again-Back" (click) = "form.reset()"><i class="fa fa-angle-left"></i> {{'Back' | translate }}</a>
+		</div>
+	</div>
+	<div class="form-element hide-from">
+		<h3 class="title_text">{{'Facility Information' | translate }}</h3>
+		<div class=" form-horizontal">
+			<form [formGroup]="form" autocomplete="off"> 
+				<div class="form-group">
+					<div class="col-sm-6">
+						<div class="input-group required">
+							<div class="input-group-addon"><i class="icofont-user-alt-7"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'Legal Name Of Facility' | translate }}" formControlName = "PhyO_DBA_Name">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_DBA_Name'].valid  && ( form.controls['PhyO_DBA_Name'].touched)">{{'Invalid name' | translate }}!!!</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="icofont-business-man-alt-1"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'DBA (If different from legal name)' | translate }}" formControlName ="PhyO_Name">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_Name'].valid  && ( form.controls['PhyO_Name'].touched)">{{'Invalid name' | translate }}!!!</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6">
+						<div class="input-group required">
+							<div class="input-group-addon"><i class="icofont-location-pin"></i></div>
+							<input id = "addrs1" ngx-google-places-autocomplete [options]='options' class="form-control" #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" formControlName = "PhyO_Address" placeholder="{{'Address Line 1' | translate }}" autocomplete="off"/>
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_Address'].valid  && ( form.controls['PhyO_Address'].touched)">{{'Invalid address' | translate }} !!!</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="icofont-location-pin"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'Address Line 2' | translate }}" formControlName ="PhyO_Address2">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_Address2'].valid  && ( form.controls['PhyO_Address2'].touched)">{{'Invalid address' | translate }} !!!</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6">
+						<div class="input-group required" >
+							<div class="input-group-addon"><i class="icofont-location-arrow"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'City' | translate }}"formControlName = "PhyO_City">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_City'].valid  && ( form.controls['PhyO_City'].touched)">{{'Invalid city' | translate }}!!!</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="input-group required" >
+							<div class="input-group-addon"><i class="icofont-location-arrow"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'State' | translate }}" formControlName = "PhyO_State">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_State'].valid  && ( form.controls['PhyO_State'].touched)">{{'Invalid state' | translate }}!!!</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6">
+						<div class="input-group required" >
+							<div class="input-group-addon"><i class="icofont-location-arrow"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'Zip' | translate }}" formControlName ="PhyO_Zip" pattern="[0-9]+">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_Zip'].valid  && ( form.controls['PhyO_Zip'].touched)">{{'Invalid zip' | translate }}!!!</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="input-group required" >
+							<div class="input-group-addon"><i class="icofont-location-arrow"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'Country' | translate }}" formControlName ="PhyO_Country">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_Country'].valid  && ( form.controls['PhyO_Country'].touched)">{{'Invalid Country' | translate }}!!!</p>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="col-sm-6">
+						<div class="input-group required" >
+							<div class="input-group-addon"><i class="icofont-ui-dial-phone"></i></div>
+							<input type="text" name="" class="form-control phoneno" placeholder="{{'Facility Phone' | translate }}" formControlName="PhyO_MobileNo" (blur) = "validatphone()" maxlength="14" minlength="14"  >
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_MobileNo'].valid  && ( form.controls['PhyO_MobileNo'].touched)">{{'Invalid phone number' | translate }}!!!</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="input-group required" >
+							<div class="input-group-addon"><i class="icofont-fax"></i></div>
+							<input type="number" name="" class="form-control" placeholder="{{'Fax Number' | translate }}" formControlName = "PhyO_FaxNo" >
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_FaxNo'].valid  && ( form.controls['PhyO_FaxNo'].touched)">{{'Invalid fax number' | translate }}!!!</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6">
+						<div class="input-group required" >
+							<div class="input-group-addon"><i class="icofont-email"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'Facility Email' | translate }}" formControlName = "PhyO_Email" (blur)="checkEmail(this.form.value.PhyO_Email)">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_Email'].valid  && ( form.controls['PhyO_Email'].touched)">{{'Invalid email' | translate }}!!!</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="input-group required" >
+							<div class="input-group-addon"><i class="icofont-web"></i></div>
+							<input type="text" name="" class="form-control" placeholder="{{'Website' | translate }}" formControlName = "PhyO_Website_URL">
+						</div>
+						<p style="color: #FF0000" *ngIf="!form.controls['PhyO_Website_URL'].valid  && ( form.controls['PhyO_Website_URL'].touched)">{{'Invalid url' | translate }}!!!</p>
+					</div>
+				</div>
+				<div class="form-group checkbox-100">
+					<div class="col-sm-12 checkbox-title">
+						<h4>{{'Choose Specialities' | translate }}</h4>
+					</div>
+					<div *ngFor = "let sepec of getSpecialtiesArray; let i = index">
+						<div class="col-sm-3 newtableHaiye">
+							<div class="icon_checked" >
+								<input type="checkbox" class="styled" id="{{sepec.Spec_Name}}" data-alertid="2" name="check" [checked] = isSelected(sepec) (change)="onChange(sepec, $event.target.checked)">
+								
+								<label for="{{sepec.Spec_Name}}"><span class="fa fa-check"></span>{{sepec.Spec_Name}} </label>
+							</div>
+						</div>
+					</div>				
+				</div>
+				
+				<h3 class="title_text">{{'Timezone' | translate }}</h3>
+				<div class="form-element personnel_form">
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6">
+						<div class="input-group required" >
+							<div class="input-group-addon"><i class="icofont-clock-time"></i></div>
+							<input type="datetime-local" id="pickerDateTime" hidden="" />   
+							<select class="form-control" id="dropdownTimeZone" (change) = "submitDate()"></select>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div>
+			<input type="button" value="{{'Submit' | translate}}" id="submitdata" data-toggle="modal" data-target="#submitbtn" [disabled] = "!form.valid"  class="btn btngp btnsubmit" />
+
+			<input type="button" value="{{'Cancel' | translate}}" id="cancel" data-toggle="modal" data-target="#cancelbtn" class="btn btngp btncancel" />
+		</div>
+	</div>
+	<div class = "add-table">
+		<a (click) = "viewDeletedRdcs()" class="custom-link">{{'Deleted Records' | translate}}</a>
+
+		<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class = "table"   id = 'Physician_office'>
+			<thead>
+				<tr>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">#</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Name' | translate}}</th>
+					<!-- <th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Email' | translate}}</th> -->
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'City' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'State' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Created By' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Last Modify' | translate}}</th>
+					<!-- <th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Status' | translate}}</th> -->
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)"> {{'Action' | translate}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor = "let list of getPhysicianArray; let i = index">
+					<td class="hash-center">{{i+1}}</td>
+					<td>{{list.PhyO_DBA_Name}}</td>
+					<!-- <td>{{list.PhyO_Email}}</td> -->
+					<td>{{list.PhyO_State}}</td>
+					<td>{{list.PhyO_City}}</td>
+					<td>{{list.PhyO_User_Name}}</td>
+					<td>{{list.PhyO_Modify_Date | date: 'MM-dd-yyyy, hh:mm a'}} <span class="info"  data-toggle="tooltip" data-placement="left" title="{{list.PhyO_Create_Date | date: 'MM-dd-yyyy, hh:mm aa'}}"><i *ngIf = "list.PhyO_Modify_Date != list.PhyO_Create_Date " class="icofont-info-circle"></i></span></td>
+					<!-- <td *ngIf = "list.PhyO_Is_Active"><mat-slide-toggle (change) = "UpdateStatus(list, $event)" checked></mat-slide-toggle></td>
+					<td *ngIf = "!list.PhyO_Is_Active"><mat-slide-toggle (change) = "UpdateStatus(list, $event)"></mat-slide-toggle></td> -->
+
+					<td class="edit-button " >
+						<i *ngIf = "admin.UM_Office_Type == 'A'" routerLink = "/physician-contact-settings/{{list.PhyO_Unique_ID}}" title = "Contact Settings" class="icofont-id-card" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
+						<i *ngIf = "admin.UM_Office_Type == 'A'" routerLink = "/physician-center-settings/{{list.PhyO_Unique_ID}}" title = "Settings" class="icofont-gear" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
+						<i class="fa fa-pencil-square-o " title = "{{'Edit' | translate}}"  aria-hidden="true" (click) = "editPhysician(list)"></i>&nbsp;&nbsp;&nbsp;
+						<i *ngIf = "admin.UM_Office_Type == 'A'" class="fa fa-trash" aria-hidden="true" (click) ="dataDeleted(list)"></i>&nbsp;&nbsp;&nbsp;
+						<span *ngIf = "list.PhyO_SiteURL" >
+						<a href="{{getSiteLink}}/login/{{list.PhyO_SiteURL.Site_URL}}" target="_blank" ><i class="icofont-web" title = "Login Scrren" ></i></a>
+						</span>
+						<i  *ngIf = "!list.PhyO_SiteURL" class="icofont-web"></i>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</div>
+	<div class = "view-deleted">
+		<a (click) = "hideShow()" class="custom-link">{{'View Records' | translate}}</a>
+
+		<table datatable [dtOptions]="dtOptions1" [dtTrigger]="dtTrigger1" class = "table"   id = 'phy_deleted_rc_new'>
+			<thead>
+				<tr>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">#</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Name' | translate}}</th>
+					<!-- <th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Email' | translate}}</th> -->
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'City' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'State' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Created By' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Last Modify' | translate}}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)"> {{'Action' | translate}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor = "let list of getDeletedPhysicianArray; let i = index">
+					<td class="hash-center" >{{i+1}}</td>
+					<td>{{list.PhyO_DBA_Name}}</td>
+					<!-- <td>{{list.PhyO_Email}}</td> -->
+					<td>{{list.PhyO_State}}</td>
+					<td>{{list.PhyO_City}}</td>
+					<td>{{list.PhyO_User_Name}}</td>
+					<td>{{list.PhyO_Modify_Date | date: 'MM-dd-yyyy, hh:mm a'}} <span class="info"  data-toggle="tooltip" data-placement="left" title="{{list.PhyO_Create_Date | date: 'MM-dd-yyyy, hh:mm aa'}}"><i *ngIf = "list.PhyO_Modify_Date != list.PhyO_Create_Date " class="icofont-info-circle"></i></span></td>
+
+
+					<td class="edit-button">
+						<!-- <i routerLink = "/physician-contact-settings/{{list.PhyO_Unique_ID}}" class="icofont-id-card" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
+						<i routerLink = "/physician-center-settings/{{list.PhyO_Unique_ID}}" class="icofont-gear" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; -->
+
+						<i class="fa fa-trash" aria-hidden="true" title = "{{'Delete' | translate}}" (click) =
+						"revertDeleted(list)"></i>&nbsp;&nbsp;&nbsp;
+						<i class="icofont-web"></i>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</div>
+</div>
+
+<!-- Modal -->
+<div id="submitbtn" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to Submit ?' | translate}}</h3>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary" (click) = "addPhysicianForm()" >{{'Yes' | translate}}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- Modal -->
+<div id="cancelbtn" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to Cancel ?' | translate}}</h3>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary" (click)  = "goBack()" >{{'Yes' | translate}}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- Modal -->
+<div id="trash" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to delete ?' | translate}}</h3>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary" (click) = "isDeletedYes()">{{'Yes' | translate}}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!-- Modal -->
+<div id="revertDelete" class="modal fade modalmsg" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="close_btn">
+				<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+			</div>
+			<div class="modal-body text-center">
+				<h3>{{'Are you sure, you want to Retrive data ?' | translate}}</h3>>
+			</div>
+			<div class="modal-footer border0">
+				<button type="button" class="btn btn-primary" (click) = "revertData()">{{'Yes' | translate}}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+			</div>
+		</div>
+
+	</div>
+</div>

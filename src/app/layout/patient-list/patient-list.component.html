@@ -1,0 +1,52 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+	<div class="loader-img">
+		<img src="assets/Images/logo2.gif" alt="">
+	</div>
+</div>	
+<div class="section-container section-container-new" >
+	<div class="main-heading main-heading1">
+		<div class="mh-left">
+			<h1 class="add-button">{{'Patient List' | translate}}</h1>
+		</div>
+		<div class="mh-right">
+			<span *ngIf = "getPerDetails[0]?.Is_Add"><a  class="add-button" routerLink = "/add-patient" *ngIf = "admin.UM_Office_Type == 'P'"><i class="fa fa-plus" aria-hidden="true" style="font-size: 15px;"></i> {{'Add Patient' | translate}}</a></span>
+		</div>
+	</div>
+	<div class = "add-table">
+		<!-- <a (click) = "viewDeletedRdcs()" class="custom-link">Deleted Records</a> -->
+		<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class = "table"  id = 'patinr_list'>
+			<thead>
+				<tr>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">#</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'First Name' | translate}}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Last Name' | translate}}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'City' | translate}}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Created By' | translate }}</th>
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Last Modify' | translate}}</th>
+					<!-- <th>{{'Status' | translate }}</th> -->
+					<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" *ngIf = "admin.UM_Office_Type != 'A'">{{'Action' | translate}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor = "let list of getPatientArray; let i = index">
+					<td class="hash-center">{{i+1}}</td>
+					<td>{{list.Patient_First_Name}}</td>
+					<td>{{list.Patient_Last_Name}}</td>
+					<td>{{list.Patient_City}}</td>
+					<td>{{list.Patient_User_Name}}</td>
+					<td>{{list.Patient_Modify_Date | date: 'MM-dd-yyyy, hh:mm a'}} <span class="info"  data-toggle="tooltip" data-placement="left" title="{{list.Patient_Create_Date | date: 'MM-dd-yyyy, hh:mm aa'}}"><i *ngIf = "list.Patient_Modify_Date != list.Patient_Create_Date " class="icofont-info-circle"></i></span></td>
+				<!-- <td *ngIf = "list..Patient_Is_Active"><mat-slide-toggle (change) = "UpdateStatus(list, $event)" checked>Active</mat-slide-toggle></td>
+					<td *ngIf = "!list.ROM_Is_Active"><mat-slide-toggle (change) = "UpdateStatus(list, $event)">Not Active</mat-slide-toggle></td> --> 
+
+					<td class="edit-button" *ngIf = "admin.UM_Office_Type != 'A'">
+						<!-- <span><i class="fa fa-eye" title = "{{'View' | translate}}"></i></span>&nbsp;&nbsp;&nbsp; -->
+						<span *ngIf = "admin.UM_Office_Type == 'P'"><i  class="fa fa-book" title = "{{'Booking' | translate}}" (click) = "gotoBookNow(list)"></i></span>&nbsp;&nbsp;&nbsp;
+						<!-- <span><i class="fa fa-pencil-square-o " title = "{{'Edit' | translate}}"  aria-hidden="true"  routerLink ="/edit-patient/{{Alert_Unique_ID}}"></i></span> -->
+						<span *ngIf = "getPerDetails[0]?.Is_Edit" title="Edit Patient"><i routerLink ="/edit-patient/{{list.Patient_Unique_ID}}" class="fa fa-pencil-square-o " title = "{{'Edit' | translate}}"  aria-hidden="true"></i></span>
+						
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

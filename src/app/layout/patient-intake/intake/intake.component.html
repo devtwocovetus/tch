@@ -1,0 +1,115 @@
+<div class="section-container section-container-new">
+	<div class="main-heading main-heading1">
+		<div class="mh-left">
+			<h1 class="add-button">{{'Patient Intake' | translate }}</h1>
+		</div>
+		<div class="mh-right">
+			<a *ngIf = "getPerDetails[0]?.Is_Add" type="button" class="add-button mr-15" routerLink="/add-intake"><i aria-hidden="true"  class="fa fa-plus" style="font-size: 15px;"></i>&nbsp; {{'Add Patient Intake' | translate }}</a>
+			<!-- <a type="button" class="add-button" routerLink="/add-notifications"><i aria-hidden="true" class="fa fa-plus" style="font-size: 15px;"></i>&nbsp;Add Notification</a> -->
+		</div>
+	</div>
+	<div class="add-table">
+		<!-- <a class="custom-link ">Deleted Records</a> -->
+		<a class="add-custom-link mr-15"  routerLink="/add-intake-type"><i aria-hidden="true" class="fa fa-plus" style="font-size: 15px;"></i> {{'Add Patient Intake Type' | translate }}</a>
+		<div class="dataTables_wrapper">
+			<table class = "table"  id = 'ntitbleview'>
+				<thead>
+					<tr>
+						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)" class="hash-center">#</th>
+						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Name' | translate }}</th>
+						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)"> {{'Category Name' | translate }}</th>
+						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Created By' | translate }}</th>
+						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Last Modify' | translate }}</th>
+						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Status' | translate }}</th>
+						<th [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorLight_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorLight_Hax : null)">{{'Action' | translate }}</th>
+					</tr>
+				</thead> 
+				
+				<tbody>
+					<tr *ngFor = "let list of getEthinicityArray; let i = index">
+						<td class="hash-center">{{i+1}}</td>
+						<td><span>{{list.PIT_Name}}</span></td>
+						<td>{{list.PIT_Category_Name}}</td> 
+						<td>{{list.PIT_User_Name}}</td>
+						<td>{{list.PIT_Modify_Date | date: 'MM-dd-yyyy'}} <span class="info"  data-toggle="tooltip" data-placement="left" title="{{list.PIT_Create_Date | date: 'MM-dd-yyyy, hh:mm aa'}}"><i *ngIf = "list.PIT_Modify_Date != list.PIT_Create_Date " class="icofont-info-circle"></i></span></td>
+						<td *ngIf = "list.PIT_Is_Active"><mat-slide-toggle checked></mat-slide-toggle></td>
+						<td *ngIf = "!list.PIT_Is_Active"><mat-slide-toggle></mat-slide-toggle></td>
+
+						<td class="edit-button">	<i *ngIf = "getPerDetails[0]?.Is_Edit" class="fa fa-pencil-square-o " title = "{{'Edit' | translate}}"  aria-hidden="true" routerLink = "/update-intake/{{list.PIT_Unique_ID}}" title = "{{'Edit' | translate}}"></i>&nbsp;&nbsp;
+
+							<span *ngIf = "getPerDetails[0]?.Is_Delete">	<i *ngIf = "getPerDetails[0]?.Is_Add" class="fa fa-trash" aria-hidden="true" title = "{{'Delete' | translate}}" (click) =
+								"dataDeleted(list)"></i>
+								&nbsp;&nbsp;
+								<i class="fa fa-plus"  title = "{{'Add Action' | translate}}" aria-hidden="true" routerLink = "/actions-intake/{{list.PIT_Unique_ID}}" ></i></span>
+							</td>
+						</tr> 
+					</tbody> 
+					
+				</table>
+			</div>
+		</div>
+
+
+		<!-- Start Popup for Add Notification Type -->
+		<div class="modal fade" id="addnotificationtype" tabindex="-1" role="dialog" aria-labelledby="addnotificationtypeLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">	<span aria-hidden="true">&times;</span></span></button>
+						<h1 class="modal-title" id="myModalLabel">{{'Add Notification Type' | translate }}</h1>
+					</div>				
+					<div class="modal-body form-element noShadow">
+						<form>
+							<div class="form-group">
+								<label for="recipient-name" class="col-form-label">{{'Notification Category' | translate }}:</label>
+								<div class="input-group">
+									<div class="input-group-addon">
+										<img src="assets/Images/box-icon.png">
+									</div>
+									<select class="form-control selectbox" [(ngModel)] = "reqData.NC_Category" [ngModelOptions]="{standalone: true}">
+										<option value="" disabled="">{{'Please Select Category' | translate }}</option>
+										<option *ngFor = "let NC_Category of GetIntakeCategoryListArray" value="{{NC_Category.NC_Unique_ID}}">{{NC_Category.NC_Category_Name}}</option>
+									</select>
+								</div>							
+							</div>
+							<div class="form-group">
+								<label for="message-text" class="col-form-label">{{'Notification Type' | translate }}:</label>
+								<div class="input-group">
+									<div class="input-group-addon">
+										<img src="assets/Images/box-icon.png">
+									</div>
+									<input type="text" class="form-control"  [(ngModel)] = "reqData.NC_Type" [ngModelOptions]="{standalone: true}">
+								</div>							
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<input class="btn btngp btnsubmit" type="button" value="{{'Close' | translate }}" data-dismiss="modal"/>
+						<input class="btn btngp btnsubmit" type="button" (click) = "SaveNotification()" value="Save"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Popup for Add Notification Type -->
+	</div>
+
+	<!-- Modal -->
+	<div id="trash" class="modal fade modalmsg" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="close_btn">
+					<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+				</div>
+				<div class="modal-body text-center">
+					<h3>{{'Are you sure, you want to delete ?' | translate }}"</h3>
+				</div>
+				<div class="modal-footer border0">
+					<button type="button" class="btn btn-primary" (click) = "isDeletedYes()">{{'Yes' | translate }}</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate }}</button>
+				</div>
+			</div>
+
+		</div>
+	</div>

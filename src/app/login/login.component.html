@@ -1,0 +1,87 @@
+<div class="loader-contaier" *ngIf = "showLoader">
+	<div class="loader-img">
+		<img src="assets/Images/logo2.gif" alt="">
+	</div>
+</div>
+
+ <input type="hidden" id="BaseUrlPath" value="@ViewBag.BaseUrlPath" />
+<div class="form-body">
+	<div class="row">
+		<div class="form-holder">
+			<div class="form-content" style="background-color:#2ca36d !important">
+				<div class="form-items">
+					<div class="">
+						<a href="index.html">
+							<div class="logo">
+								<img class="logo-size" src="assets/Images/logo.png" alt="">
+							</div>
+						</a>
+					</div>
+					<h3></h3>
+					<p></p>
+					<div class="page-links">
+						<a href="javascript:void(0);" class="active unlink login">Login</a>
+					</div>
+					<form>
+						<input class="form-control userNameCtrl" type="text" [(ngModel)] = "reqData.email" name="username" placeholder="Email Id" required (keydown.enter)="onLoggedin()">
+						<input class="form-control clientSecretCtrl" type="password" [(ngModel)] = "reqData.password" name="password" placeholder="Password" required (keydown.enter)="onLoggedin()">
+						<div class="form-button">
+							<button id="submit" type="button"   (click)= "onLoggedin();" class="ibtn loginBtn">Login</button>
+							 <a routerLink = "/forgot-password">Forgot Password ?</a>
+						</div>
+					</form>
+					<div class="other-links">
+						<span>Version 0.0.1</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <div class="login-container">
+	<div class="col-md-7 login-left">
+		<div class="login-left-section">
+			<div class="text-center">
+				<img src="assets/Images/track_every_message.png" alt="" class="center-block">
+			</div>
+			<div class="text-left">
+			<h2>Complete Delivery Tracking</h2>
+			<h4>Track every single message sent out for your campaign</h4>
+			<ul class="login-list">
+				<li><i class="icofont-check"></i> Track your messages opens & clicks</li>
+				<li><i class="icofont-check"></i> Automatically handle bounce & feedback</li>
+				<li><i class="icofont-check"></i> Measure your campaign performance with insight reports</li>
+			</ul>
+		</div>
+		</div>
+	</div>
+	<div class="col-md-5 login-right">
+		<div class="login-right-pad">
+		<div class="login-right-logo text-center">
+			<img src="assets/Images/logo.png" class="">
+		</div>
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="text" class="form-control mb-20" name="" [(ngModel)] = "reqData.email" (keydown.enter)="onLoggedin()">
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" class="form-control" name="" [(ngModel)] = "reqData.password" (keydown.enter)="onLoggedin()">
+			</div>
+			<div class="form-group mt-25">
+				<div class="checkbox checkbox-success checkbox-inline ">
+							<input type="checkbox" class="styled" id="Remember" value="option1" >
+							<label for="Remember"> Remember me on this device </label>
+						</div>
+			</div>
+			<div class="mt-35">
+				<a href="#" class="btn btn-primary btn-block" (click) = "onLoggedin()">Login</a>
+			</div>
+			<div class="mt-25 text-center">
+				<a href="#" class="btm-links" routerLink = "/forgot-password">Forgot Password?</a>
+			</div>
+		</div>
+	</div>
+</div> -->
+

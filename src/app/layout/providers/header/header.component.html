@@ -1,0 +1,723 @@
+<style type="text/css">
+	body.home{
+		padding-left: 0;
+	}
+	body a:hover{
+	}
+</style>
+<div class="main-contaier">
+	<div *ngIf = "admin.UM_Office_Type == 'S' || admin.UM_Office_Type == 'A'" class="left-bar ps" [perfectScrollbar]="config" [ngStyle]="setAccToSurgery?.SurgC_Appearance?{'background-color': setAccToSurgery.SurgC_Appearance.App_NavigationColorLight_Hax} : {'background-color': 'green'}">
+		<div class="header" [ngStyle]="setAccToSurgery?.SurgC_Appearance?{'background-color': setAccToSurgery?.SurgC_Appearance.App_NavigationColorDark_Hax} : {'background-color': '#04a8c5'}">
+			<div class="logo">
+				<a  routerLink = "/dashboard" *ngIf = "!setAccToSurgery?.SurgC_Logo"><img src="assets/Images/logo.png"></a>
+				<a routerLink = "/dashboard" *ngIf = "setAccToSurgery && setAccToSurgery.SurgC_Logo"  class="nav-toggle"><img src="{{imageLink}}{{removeTildSign(setAccToSurgery.SurgC_Logo.Logo_Navigation_Image)}}"></a>
+				<a routerLink = "/dashboard" *ngIf = "setAccToSurgery && setAccToSurgery.PhyO_Logo"  class="nav-toggle"><img src="{{imageLink}}{{removeTildSign(setAccToSurgery.PhyO_Logo.Logo_Navigation_Image)}}"></a>
+			</div>
+			<div class="menu-icon">
+				<a  class="nav-toggle"><img src="assets/Images/menu-icon.png"></a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="main-menu">
+			<ul class="nav menu">
+				
+				<li>
+					<a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink] = "['/dashboard']" >
+						<img src="assets/Images/home-icon.png" class="inactiveimg" />
+						<img src="assets/Images/home-active-icon.png" class="activeimg" />
+						<span>{{ 'Dashboard' | translate }}</span>
+						<img src="assets/Images/right-arrow.png" class="inactiveimg1" />
+						<img src="assets/Images/right-arrow-active.png" class="activeimg1" />
+					</a>
+				</li>
+				<!-- <li *ngIf = "patientList && admin.UM_Office_Type == 'S'" >
+					<a  [routerLinkActive]="['active']" [routerLink] = "['/patient-list']">
+						<img src="assets/Images/inc-man-icon.png" class="inactiveimg" />
+						<img src="assets/Images/inc-man-icon-active.png" class="activeimg" />
+						<span>{{'Patients' | translate}}</span>
+						<img src="assets/Images/right-arrow.png" class="inactiveimg1" />
+						<img src="assets/Images/right-arrow-active.png" class="activeimg1" />
+					</a>
+				</li> -->
+				<li class="sidebar-dropdown appHide" *ngIf = "admin.UM_Office_Type != 'A'">
+					<a>
+						<img src="assets/Images/appointments.png" class="inactiveimg" />
+						<img src="assets/Images/appointments-active.png" class="activeimg" />
+						<span>{{'Appointments' | translate }}</span>
+						<div class="plus">
+							<img src="assets/Images/plus.png" class="inactiveimg1" />
+							<img src="assets/Images/plus-active.png" class="activeimg1" />
+						</div>
+						<div class="minus">
+							<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+							<img src="assets/Images/minus-white.png" class="activeimg1" />
+						</div>
+					</a>
+					<ul class="side-nav-dropdown">
+						<li *ngIf = "appointmentList"><a [routerLinkActive]="['active']" [routerLink] = "['/appointment-list']">{{'Appointment List' | translate}}</a></li>
+						<li *ngIf = "appointmentHistory"><a [routerLinkActive]="['active']" [routerLink] = "['/appointment-history']">{{'Appointment History' |  translate}}</a></li>
+						<!-- <li><a routerLink = "/quick-booking-list">Quick Booking List</a></li> -->
+						<!-- <li><a routerLink = "/walkin-list">Walk-in List</a></li> -->
+					</ul>
+				</li>
+				
+				<li  *ngIf ="admin.UM_Office_Type == 'A' && masterSurgery">
+					<a [routerLinkActive]="['active']" [routerLink] = "['/master-surgery']">
+						<img src="assets/Images/surgical-procedure-info-icon.png" class="inactiveimg" />
+						<img src="assets/Images/surgical-procedure-info-active-icon.png" class="activeimg" />
+						<span>{{'Surgery Centers'  |  translate}}</span>
+						<img src="assets/Images/right-arrow.png" class="inactiveimg1" />
+						<img src="assets/Images/right-arrow-active.png" class="activeimg1" />
+					</a>
+				</li>
+				<li *ngIf ="admin.UM_Office_Type == 'A' || admin.UM_Office_Type == 'S' && masterPhysician">
+					<a [routerLinkActive]="['active']" [routerLink] = "['/master-physician']" >
+						<img src="assets/Images/heightmap-icon.png" class="inactiveimg" />
+						<img src="assets/Images/heightmap-icon-active.png" class="activeimg" />
+						<span>{{'Physician Offices' |  translate}} </span>
+						<img src="assets/Images/right-arrow.png" class="inactiveimg1" />
+						<img src="assets/Images/right-arrow-active.png" class="activeimg1" />
+					</a>
+				</li>
+				<li class="sidebar-dropdown staffmsgnt">
+					<a>
+						<img src="assets/Images/staff_management.png" class="inactiveimg" />
+						<img src="assets/Images/staff_management-active.png" class="activeimg" />
+						<span>{{'Staff Management' |  translate}}</span>
+						<div class="plus">
+							<img src="assets/Images/plus.png" class="inactiveimg1" />
+							<img src="assets/Images/plus-active.png" class="activeimg1" />
+						</div>
+						<div class="minus">
+							<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+							<img src="assets/Images/minus-white.png" class="activeimg1" />
+						</div>
+						<!-- *ngIf ="admin.UM_Office_Type == 'A' || admin.UM_Office_Type == 'S'" -->
+					</a>
+					<ul class="side-nav-dropdown">
+						<li *ngIf ="admin.UM_Office_Type == 'A' && userSurgery"><a [routerLinkActive]="['active']" [routerLink] = "['/master-user/surgery']">{{'Surgery Center'  |  translate}}</a></li>
+						<li *ngIf ="admin.UM_Office_Type == 'S' && userSurgery"><a [routerLinkActive]="['active']" [routerLink] = "['/master-user/surgery']">{{'Staff List'  |  translate}}</a></li>
+						<li *ngIf = " admin.UM_Office_Type == 'S' && userPhysicain"><a [routerLinkActive]="['active']" [routerLink] = "['/master-user/physician']">{{'Physician Office' |  translate}}</a></li>
+						<!-- <li><a routerLink = "/master-role">Staff Roles</a></li> -->
+					</ul>
+				</li>
+				<li class="sidebar-dropdown SurMstrLib">
+					<a >
+						<img src="assets/Images/ethnicity-icon.png" class="inactiveimg" />
+						<img src="assets/Images/ethnicity-icon-active.png" class="activeimg" />
+						<span>{{'Master Library' | translate}}</span>
+						<div class="plus">
+							<img src="assets/Images/plus.png" class="inactiveimg1" />
+							<img src="assets/Images/plus-active.png" class="activeimg1" />
+						</div>
+						<div class="minus">
+							<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+							<img src="assets/Images/minus-white.png" class="activeimg1" />
+						</div>
+					</a>
+					<ul class="side-nav-dropdown">
+						<li *ngIf = "masterAlert"><a [routerLinkActive]="['active']" [routerLink] = "['/master-alerts']">{{'Alerts' | translate}}</a></li>
+						<li *ngIf = "masterAnesthesia"><a [routerLinkActive]="['active']" [routerLink] = "['/master-anesthesia']">{{'Anesthesia' | translate}}</a></li>
+						<!-- <li *ngIf = ""><a [routerLinkActive]="['active']" [routerLink] = "/kb-articles">{{'Articles' | translate}}</a></li> -->
+						<li *ngIf = "masterBlock"><a [routerLinkActive]="['active']" [routerLink] = "['/master-block']">{{'Block' | translate}}</a></li>
+						<li *ngIf = " admin.UM_Office_Type == 'A'"><a [routerLinkActive]="['active']" [routerLink] = "['/master-cpt']">{{'CPT' | translate}}</a></li>
+						<li *ngIf = "masterDesignation"><a [routerLinkActive]="['active']" [routerLink] = "['/master-designation']">{{'Designation' | translate}}</a></li>
+						<li *ngIf = "documentCategory"><a [routerLinkActive]="['active']" [routerLink] = "['/document-category']">{{'Document Category' | translate}}</a></li>
+						<li *ngIf = "masterEquipment"><a [routerLinkActive]="['active']" [routerLink] = "['/master-equipment']">{{'Equipments' | translate}}</a></li>
+						<li  *ngIf ="admin.UM_Office_Type == 'A'"><a [routerLinkActive]="['active']" [routerLink] = "['/master-ethinicity']">{{'Ethinicity' | translate}}</a></li>
+						<li *ngIf = "masterForms"><a [routerLinkActive]="['active']" [routerLink] = "['/master-forms']">{{'Forms' | translate}}</a></li>
+						<li *ngIf = "admin.UM_Office_Type == 'A'"><a [routerLinkActive]="['active']" [routerLink] = "['/master-icd-code']">{{'ICD Code' | translate}}</a></li>
+						<li *ngIf = "masterIncident"><a [routerLinkActive]="['active']" [routerLink] = "['/master-incident']">{{'Incident' | translate}}</a></li>
+						<li *ngIf = "kbCategory"><a [routerLinkActive]="['active']" [routerLink] = "['/kb-category']">{{'KB Category' | translate}}</a></li>
+						<li *ngIf = "masterInstrumentation"><a [routerLinkActive]="['active']" [routerLink] = "['/master-instrumentation']">{{'Instruments' | translate}}</a></li>
+						<li  *ngIf ="admin.UM_Office_Type == 'A'"><a [routerLinkActive]="['active']" [routerLink] = "['/master-language']">{{'Languages' | translate}}</a></li>
+						<li  *ngIf ="admin.UM_Office_Type == 'A'"><a [routerLinkActive]="['active']" [routerLink] = "['/master-nationality']">{{'Nationality' | translate}}</a></li>
+						<li *ngIf = "addNotiType"><a [routerLinkActive]="['active']" [routerLink] = "['/add-notification-type']">{{'Notification Type' | translate}}</a></li>
+						<li *ngIf = "admin.UM_Office_Type == 'A'"><a [routerLinkActive]="['active']" [routerLink] = "['/master-procedure']">{{'Procedure' | translate}}</a></li>
+						<li  *ngIf ="admin.UM_Office_Type == 'A'"><a [routerLinkActive]="['active']" [routerLink] = "['/master-race']">{{'Race' | translate}}</a></li>
+						<li  *ngIf ="admin.UM_Office_Type == 'A'"><a [routerLinkActive]="['active']" [routerLink] = "['/master-religion']">{{'Religion' | translate}}</a></li>
+						<li *ngIf = "masterSupplies"><a [routerLinkActive]="['active']" [routerLink] = "['/master-supplies']">{{'Supplies' | translate}}</a></li>
+						<li  *ngIf ="admin.UM_Office_Type == 'A'"><a [routerLinkActive]="['active']" [routerLink] = "['/master-specility']">{{'Speciality' | translate}}</a></li>
+					</ul>
+				</li>
+				<li class="sidebar-dropdown patform">
+					<a>
+						<img src="assets/Images/patient_forms.png" class="inactiveimg" />
+						<img src="assets/Images/patient_forms-active.png" class="activeimg" />
+						<span>{{'Patient Forms' | translate}}</span>
+						<div class="plus">
+							<img src="assets/Images/plus.png" class="inactiveimg1" />
+							<img src="assets/Images/plus-active.png" class="activeimg1" />
+						</div>
+						<div class="minus">
+							<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+							<img src="assets/Images/minus-white.png" class="activeimg1" />
+						</div>
+					</a>
+					<ul class="side-nav-dropdown">
+						<li *ngIf = "medicalForm"><a [routerLinkActive]="['active']" [routerLink] = "['/medical-form']">{{'Medical Forms' | translate}}</a></li>
+						<li *ngIf = "legalForm"><a [routerLinkActive]="['active']" [routerLink] = "['/legal-form']">{{'General Forms' | translate}}</a></li>
+					</ul>
+				</li>
+				<li class="sidebar-dropdown commMod" *ngIf ="admin.UM_Office_Type != 'A'">
+					<a>
+						<img src="assets/Images/inbox-icon.png" class="inactiveimg" />
+						<img src="assets/Images/inbox-icon.png" class="activeimg" />
+						<span>{{'Communications' | translate}}</span>
+						<div class="plus">
+							<img src="assets/Images/plus.png" class="inactiveimg1" />
+							<img src="assets/Images/plus-active.png" class="activeimg1" />
+						</div>
+						<div class="minus">
+							<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+							<img src="assets/Images/minus-white.png" class="activeimg1" />
+						</div>
+					</a>
+					<ul class="side-nav-dropdown">
+						<!-- <li><a [routerLinkActive]="['active']" [routerLink] = "/messages">Messages</a></li> -->
+						<li *ngIf = "notifications"><a [routerLinkActive]="['active']" [routerLink] = "['/notifications']">{{'Notifications' | translate}}</a></li>
+						<li *ngIf = "intake"><a [routerLinkActive]="['active']" [routerLink] = "['/intake']">{{'Patient In-take' | translate}}</a></li>
+					</ul>
+				</li>
+				<!-- <li *ngIf ="admin.UM_Office_Type == 'A' && languages">
+					<a [routerLinkActive]="['active']" [routerLink] = "/languages" >
+						<img src="assets/Images/a-icon.png" class="inactiveimg" />
+						<img src="assets/Images/a-icon-active.png" class="activeimg" />
+						<span>{{'Languages' | translate}}</span>
+						<div class="plus">
+							<img src="assets/Images/right-arrow.png" class="inactiveimg1" />
+							<img src="assets/Images/right-arrow-active.png" class="activeimg1"/>
+						</div>
+					</a>
+				</li> -->
+				<li class="sidebar-dropdown knwbse">
+					<a>
+						<img src="assets/Images/inbox-icon.png" class="inactiveimg" />
+						<img src="assets/Images/inbox-icon.png" class="activeimg" />
+						<span>{{'Knowledge Base' | translate}}</span>
+						<div class="plus">
+							<img src="assets/Images/plus.png" class="inactiveimg1" />
+							<img src="assets/Images/plus-active.png" class="activeimg1" />
+						</div>
+						<div class="minus">
+							<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+							<img src="assets/Images/minus-white.png" class="activeimg1" />
+						</div>
+					</a>
+					<ul class="side-nav-dropdown">
+						<li *ngIf = "knowledgeBase"><a [routerLinkActive]="['active']" [routerLink] = "['/knowledge-base']">{{'KB Article' | translate}}</a></li>
+						<li *ngIf = "kbArticles"><a [routerLinkActive]="['active']" [routerLink] = "['/kb-articles']">{{'Article' | translate}}</a></li>
+					</ul>
+				</li>
+				<li class="sidebar-dropdown patform">
+					<a>
+						<img src="assets/Images/patient_forms.png" class="inactiveimg" />
+						<img src="assets/Images/patient_forms-active.png" class="activeimg" />
+						<span>{{'Language' | translate }}</span>
+						<div class="plus">
+							<img src="assets/Images/plus.png" class="inactiveimg1" />
+							<img src="assets/Images/plus-active.png" class="activeimg1" />
+						</div>
+						<div class="minus">
+							<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+							<img src="assets/Images/minus-white.png" class="activeimg1" />
+						</div>
+					</a>
+					<ul class="side-nav-dropdown">
+						<li> <a class="dropdown-item"  (click)="changeLang('en')">
+							{{ 'English' | translate }}
+						</a></li>
+						<li> <a class="dropdown-item"  (click)="changeLang('fr')">
+							{{ 'French' | translate }}
+						</a></li>
+						<li><a class="dropdown-item"  (click)="changeLang('es')">
+							{{ 'Spanish' | translate }}
+						</a></li>
+					</ul>
+				</li>
+
+				
+				<li class="sidebar-dropdown">
+					<a>
+						<img src="assets/Images/settings-alt.png" class="inactiveimg" />
+						<img src="assets/Images/settings-alt-active.png" class="activeimg" />
+						<span>{{'Settings' | translate}}</span>
+						<div class="plus">
+							<img src="assets/Images/plus.png" class="inactiveimg1" />
+							<img src="assets/Images/plus-active.png" class="activeimg1" />
+						</div>
+						<div class="minus">
+							<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+							<img src="assets/Images/minus-white.png" class="activeimg1" />
+						</div>
+					</a>
+					<ul class="side-nav-dropdown">
+						<li *ngIf = "admin.UM_Office_Type == 'S'"><a [routerLinkActive]="['active']" [routerLink] = "['/surgery-center-settings',admin.UM_Surgary_Physician_CenterID]">{{'Global' | translate}}</a></li>
+						<!-- <li><a [routerLinkActive]="['active']" [routerLink] = "/master-user/physician">Notifications</a></li>
+							<li><a [routerLinkActive]="['active']" [routerLink] = "/email-templete">Email Templates</a></li> -->
+							<li *ngIf = "admin.UM_Office_Type == 'S' && editSurgery"><a [routerLinkActive]="['active']" [routerLink] = "['/edit-surgery-center',admin.UM_Surgary_Physician_CenterID]">{{'Facility Information' | translate}}</a></li>
+							
+							<!-- <li *ngIf = "admin.UM_Office_Type == 'S'"><a [routerLinkActive]="['active']" [routerLink] = "/notification-time">Notification Time</a></li> -->
+							<!-- <li *ngIf = "admin.UM_Office_Type == 'P'"><a [routerLinkActive]="['active']" [routerLink] = "/notification-time">Notification Time</a></li> -->
+							<li *ngIf = "systemEmail"><a [routerLinkActive]="['active']" [routerLink] = "['/system-email']">{{'System Email' | translate}}</a></li>
+							<li *ngIf = "changePassword"><a [routerLinkActive]="['active']" [routerLink] = "['/change-password']">{{'Change Password' | translate}}</a></li>
+						</ul>
+					</li>
+					<li *ngIf = "chat && admin.UM_Office_Type != 'A'">
+						<a  [routerLinkActive]="['active']" [routerLink] = "['/chat']">
+							<img src="assets/Images/chat_icon.png" class="inactiveimg" />
+							<img src="assets/Images/chat_icon_active.png" class="activeimg" />
+							<span>{{'Chat' | translate}}</span>
+						</a>
+					</li>
+					<li>
+						<a  data-toggle="modal" data-target="#logout">
+							<img src="assets/Images/logout.png" class="inactiveimg" />
+							<img src="assets/Images/logout-active.png" class="activeimg" />
+							<span>{{'Logout' | translate}}</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="left-bar ps" *ngIf = "admin.UM_Office_Type == 'P'" [perfectScrollbar]="config" [ngStyle]="setAccToSurgery?.PhyO_Appearance?{'background-color': setAccToSurgery.PhyO_Appearance.App_NavigationColorLight_Hax} : {'background-color': 'green'}">
+			<div class="header" [ngStyle]="setAccToSurgery?.PhyO_Appearance?{'background-color': setAccToSurgery?.PhyO_Appearance.App_NavigationColorDark_Hax} : {'background-color': '#006400'}">
+				<div class="logo">
+					<a routerLink = "/dashboard" *ngIf = "!setAccToSurgery?.PhyO_Logo"><img src="assets/Images/logo.png"></a>
+					<a routerLink = "/dashboard" *ngIf = "setAccToSurgery && setAccToSurgery.PhyO_Logo"  class="nav-toggle"><img src="{{imageLink}}{{removeTildSign(setAccToSurgery.PhyO_Logo.Logo_Navigation_Image)}}"></a>
+				</div>
+				<div class="menu-icon">
+					<a  class="nav-toggle"><img src="assets/Images/menu-icon.png"></a>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="main-menu">
+				<ul class="nav menu">
+					<li>
+						<a [routerLinkActive]="['active']" [routerLink] = "['/dashboard']" >
+							<img src="assets/Images/home-icon.png" class="inactiveimg" />
+							<img src="assets/Images/home-active-icon.png" class="activeimg" />
+							<span>{{'Dashboard' | translate }}</span>
+							<img src="assets/Images/right-arrow.png" class="inactiveimg1" />
+							<img src="assets/Images/right-arrow-active.png" class="activeimg1" />
+						</a>
+					</li>
+					<li *ngIf = "patientList" >
+						<a [routerLinkActive]="['active']" [routerLink] = "['/patient-list']">
+							<img src="assets/Images/inc-man-icon.png" class="inactiveimg" />
+							<img src="assets/Images/inc-man-icon-active.png" class="activeimg" />
+							<span>{{'Patients' | translate }}</span>
+							<img src="assets/Images/right-arrow.png" class="inactiveimg1" />
+							<img src="assets/Images/right-arrow-active.png" class="activeimg1" />
+						</a>
+					</li>
+					<!-- <li>{{appointmentList}}{{appointmentHistory}}</li> -->
+					<li class="sidebar-dropdown appHide" *ngIf ="admin.UM_Office_Type != 'A'">
+						<a>
+							<img src="assets/Images/appointments.png" class="inactiveimg" />
+							<img src="assets/Images/appointments-active.png" class="activeimg" />
+							<span>{{'Appointments' | translate }}</span>
+							<div class="plus">
+								<img src="assets/Images/plus.png" class="inactiveimg1" />
+								<img src="assets/Images/plus-active.png" class="activeimg1" />
+							</div>
+							<div class="minus">
+								<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+								<img src="assets/Images/minus-white.png" class="activeimg1" />
+							</div>
+						</a>
+						<ul class="side-nav-dropdown" >
+							<li  *ngIf = "appointmentList"><a [routerLinkActive]="['active']" [routerLink] = "['/appointment-list']">{{'Appointment List' | translate }}</a></li>
+							<li *ngIf = "appointmentHistory"><a [routerLinkActive]="['active']" [routerLink] = "['/appointment-history']">{{'Appointment History' | translate }}</a></li>
+							<li *ngIf = "quickList"><a [routerLinkActive]="['active']" [routerLink] = "['/quick-booking-list']">{{'Quick Booking' | translate }} List</a></li>
+							<li *ngIf = "walkinList"><a [routerLinkActive]="['active']" [routerLink] = "['/walkin-list']">{{'Walk-in List' | translate }}</a></li>
+						</ul>
+					</li>
+					<li>
+						<li class="sidebar-dropdown vcHide">
+							<a>
+								<img src="assets/Images/appointments.png" class="inactiveimg" />
+								<img src="assets/Images/appointments-active.png" class="activeimg" />
+								<span>{{'Virtual Consultation' | translate }} </span>
+								<div class="plus">
+									<img src="assets/Images/plus.png" class="inactiveimg1" />
+									<img src="assets/Images/plus-active.png" class="activeimg1" />
+								</div>
+								<div class="minus">
+									<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+									<img src="assets/Images/minus-white.png" class="activeimg1" />
+								</div>
+							</a>
+							<ul class="side-nav-dropdown">
+								<li *ngIf = "vcList"><a [routerLinkActive]="['active']" [routerLink] = "['/vc-list']">{{'Appointment List' | translate }}</a></li>
+								<li *ngIf = "vcHistory"><a [routerLinkActive]="['active']" [routerLink] = "['/vc-history']">{{'Appointment History' | translate }}</a></li>
+							</ul>
+						</li>
+						<li class="sidebar-dropdown staffPhy" >
+							<a>
+								<img src="assets/Images/staff_management.png" class="inactiveimg" />
+								<img src="assets/Images/staff_management-active.png" class="activeimg" />
+								<span>{{'Staff Management' | translate }}</span>
+								<div class="plus">
+									<img src="assets/Images/plus.png" class="inactiveimg1" />
+									<img src="assets/Images/plus-active.png" class="activeimg1" />
+								</div>
+								<div class="minus">
+									<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+									<img src="assets/Images/minus-white.png" class="activeimg1" />
+								</div>
+								<!-- *ngIf ="admin.UM_Office_Type == 'A' || admin.UM_Office_Type == 'S'" -->
+							</a>
+							<ul class="side-nav-dropdown" *ngIf = "userPhysicain">
+								<li *ngIf ="admin.UM_Office_Type == 'A' || admin.UM_Office_Type == 'P'"><a [routerLinkActive]="['active']" [routerLink] = "['/master-user/physician']">{{'Staff List' | translate }}</a></li>
+								<!-- <li><a [routerLinkActive]="['active']" [routerLink] = "/master-role">Staff Roles</a></li> -->
+							</ul>
+						</li>
+						<li class="sidebar-dropdown phyMstrLib">
+							<a >
+								<img src="assets/Images/ethnicity-icon.png" class="inactiveimg" />
+								<img src="assets/Images/ethnicity-icon-active.png" class="activeimg" />
+								<span>{{'Master Library' | translate }}</span>
+								<div class="plus">
+									<img src="assets/Images/plus.png" class="inactiveimg1" />
+									<img src="assets/Images/plus-active.png" class="activeimg1" />
+								</div>
+								<div class="minus">
+									<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+									<img src="assets/Images/minus-white.png" class="activeimg1" />
+								</div>
+							</a>
+							<ul class="side-nav-dropdown">
+								<li *ngIf = "masterAlert"><a [routerLinkActive]="['active']" [routerLink] = "['/master-alerts']">{{'Alerts' | translate }}</a></li>
+								<!-- <li><a [routerLinkActive]="['active']" [routerLink] = "['/master-anesthesia']">Anesthesia</a></li> -->
+								<!-- <li><a [routerLinkActive]="['active']" [routerLink] = "['/kb-articles']">Articles</a></li> -->
+								<!-- <li><a [routerLinkActive]="['active']" [routerLink] = "['/master-block']">Block</a></li> -->
+								<!-- <li><a [routerLinkActive]="['active']" [routerLink] = "['/master-cpt']">CPT</a></li> -->
+								<li  *ngIf = "masterDesignation"><a [routerLinkActive]="['active']" [routerLink] = "['/master-designation']">{{'Designation' | translate }}</a></li>
+								<li  *ngIf = "documentCategory"><a [routerLinkActive]="['active']" [routerLink] = "['/document-category']">{{'Document Category' | translate }}</a></li>
+								<li  *ngIf = "masterEquipment"><a [routerLinkActive]="['active']" [routerLink] = "['/master-equipment']">{{'Equipments' | translate }}</a></li>
+
+								<li  *ngIf = "masterForms"><a [routerLinkActive]="['active']" [routerLink] = "['/master-forms']">{{'Forms' | translate }}</a></li>
+								<!-- <li  *ngIf = "masterAlert"><a [routerLinkActive]="['active']" [routerLink] = "['/master-icd-code']">ICD Code</a></li> -->
+								<li  *ngIf = "masterIncident"><a [routerLinkActive]="['active']" [routerLink] = "['/master-incident']">{{'Incident' | translate }}</a></li>
+								<li  *ngIf = "kbCategory"><a [routerLinkActive]="['active']" [routerLink] = "['/kb-category']">{{'KB Category' | translate }}</a></li>
+								<li  *ngIf = "masterInstrumentation"><a [routerLinkActive]="['active']" [routerLink] = "['/master-instrumentation']">{{'Instruments' | translate }}</a></li>
+								<li  *ngIf = "addNotiType"><a [routerLinkActive]="['active']" [routerLink] = "['/add-notification-type']">{{'Notification Type' | translate }}</a></li>
+								<!-- <li  *ngIf = "masterAlert"><a [routerLinkActive]="['active']" [routerLink] = "['/master-procedure']">Procedure</a></li> -->
+								<!-- <li  *ngIf = "masterAlert"><a [routerLinkActive]="['active']" [routerLink] = "['/master-relationship']">Relationship</a></li> -->
+								<li  *ngIf = "masterSupplies"><a [routerLinkActive]="['active']" [routerLink] = "['/master-supplies']">{{'Supplies' | translate }}</a></li>
+
+							</ul>
+						</li>
+						<li class="sidebar-dropdown patform">
+							<a>
+								<img src="assets/Images/patient_forms.png" class="inactiveimg" />
+								<img src="assets/Images/patient_forms-active.png" class="activeimg" />
+								<span>{{'Patient Forms' | translate }}</span>
+								<div class="plus">
+									<img src="assets/Images/plus.png" class="inactiveimg1" />
+									<img src="assets/Images/plus-active.png" class="activeimg1" />
+								</div>
+								<div class="minus">
+									<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+									<img src="assets/Images/minus-white.png" class="activeimg1" />
+								</div>
+							</a>
+							<ul class="side-nav-dropdown">
+								<li  *ngIf = "medicalForm"><a [routerLinkActive]="['active']" [routerLink] = "['/medical-form']">{{'Medical Forms' | translate }}</a></li>
+								<li *ngIf = "legalForm"><a [routerLinkActive]="['active']" [routerLink] = "['/legal-form']">{{'General Forms' | translate }}</a></li>
+							</ul>
+						</li>
+						<li class="sidebar-dropdown commMod" *ngIf ="admin.UM_Office_Type != 'A'">
+							<a>
+								<img src="assets/Images/inbox-icon.png" class="inactiveimg" />
+								<img src="assets/Images/inbox-icon.png" class="activeimg" />
+								<span>{{'Communication' | translate }}</span>
+								<div class="plus">
+									<img src="assets/Images/plus.png" class="inactiveimg1" />
+									<img src="assets/Images/plus-active.png" class="activeimg1" />
+								</div>
+								<div class="minus">
+									<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+									<img src="assets/Images/minus-white.png" class="activeimg1" />
+								</div>
+							</a>
+							<ul class="side-nav-dropdown ">
+								<!-- <li><a [routerLinkActive]="['active']" [routerLink] = "/messages">Messages</a></li> -->
+								<li *ngIf = "notifications"><a [routerLinkActive]="['active']" [routerLink] = "['/notifications']">{{'Notifications' | translate }}</a></li>
+								<li *ngIf = "intake"><a [routerLinkActive]="['active']" [routerLink] = "['/intake']">{{'Patient In-take' | translate }}</a></li>
+							</ul>
+						</li>
+						<li class="sidebar-dropdown knwbse">
+							<a>
+								<img src="assets/Images/inbox-icon.png" class="inactiveimg" />
+								<img src="assets/Images/inbox-icon.png" class="activeimg" />
+								<span>{{'Knowledge Base' | translate}}</span>
+								<div class="plus">
+									<img src="assets/Images/plus.png" class="inactiveimg1" />
+									<img src="assets/Images/plus-active.png" class="activeimg1" />
+								</div>
+								<div class="minus">
+									<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+									<img src="assets/Images/minus-white.png" class="activeimg1" />
+								</div>
+							</a>
+							<ul class="side-nav-dropdown">
+								<li *ngIf = "knowledgeBase"><a [routerLinkActive]="['active']" [routerLink] = "['/knowledge-base']">{{'KB Article' | translate}}</a></li>
+								<li *ngIf = "kbCategory"><a [routerLinkActive]="['active']" [routerLink] = "['/kb-articles']">{{'Article' | translate}}</a></li>
+							</ul>
+						</li>
+						<li class="sidebar-dropdown patform">
+							<a>
+								<img src="assets/Images/patient_forms.png" class="inactiveimg" />
+								<img src="assets/Images/patient_forms-active.png" class="activeimg" />
+								<span>{{'Language' | translate }}</span>
+								<div class="plus">
+									<img src="assets/Images/plus.png" class="inactiveimg1" />
+									<img src="assets/Images/plus-active.png" class="activeimg1" />
+								</div>
+								<div class="minus">
+									<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+									<img src="assets/Images/minus-white.png" class="activeimg1" />
+								</div>
+							</a>
+							<ul class="side-nav-dropdown">
+								<li> <a class="dropdown-item"  (click)="changeLang('en')">
+									{{ 'English' | translate }}
+								</a></li>
+								<li> <a class="dropdown-item"  (click)="changeLang('fr')">
+									{{ 'French' | translate }}
+								</a></li>
+								<li><a class="dropdown-item"  (click)="changeLang('es')">
+									{{ 'Spanish' | translate }}
+								</a></li>
+							</ul>
+						</li>
+						
+						<li class="sidebar-dropdown">
+							<a>
+								<img src="assets/Images/settings-alt.png" class="inactiveimg" />
+								<img src="assets/Images/settings-alt-active.png" class="activeimg" />
+								<span>{{'Settings' | translate}}</span>
+								<div class="plus">
+									<img src="assets/Images/plus.png" class="inactiveimg1" />
+									<img src="assets/Images/plus-active.png" class="activeimg1" />
+								</div>
+								<div class="minus">
+									<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+									<img src="assets/Images/minus-white.png" class="activeimg1" />
+								</div>
+							</a>
+							<ul class="side-nav-dropdown">
+								<li *ngIf = "admin.UM_Office_Type == 'P' && physicianCenterSettings"><a [routerLinkActive]="['active']" [routerLink] = "['/physician-center-settings',admin.UM_Surgary_Physician_CenterID]">{{'Global' | translate}}</a></li>
+
+								<li *ngIf = "admin.UM_Office_Type == 'P' && editPhysician"><a [routerLinkActive]="['active']" [routerLink] = "['/edit-physician-office',admin.UM_Surgary_Physician_CenterID]">{{'Facility Information' | translate}}</a></li>
+
+								<li *ngIf = "systemEmail"><a [routerLinkActive]="['active']" [routerLink] = "['/system-email']">{{'System Email' | translate}}</a></li>
+								<li *ngIf = "changePassword"><a [routerLinkActive]="['active']" [routerLink] = "['/change-password']">{{'Change Password' | translate}}</a></li>
+							</ul>
+						</li>
+						<li>
+							<a *ngIf = "chat" [routerLinkActive]="['active']" [routerLink] = "['/chat']">
+								<img src="assets/Images/chat_icon.png" class="inactiveimg" />
+								<img src="assets/Images/chat_icon_active.png" class="activeimg" />
+								<span>{{'Chat' | translate}}</span>
+							</a>
+						</li>
+						<li>
+							<a  data-toggle="modal" data-target="#logout">
+
+								<img src="assets/Images/logout.png" class="inactiveimg" />
+								<img src="assets/Images/logout-active.png" class="activeimg" />
+								<span>{{'Logout' | translate}}</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="right-header">
+				<div class="row">
+					<div class="col-sm-6 col-md-8 col-lg-8">
+						<nav>
+							<ul class="nav nav-pills rbmenu">
+
+								<li  *ngIf = "admin.UM_Office_Type == 'P' && appointmentAdd"><a routerLink="/booking" ><i aria-hidden="true" class="fa fa-plus" style="font-size: 15px;"></i>{{'Book Now' | translate}}</a></li>
+								<li  *ngIf = "admin.UM_Office_Type == 'P' && quickBookingAdd"><a routerLink="/quik-book" ><i aria-hidden="true" class="fa fa-plus" style="font-size: 15px;"></i>{{'Quick Book' | translate}} </a></li>
+								<li  *ngIf = "admin.UM_Office_Type == 'P' && walkinBookingAdd"><a routerLink="/walking" ><i aria-hidden="true" class="fa fa-plus" style="font-size: 15px;"></i>{{'Walk-in' | translate}}</a></li>
+								<li  *ngIf = "admin.UM_Office_Type == 'P' && vcBookingAdd"><a routerLink="/vc-book" ><i aria-hidden="true" class="fa fa-plus" style="font-size: 15px;"></i>{{'Virtual Consultation' | translate}}</a></li>
+
+							</ul>
+						</nav>
+					</div>
+					<div class="col-sm-6 col-md-4 col-lg-4">
+						<nav>
+							<ul class="nav nav-pills rbmenu text-right pull-right">
+								<li><a style="margin-right: 0;">{{'Hi' | translate}} {{admin.UM_Username}}</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="left-bar ps" *ngIf = "admin.UM_Office_Type == 'PA'" [ngStyle]="setAccToSurgery?.PhyO_Appearance?{'background-color': setAccToSurgery.PhyO_Appearance.App_NavigationColorLight_Hax} : {'background-color': 'green'}">
+			<div class="header" [ngStyle]="setAccToSurgery?.PhyO_Appearance?{'background-color': setAccToSurgery?.PhyO_Appearance.App_NavigationColorDark_Hax} : {'background-color': '#006400'}">
+				<div class="logo">
+					<a routerLink = "/patient-dashboard"><img src="assets/Images/logo.png"></a>
+					<!-- <a [routerLinkActive]="['active']" [routerLink] = "/dashboard" *ngIf = "setAccToSurgery && setAccToSurgery.PhyO_Logo"  class="nav-toggle"><img src="{{imageLink}}{{removeTildSign(setAccToSurgery.PhyO_Logo.Logo_Navigation_Image)}}"></a> -->
+				</div>
+				<div class="menu-icon">
+					<a  class="nav-toggle"><img src="assets/Images/menu-icon.png"></a>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="main-menu">
+				<ul class="nav menu">
+					<li>
+						<a [routerLinkActive]="['active']" [routerLink] = "['/patient-dashboard']" >
+							<img src="assets/Images/home-icon.png" class="inactiveimg" />
+							<img src="assets/Images/home-active-icon.png" class="activeimg" />
+							<span>Dashboard</span>
+							<img src="assets/Images/right-arrow.png" class="inactiveimg1" />
+							<img src="assets/Images/right-arrow-active.png" class="activeimg1" />
+						</a>
+					</li>
+					<li class="sidebar-dropdown" >
+						<a>
+							<img src="assets/Images/appointments.png" class="inactiveimg" />
+							<img src="assets/Images/appointments-active.png" class="activeimg" />
+							<span>Appointments</span>
+							<div class="plus">
+								<img src="assets/Images/plus.png" class="inactiveimg1" />
+								<img src="assets/Images/plus-active.png" class="activeimg1" />
+							</div>
+							<div class="minus">
+								<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+								<img src="assets/Images/minus-white.png" class="activeimg1" />
+							</div>
+						</a>
+						<ul class="side-nav-dropdown">
+							<li [routerLinkActive]="['active']" [routerLink] = "['/booking-list']"><a>Appointment List</a></li>
+							<li [routerLinkActive]="['active']" [routerLink] = "['/booking-history']"><a >Appointment History</a></li>
+							<!-- <li><a [routerLinkActive]="['active']" [routerLink] = "/quick-booking-list">Quick Booking List</a></li> -->
+							<!-- <li><a [routerLinkActive]="['active']" [routerLink] = "/walkin-list">Walk-in List</a></li> -->
+						</ul>
+					</li>
+					<li class="sidebar-dropdown" >
+						<a>
+							<img src="assets/Images/appointments.png" class="inactiveimg" />
+							<img src="assets/Images/appointments-active.png" class="activeimg" />
+							<span>Virtual Consultation</span>
+							<div class="plus">
+								<img src="assets/Images/plus.png" class="inactiveimg1" />
+								<img src="assets/Images/plus-active.png" class="activeimg1" />
+							</div>
+							<div class="minus">
+								<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+								<img src="assets/Images/minus-white.png" class="activeimg1" />
+							</div>
+						</a>
+						<ul class="side-nav-dropdown">
+							<li  [routerLinkActive]="['active']" [routerLink] = "['/patient-vc-list']"><a>Appointment List</a></li>
+							<li  [routerLinkActive]="['active']" [routerLink] = "['/patient-vc-history']"><a >Appointment History</a></li>
+							<li><a [routerLinkActive]="['active']" [routerLink] = "['/vc-cancel-list']">Appointment Cancel List</a></li>
+							<!-- <li><a [routerLinkActive]="['active']" [routerLink] = "/walkin-list">Walk-in List</a></li> -->
+						</ul>
+					</li>
+					<li class="sidebar-dropdown patform">
+						<a>
+							<img src="assets/Images/patient_forms.png" class="inactiveimg" />
+							<img src="assets/Images/patient_forms-active.png" class="activeimg" />
+							<span>{{'Language' | translate }}</span>
+							<div class="plus">
+								<img src="assets/Images/plus.png" class="inactiveimg1" />
+								<img src="assets/Images/plus-active.png" class="activeimg1" />
+							</div>
+							<div class="minus">
+								<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+								<img src="assets/Images/minus-white.png" class="activeimg1" />
+							</div>
+						</a>
+						<ul class="side-nav-dropdown">
+							<li> <a class="dropdown-item"  (click)="changeLang('en')">
+								{{ 'English' | translate }}
+							</a></li>
+							<li> <a class="dropdown-item"  (click)="changeLang('fr')">
+								{{ 'French' | translate }}
+							</a></li>
+							<li><a class="dropdown-item"  (click)="changeLang('es')">
+								{{ 'Spanish' | translate }}
+							</a></li>
+						</ul>
+					</li>
+					<li class="sidebar-dropdown">
+						<a>
+							<img src="assets/Images/settings-alt.png" class="inactiveimg" />
+							<img src="assets/Images/settings-alt-active.png" class="activeimg" />
+							<span>Settings</span>
+							<div class="plus">
+								<img src="assets/Images/plus.png" class="inactiveimg1" />
+								<img src="assets/Images/plus-active.png" class="activeimg1" />
+							</div>
+							<div class="minus">
+								<img src="assets/Images/minus-grey.png" class="inactiveimg1" />
+								<img src="assets/Images/minus-white.png" class="activeimg1" />
+							</div>
+						</a>
+						<ul class="side-nav-dropdown">
+							<li [routerLinkActive]="['active']" [routerLink] = "['/edit-user',admin.UM_Member_ID]"><a >Profile</a></li>
+							<li><a [routerLinkActive]="['active']" [routerLink] = "['/reset-passwo']">Change Password</a></li>
+						</ul>
+					</li>
+					<li   data-toggle="modal" data-target="#logout">
+						<a>
+							<img src="assets/Images/inc-man-icon.png" class="inactiveimg" />
+							<img src="assets/Images/inc-man-icon-active.png" class="activeimg" />
+							<span>Logout</span>
+							<img src="assets/Images/right-arrow.png" class="inactiveimg1" />
+							<img src="assets/Images/right-arrow-active.png" class="activeimg1" />
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- Modal -->
+		<div id="logout" class="modal fade modalmsg" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="close_btn">
+						<button type="button" class="close" data-dismiss="modal"><img src="assets/Images/close-line.png" alt=""></button>
+					</div>
+					<div class="modal-body text-center">
+						<h3>{{'Are you sure, you want to logout?' | translate}}</h3>
+					</div>
+					<div class="modal-footer border0">
+						<button type="button" class="btn btn-primary" (click)  = "onLoggedout()" >{{'Yes' | translate}}</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">{{'No' | translate}}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="messageModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="errors">Do you want to proceed with this action?</div>
+						<div style="margin-top:15px;margin-left:60px;">
+							<input type="button" value="Proceed" id="saveAction" class="btn btngp btngp1 btnModalSave" style="width:100px;" />
+							<input type="button" value="{{'Cancel' | translate }}" id="cancelAction" class="btn btngp btngp1 btnModalCancel" style="width:100px;" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="messageInfo">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="messageInfo">Insurance Details are sent for eligibility verification.</div>
+					</div>
+				</div>
+			</div>
+		</div>

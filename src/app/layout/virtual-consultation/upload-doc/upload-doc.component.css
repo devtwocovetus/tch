@@ -1,0 +1,13 @@
+
+.newifrm{
+	min-height: calc(100vh - 140px);
+
+}
+.fa-eye{
+	cursor: pointer;
+}
+.fa-eye:before {
+	content: "\f06e";
+	color: black;
+}
+

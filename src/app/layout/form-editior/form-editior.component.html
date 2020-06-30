@@ -1,0 +1,627 @@
+
+<style type="text/css">
+	* /deep/ .input-group-addon i {
+		font-size: 30px;
+		color: #aaacaf;
+	}
+	* /deep/ .pt-0 {
+		padding-top: 0!important;
+	}
+	* /deep/ .form-element * /deep/ .input-group-addon {
+		padding: 3px 6px;
+		border-radius: 0px;
+		background: #f2f3f8;
+		border-color: #c3c6d2;
+	}
+
+	* /deep/ .block-element {
+		padding: 1px 15px;
+		/*font-size: 1* /deep/ .2em; */
+		/*width: 100%; */
+		/*outline: 1px dotted #000 !important; */
+	}
+
+	* /deep/ .mb-0 {
+		margin-bottom: 0;
+	}
+	
+	* /deep/ .form-horizontal * /deep/ .form-group {
+		margin-right: 0;
+		margin-left: 0;
+	}
+
+	* /deep/ .sap_form {
+		-webkit-box-shadow: 0px -4px 9px 0px #cdcdcd7a;
+		-moz-box-shadow: none;
+		box-shadow: none;
+		margin: 0 15px;
+	}
+
+	* /deep/ h3.title_text {
+		font-size: 21px;
+		color: #2ca36c;
+		font-weight: 600;
+		margin-top: 0;
+		margin-bottom: 0;
+		text-transform: uppercase;
+	}
+
+	* /deep/ .form-element * /deep/ select.form-control {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		background: url(/assets/Images/select-bg.png) no-repeat 98% center #f2f3f8;
+	}
+
+	* /deep/ .checkbox label, * /deep/ .radiobox label {
+		display: inline-block;
+		vertical-align: middle;
+		position: relative;
+		padding-left: 5px;
+	}
+	* /deep/ .checkbox input, * /deep/ .radiobox input {
+		
+		z-index: 1;
+		position: relative;
+		opacity: 0;
+		top: 0px;
+		left: 3px;
+		transform: scale(1.36);
+
+	}
+	* /deep/ .checkbox label::before, * /deep/ .radiobox label::before {
+		content: "";
+		display: inline-block;
+		position: absolute;
+		width: 17px;
+		height: 17px;
+		left: 0;
+		margin-left: -20px;
+		border: 1px solid #cccccc;
+		border-radius: 3px;
+		background-color: #fff;
+		-webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+		-o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+		transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+	}
+
+	* /deep/ .radiobox label::before {
+		border-radius: 20px;
+	}
+
+	* /deep/ .checkbox label::after, * /deep/ .radiobox label::after  {
+		display: inline-block;
+		position: absolute;
+		width: 16px;
+		height: 16px;
+		left: 0;
+		top: 0;
+		margin-left: -20px;
+		padding-left: 3px;
+		padding-top: 1px;
+		font-size: 11px;
+		color: #555555;
+	}
+
+	* /deep/ .checkbox input[type="checkbox"]:checked+label::after {
+		font-family: "FontAwesome";
+		content: "\f00c";
+	}
+
+	* /deep/ .radiobox input[type="radio"]:checked+label::after {    
+		content: "";
+		width: 7px;
+		height: 7px;
+		background: white;
+		border-radius: 40px;
+		margin: 5px -16px 4px -15px;
+	}
+
+	* /deep/ .checkbox-success input[type="checkbox"]:checked+label::before,
+	* /deep/ .radiobox-success input[type="radio"]:checked+label::before {
+		background-color: #5cb85c;
+		border-color: #5cb85c;
+	}
+
+	* /deep/ .checkbox-success input[type="checkbox"]:checked+label::after,
+	* /deep/ .radiobox-success input[type="radio"]:checked+label::after {
+		color: #fff;
+	}
+
+	* /deep/ h3.title_text {
+		font-size: 21px;
+		color: #2ca36c;
+		font-weight: 600;
+		margin-top: 0;
+		margin-bottom: 0;
+		text-transform: uppercase;
+	}
+
+	* /deep/ span.h3 {
+		color: #2ca36c;
+	}
+
+	* /deep/ .section-container.section-container-new {
+		min-height: calc(100vh - 111px);
+		max-width: 767px;
+		width: 100%;
+		margin: 30px auto;
+	}
+
+	* /deep/ .add-button {
+		background: #04a8c5;
+		color: #ffffff;
+		font-weight: 300;
+		padding: 8px 25px;
+		border-radius: 30px;
+		border: 1px solid #04a8c5;
+	}
+
+	* /deep/ .main-heading {
+		padding: 19px 11px;
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		background: #ffffff;
+		box-shadow: 0px 0px 6px 0px #cdcdcd;
+		-webkit-box-shadow: 0px 0px 6px 0px #cdcdcd;
+		-moz-box-shadow: 0px 0px 6px 0px #cdcdcd;
+	}
+
+	* /deep/ .form-element * /deep/ .form-control {
+		height: 40px;
+		background: #f2f3f8;
+		border-radius: 0px;
+		box-shadow: none;
+		outline: none;
+		border-color: #c3c6d2;
+		color: #acafbe;
+		font-size: 14px;
+	}
+
+	* /deep/ .editior-box {
+		min-height: calc(100vh - 275px);
+		float: left;
+		width: 100%;
+		background: #fff;
+		/* padding: 15px 30px; */
+	}
+
+	* /deep/ body {
+		background: #f2f3f8;
+	}
+
+	* /deep/ .sh-toolbar {
+		float: left;
+		width: 100%;
+		list-style-type: none;
+		float: left;
+		display: block;
+		width: 100%;
+		background: #e9e9e9;
+		padding: 0;
+		margin: 0;
+	}
+
+	* /deep/ ul.sh-toolbar-list {
+		list-style-type: none;
+		float: left;
+		display: inline-block;
+		padding: 0;
+		margin: 0;
+	}
+
+	* /deep/ ul.sh-toolbar-list li {
+		float: left;
+	}
+
+	* /deep/ ul.sh-toolbar-list li a {
+		padding: 10px 13px;
+		float: left;
+		cursor: pointer;
+	}
+
+	* /deep/ ul.sh-toolbar-list li a {
+		color: #4e4e4e;
+		border-radius: 0;
+	}
+
+	* /deep/ ul.sh-toolbar-list li a:hover {
+		background: #04a8c5;
+		color: #fff;
+	}
+
+	* /deep/ ul.sh-toolbar-list li .p-0 {
+		padding: 0;
+	}
+
+	* /deep/ .d-inline {
+		display: inline-block;
+	}
+
+	* /deep/ .btn-transparent {
+		background: transparent;
+	}
+
+	* /deep/ .editior-box {
+		min-height: calc(100vh - 275px);
+		float: left;
+		width: 100%;
+		background: #fff;
+		padding: 25px 0px;
+	}
+
+	* /deep/ .bg-transparent {
+		background: transparent!important;
+	}
+
+	* /deep/ .border-none {
+		border: 0!important;
+	}
+
+	* /deep/ .text-dark {
+		color: #121212!important;
+	}
+
+	* /deep/ li.sh-toolbar-tool-other .side-nav-dropdown li {
+		width: 100%;
+	}
+
+	* /deep/ li.sh-toolbar-tool-other {
+		position: relative;
+	}
+
+	* /deep/ .modal-lg {
+		width: 100%;
+		margin: 0;
+		padding: 10px;
+	}
+
+	* /deep/ .horizontal-max {
+		max-width: 768px;
+		margin: auto;
+	}
+
+	* /deep/ .text-strong {
+		font-weight: bold;
+	}
+
+	* /deep/ .btn-style {
+		background: #04a8c5;
+		color: #ffffff;
+		font-weight: 300;
+		padding: 8px 25px;
+		border-radius: 30px;
+		border: 1px solid #04a8c5;
+	}         
+	* /deep/ .sh-col .sh-element {
+		border: 2px dotted #ccc;
+		height: auto;
+		float: left;
+		width: 100%;
+	}
+</style>
+
+
+<style>
+	#sh-form-bulder {
+		min-height: 20px;
+		list-style-type: none;
+		padding: 40px 0 40px 0;
+	}
+	#sh-form-bulder .block-element {
+		margin: 10px 5% 10px 5%;
+		padding: 15px;
+		width: 90%;
+		outline: 1px dotted #000 !important;
+	}
+	#sh-form-bulder .block-element:hover {
+		outline: 1px solid #04a8c5 !important;
+	}
+	.sh-col{
+		outline: 1px dashed #ccc;
+	}
+	.sh-context-menu
+	{
+		position: absolute;
+		z-index: 999;
+		top: 0;
+		left: 0;
+		display: none;
+		background: #fff;
+		border: 1px solid #c0c0c0;
+		box-sizing: border-box;
+		width: 200px;
+		box-shadow: 2px 2px 10px -5px rgba(0,0,0,0.9);
+	}
+	.sh-context-menu ul
+	{
+		white-space: nowrap;
+		display: block;
+		height: auto;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.sh-context-menu ul li
+	{
+		text-align: left;
+		position: relative;
+		height: 32px;
+		display: block;
+		line-height: 32px;
+		letter-spacing: normal;
+		background-color: transparent;
+		font-family: arial;
+		color: #2f353b;
+		font-size: 13px;
+		margin: 0;
+	}
+	.sh-context-menu ul li a
+	{
+		display: block;
+		color: #2f353b;
+		cursor: pointer !important;
+		text-decoration: none !important;
+		box-shadow: none !important;
+		outline: none !important;
+		padding: 0 1em;
+	}
+	.sh-context-menu ul li a i {
+		width: 1em;
+		margin-right: 0.5em;
+	}
+	.sh-context-menu ul li.menu-line {
+		height: 1px;
+		display: block;
+		line-height: 1px;
+		background-color: #e0e0e0;
+		margin: 0;
+	}
+	.sh-option-box
+	{
+		border-top: 1px solid #ccc;
+		min-height: 180px;
+		width:100%;
+	}
+	* /deep/ .box-hover
+	{
+		background-color:#e0e0d1;
+	}
+	* /deep/ .sh-editor {
+		border: 1px inset grey;
+		height: 200px;
+		width: 100%;
+		margin: 10px auto 0;
+		/*overflow-y: scroll;*/
+	}
+	* /deep/ .editor-element {
+		margin: 2px auto 15px;
+		width: 100%;
+	}
+	* /deep/ .form-element.sap_form {
+    box-shadow: none !important;
+    padding: 0  !important;
+    margin: 0  !important;
+	}
+	* /deep/ .modal-footer{
+		border-top: none;
+	}
+</style>
+<div class="section-container section-container-new section-editior">
+	<div class="main-heading main-heading1">
+		<div class="pull-left">
+
+			<span class="h3">Form Builder - {{getTheFormName}} </span>
+		</div>
+
+		<div class="mh-right">
+			<a onclick='return ShowForm()' class="view-button bg-transparent border-none text-dark"><i class="fa fa-2x fa-eye"></i></a>
+			<a class="add-button mr-15" (click) = "saveForm()">{{'Save' | translate }}</a>
+			<a class="view-button" (click) = "goBackLastLocation()"><i class="fa fa-angle-left" ></i> {{'Back' | translate }}</a>
+		</div>
+	</div>
+	<div class="sh-toolbar">
+		<ul class="sh-toolbar-list">
+			<li data-type="text">
+				<a onclick='return add_element_block(2)' title="Text"><i class="fa fa fa-pencil"></i></a>
+			</li>
+			<li data-type="email">
+				<a onclick='return add_element_block(3)' title="Email"><i class="fa fa fa-envelope"></i></a></li>
+				<li data-type="number"><a onclick='return add_element_block(4)' title="Number">42</a>
+				</li>
+				<li onclick='return add_element_block(10)' data-type="textarea">
+					<a title="Textarea"><i class="fa fa fa-align-left"></i></a>
+				</li>
+				<li data-type="select">
+					<a onclick='return add_element_block(11)' title="Selectbox"><i class="fa fa-caret-down"></i></a>
+				</li>
+				<li onclick='return add_element_block(9)'  data-type="checkbox">
+					<a title="Checkbox">
+						<i class="fa fa fa-check-square"></i></a>
+					</li>
+					<li data-type="radio">
+						<a  onclick='return add_element_block(7)' title="Radio button"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></a>
+					</li>
+					<li data-type="multiselect">
+						<a onclick='return add_element_block(8)' title="Multiselect"><i class="fa fa fa-list-ul"></i></a>
+					</li>
+					<li data-type="date">
+						<a onclick='return add_element_block(5)' title="Date"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+					</li>
+					<li data-type="file">
+						<a onclick='return add_element_block(6)' title="File upload"><i class="fa fa-upload"></i></a>
+					</li>
+
+					<li data-type="title">
+						<a onclick='return add_element_block(1)' title="Title"><i class="fa fa-header"></i></a>
+					</li>
+					<li data-type="editor">
+						<a onclick='return add_element_block(14)' title="Paragraph"><i class="fa fa-paragraph"></i></a>
+					</li>
+					<li data-type="editor">
+						<a onclick='return add_element_block(16)' title="Signature"><i class="fa fa-pencil-square-o"></i></a>
+					</li>
+
+
+					<li class="sh-toolbar-tool-other" data-type="columns" data-option="2">
+						<div class="dropdown">
+							<a class="btn btn-transparent dropdown-toggle" type="button" data-toggle="dropdown" data-placement="bottom" title="Column Layout"><i class="fa fa-columns"></i></a>
+							<ul class="dropdown-menu">
+								<li><a  onclick='return add_element_block(12)' >2 Column</a></li>
+								<li><a onclick='return add_element_block(13)' >3 Column</a></li>
+								<li><a onclick='return add_element_block(15)' >4 Column</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="editior-box form-element">
+				<div id="sh-form-bulder" data-parent="1" data-type="columns" data-parent-col="0" class="sh-element ui-sortable sap_form">
+
+
+				</div>
+
+			</div>
+		</div>
+		<div id="myModal" class="modal fade form-element" role="dialog" aria-hidden="true" style="display: none;" [style.background-color]="setAccToSurgery?.SurgC_Appearance?.App_NavigationColorDark_Hax ? setAccToSurgery?.SurgC_Appearance?.App_NavigationColorDark_Hax : (setAccToSurgery?.PhyO_Appearance?.App_NavigationColorDark_Hax ? setAccToSurgery?.PhyO_Appearance?.App_NavigationColorDark_Hax : null)">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" onclick='return CloseForm()' class="close" data-dismiss="modal">×</button>
+						<h4 class="modal-title">Form Name</h4>
+					</div>
+					<div class="modal-body">
+						<input type="" hidden="" name="editFormData" id="editFormData" value="{{getFormDataFinal}}">
+						<input type="" hidden="" name="editImagedata" id="editImagedata" value="{{getImageValueShow}}">
+						<button hidden="" id="myclsclikc" onclick = "LayoutEdit()"></button>
+						<div class="form-element sap_form" id="FormB">
+
+
+
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" onclick='return CloseForm()' class="close" data-dismiss="modal">{{'Close' | translate }}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="sh-context-menu">
+			<ul>
+				<li>
+					<a onclick='return ShowProperty()' >
+						<i class="fa fa-pencil"></i>Edit</a>
+					</li>	
+					<li class="menu-line"></li>
+					<li><a onclick='return DeleteElement()'><i class="fa fa-trash"></i>Delete</a>
+					</li>
+				</ul>
+			</div>
+
+			<div id="myModalProperty" class="modal fade form-property" role="dialog" aria-hidden="true" style="display: none;">
+				<div class="modal-dialog modal-property">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" onclick='return ClosePropertyWin()' class="close" data-dismiss="modal">×</button>
+							<h4 class="modal-title">Property</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-horizontal horizontal-max">
+
+								<input id="textinputid" name="textinputid" type="hidden" class="form-control input-mdp">
+								<!-- Number input-->
+								<div class="form-group">
+									<div class="col-md-4"><label id="LblTitle" class="col-md-12 text-left text-dark text-strong" for="textinput">Lable</label>  
+									</div>
+									<div class="col-md-8">
+										<input id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-mdp">
+									</div>
+								</div>
+								<!-- Textarea -->
+								<div class="form-group non-title  non-place">
+									<div class="col-md-4">
+										<label class="col-md-12 text-left text-dark text-strong" for="textarea">Placeholder</label>
+									</div>
+									<div class="col-md-8">                     
+										<input id="textinputp" name="textinputp" type="text" placeholder="placeholder" class="form-control input-mdp">
+									</div>
+								</div>
+								<div class="form-group non-editior">
+									<div class="col-md-12">
+										<label class="col-md-12 text-left text-dark text-strong" for="textarea">Editor</label>
+									</div>
+									<div class="col-md-12">                     
+										<input id="ptextinputeditor" name="ptextinputeditor" type='hidden' value='Type Description' class='form-control input-md'>	
+										<div class='editor-element'>
+											<button class="fontStyle" onclick='document.execCommand("italic",false,null);' title="Italicize Highlighted Text"><i>I</i>
+											</button>
+											<button class="fontStyle" onclick='document.execCommand("bold",false,null);' title="Bold Highlighted Text"><b>B</b>
+											</button>
+											<button class="fontStyle" onclick='document.execCommand("underline",false,null);'><u>U</u>
+											</button>
+											<button class="fontStyle" onclick='addlink()' title="Link"> <i class="fa fa-link" aria-hidden="true"></i>
+											</button>
+										</div>
+										<div class="sh-editor ceditor" id="ptexteditor" contenteditable="true">
+											Type Description
+										</div>
+									</div>
+								</div>
+								<div class="form-group non-title">
+									<div class="col-md-4">
+										<label class="col-md-12 text-left text-dark text-strong" for="textarea">Description</label>
+									</div>
+									<div class="col-md-8">                     
+										<input id="textinputd" name="textinputd" type="text" placeholder="placeholder" class="form-control input-mdp">
+									</div>
+								</div>
+
+								<div class="form-group non-title">
+									<div class="col-md-4">
+										<label class="col-md-12 text-left text-dark text-strong" for="textarea">Required</label>
+									</div>
+									<div class="col-md-8">                     
+										<div class="checkbox checkbox-success pt-0">
+
+											<input type="checkbox" name="checkboxes" id="checkboxes-0" >
+											<label for="checkboxes-0">&nbsp;</label>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group non-title opt-block">
+									<div class="col-md-4">
+										<label class="col-md-12 text-left text-dark text-strong" for="textarea">Options</label>
+									</div>
+									<div class="col-md-8">     
+										<div class="row"> 
+											<div class="col-md-4"> 
+												Label
+											</div>
+											<div class="col-md-4"> 
+												Value
+											</div>
+											<div class="col-md-4"> 
+												<a  onclick='return AddFirstOption()' id='addoption' data-toggle='tooltip' data-placement='bottom' title='Add New'><i class='fa fa fa-plus'></i></a>
+											</div>
+										</div>	
+										<div class="row"> 											
+											<div class="sh-option-box" id="optionbox">		
+
+											</div>			
+										</div>									
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal" onClick='return updateelement()'>{{'Save' | translate }}</button>
+						</div>
+					</div>
+				</div>
+			</div>
